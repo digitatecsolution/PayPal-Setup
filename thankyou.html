@@ -17,7 +17,8 @@ s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
 fbq('init', '631335109208440');
 fbq('track', 'PageView');
-fbq('track', 'Purchase', {currency: 'NGN', value: 180000});
+// ✅ Purchase fires ONCE only — in the script below after order data loads
+// Do NOT fire Purchase here to avoid double-counting
 </script>
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=631335109208440&ev=PageView&noscript=1"/></noscript>
 
@@ -498,13 +499,22 @@ fbq('track', 'Purchase', {currency: 'NGN', value: 180000});
   const orderData = JSON.parse(sessionStorage.getItem('ggsOrder') || '{}');
 
   // Populate order summary
-  document.getElementById('sum-name').textContent = orderData.fullName || 'Not provided';
+  document.getElementById('sum-name').textContent     = orderData.fullName     || 'Not provided';
   document.getElementById('sum-business').textContent = orderData.businessName || 'N/A';
-  document.getElementById('sum-phone').textContent = orderData.phone || 'Not provided';
-  document.getElementById('sum-dob').textContent = orderData.dob || 'Not provided';
-  document.getElementById('sum-type').textContent = orderData.businessType || 'Not provided';
-  document.getElementById('sum-id').textContent = orderData.idType || 'Not provided';
-  document.getElementById('sum-package').textContent = orderData.packageType || 'Standard (72 Hours)';
+  document.getElementById('sum-phone').textContent    = orderData.phone        || 'Not provided';
+  document.getElementById('sum-dob').textContent      = orderData.dob          || 'Not provided';
+  document.getElementById('sum-type').textContent     = orderData.businessType || 'Not provided';
+  document.getElementById('sum-id').textContent       = orderData.idType       || 'Not provided';
+  document.getElementById('sum-package').textContent  = orderData.packageType  || 'Standard (72 Hours)';
+
+  // ✅ PURCHASE EVENT — fires ONCE here, correctly, after payment is confirmed
+  // This is the correct place: person has paid and landed on this page
+  if (typeof fbq !== 'undefined') {
+    fbq('track', 'Purchase', {
+      currency: 'NGN',
+      value: 180000
+    });
+  }
 
   // Build WhatsApp pre-filled message
   function buildWaMessage() {
@@ -536,11 +546,6 @@ Please confirm receipt and begin my setup. Thank you! 🙏`;
   // Set WhatsApp button href
   const waUrl = `https://wa.me/2348106334849?text=${buildWaMessage()}`;
   document.getElementById('waBtn').href = waUrl;
-
-  // Track Purchase with Facebook Pixel
-  if (typeof fbq !== 'undefined') {
-    fbq('track', 'Purchase', { currency: 'NGN', value: 180000 });
-  }
 
   // Auto-countdown and redirect to WhatsApp
   let seconds = 5;

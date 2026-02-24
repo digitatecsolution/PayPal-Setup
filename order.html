@@ -698,17 +698,17 @@ fbq('track', 'PageView');
     e.target.value = v;
   });
 
-  function submitForm() {
+  async function submitForm() {
     // Get values
-    const fullName = document.getElementById('fullName').value.trim();
+    const fullName     = document.getElementById('fullName').value.trim();
     const businessName = document.getElementById('businessName').value.trim();
-    const phone = document.getElementById('phone').value.trim();
-    const dob = document.getElementById('dob').value.trim();
+    const phone        = document.getElementById('phone').value.trim();
+    const dob          = document.getElementById('dob').value.trim();
     const businessType = document.getElementById('businessType').value;
-    const idType = document.getElementById('idType').value;
-    const packageType = document.querySelector('input[name="package"]:checked').value;
+    const idType       = document.getElementById('idType').value;
+    const packageType  = document.querySelector('input[name="package"]:checked').value;
 
-    // Validate
+    // ── Validate ──────────────────────────────────────────────
     let valid = true;
 
     if (!fullName) {
@@ -761,12 +761,19 @@ fbq('track', 'PageView');
       return;
     }
 
-    // Track with Facebook Pixel
+    // ── Disable button immediately ────────────────────────────
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.innerHTML = '⏳ Saving your details...';
+
+    // ── Track InitiateCheckout with Facebook Pixel ────────────
     if (typeof fbq !== 'undefined') {
       fbq('track', 'InitiateCheckout');
     }
 
-    // Save to sessionStorage to use on thank you page
+    // ── Build order data object ───────────────────────────────
+    const timestamp = new Date().toLocaleString('en-NG', { timeZone: 'Africa/Lagos' });
+
     const orderData = {
       fullName,
       businessName: businessName || 'N/A',
@@ -775,17 +782,47 @@ fbq('track', 'PageView');
       businessType,
       idType,
       packageType,
-      timestamp: new Date().toLocaleString('en-NG', { timeZone: 'Africa/Lagos' })
+      timestamp
     };
 
+    // ── Save to sessionStorage for Thank You page ─────────────
     sessionStorage.setItem('ggsOrder', JSON.stringify(orderData));
 
-    // Disable button and show loading
-    const btn = document.getElementById('submitBtn');
-    btn.disabled = true;
-    btn.innerHTML = '⏳ Redirecting to Payment...';
+    // ── Send to Formspree (captures lead even if payment abandoned) ──
+    try {
+      await fetch('https://formspree.io/f/xzdayezv', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          '📛 Full Name':        fullName,
+          '🏢 Business Name':    businessName || 'N/A',
+          '📞 Phone Number':     phone,
+          '🎂 Date of Birth':    dob,
+          '💼 Business Type':    businessType,
+          '🪪 ID Type':          idType,
+          '📦 Package Selected': packageType,
+          '🕐 Submitted At':     timestamp,
+          '_subject': `🔔 New GGS Order — ${fullName} (${phone})`
+        })
+      });
+    } catch (err) {
+      // Formspree failed silently — still proceed to payment
+      console.warn('Formspree submission failed:', err);
+    }
 
-    // Redirect to Flutterwave after short delay
+    // ── Track Lead with Facebook Pixel ───────────────────────
+    // Fires HERE because this is the true lead moment:
+    // person has filled the form with real intent before payment
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'Lead');
+    }
+
+    // ── Redirect to Flutterwave payment ───────────────────────
+    btn.innerHTML = '✅ Details saved! Redirecting to payment...';
+
     setTimeout(() => {
       window.location.href = 'https://flutterwave.com/pay/paypalbusiness';
     }, 1200);
