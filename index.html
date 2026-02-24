@@ -1735,15 +1735,11 @@ fbq('track', 'PageView');
 <a href="https://wa.me/2348106334849?text=Hello%20Richard%2C%20I%20want%20to%20get%20my%20PayPal%20sorted" class="wa-float" target="_blank" title="Chat on WhatsApp">💬</a>
 
 <script>
-  // ====== FACEBOOK PIXEL — TRACK LEAD ON CTA CLICKS ======
-  document.querySelectorAll('.cta-btn, .wa-float').forEach(btn => {
-    btn.addEventListener('click', function() {
-      if (typeof fbq !== 'undefined') {
-        fbq('track', 'Lead');
-        fbq('track', 'Contact');
-      }
-    });
-  });
+    // ====== FACEBOOK PIXEL — PAGEVIEW ONLY (Landing Page) ======
+  // ✅ PageView already fires on page load above (in <head>)
+  // ✅ Lead event fires on order.html after form submission
+  // ✅ Purchase event fires on thankyou.html after payment confirmed
+  // No additional pixel events needed on this page
 
   // ====== COUNTDOWN TIMER ======
   function initCountdown() {
