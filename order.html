@@ -30,11 +30,14 @@ fbq('track', 'PageView');
     --green-dim: rgba(0,200,83,0.1);
     --orange: #FF6B35;
     --red: #E74C3C;
+    --blue: #3B82F6;
+    --blue-dim: rgba(59,130,246,0.1);
     --white: #FFFFFF;
     --text: #E2E8F0;
     --muted: #94A3B8;
     --border: rgba(255,255,255,0.08);
     --border-gold: rgba(245,200,66,0.2);
+    --border-blue: rgba(59,130,246,0.25);
     --card: rgba(255,255,255,0.04);
   }
 
@@ -373,6 +376,13 @@ fbq('track', 'PageView');
   .submit-btn:hover { background: #00E060; transform: translateY(-2px); box-shadow: 0 12px 40px rgba(0,200,83,0.4); }
   .submit-btn:disabled { background: #444; color: #888; cursor: not-allowed; transform: none; box-shadow: none; }
 
+  /* Bank transfer submit button variant */
+  .submit-btn.bank-btn {
+    background: var(--blue);
+    box-shadow: 0 8px 32px rgba(59,130,246,0.3);
+  }
+  .submit-btn.bank-btn:hover { background: #60A5FA; box-shadow: 0 12px 40px rgba(59,130,246,0.4); }
+
   .submit-btn .arrow { font-size: 22px; transition: transform 0.2s; }
   .submit-btn:hover .arrow { transform: translateX(4px); }
 
@@ -385,10 +395,10 @@ fbq('track', 'PageView');
     letter-spacing: 0.5px;
   }
 
-  /* PACKAGE SELECTOR */
+  /* PACKAGE SELECTOR — now 2x2 grid for 4 options */
   .package-selector {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 12px;
     margin-top: 4px;
   }
@@ -399,6 +409,20 @@ fbq('track', 'PageView');
   .split-badge {
     display: inline-block;
     background: var(--orange);
+    color: white;
+    font-size: 9px;
+    font-weight: 900;
+    padding: 2px 6px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    border-radius: 2px;
+  }
+
+  /* BANK TRANSFER BADGE */
+  .bank-badge {
+    display: inline-block;
+    background: var(--blue);
     color: white;
     font-size: 9px;
     font-weight: 900;
@@ -425,6 +449,65 @@ fbq('track', 'PageView');
   .split-warning.show { display: block; }
   .split-warning strong { color: var(--orange); }
 
+  /* BANK TRANSFER DETAILS BOX */
+  .bank-details {
+    display: none;
+    background: var(--blue-dim);
+    border: 1px solid var(--border-blue);
+    border-left: 3px solid var(--blue);
+    padding: 18px 20px;
+    margin-top: 16px;
+  }
+
+  .bank-details.show { display: block; }
+
+  .bank-details-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--blue);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    font-weight: 700;
+  }
+
+  .bank-detail-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(59,130,246,0.15);
+    font-size: 14px;
+  }
+
+  .bank-detail-row:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .bank-detail-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.5px;
+  }
+
+  .bank-detail-value {
+    font-weight: 800;
+    color: var(--white);
+    font-size: 15px;
+    text-align: right;
+  }
+
+  .bank-detail-value.accent { color: var(--blue); font-size: 20px; letter-spacing: 2px; font-family: 'DM Mono', monospace; }
+
+  .bank-details-note {
+    margin-top: 12px;
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+    font-style: italic;
+  }
+
+  .bank-details-note strong { color: var(--text); font-style: normal; }
+
   .package-option {
     position: relative;
   }
@@ -446,11 +529,18 @@ fbq('track', 'PageView');
     cursor: pointer;
     transition: all 0.2s;
     border-radius: 4px;
+    height: 100%;
   }
 
   .package-option input:checked + .package-label {
     border-color: var(--green);
     background: var(--green-dim);
+  }
+
+  /* Bank transfer selected state */
+  .package-option.bank-option input:checked + .package-label {
+    border-color: var(--blue);
+    background: var(--blue-dim);
   }
 
   .package-label-title {
@@ -480,6 +570,11 @@ fbq('track', 'PageView');
     padding: 20px 24px;
   }
 
+  .next-steps.bank-next {
+    background: var(--blue-dim);
+    border-color: var(--border-blue);
+  }
+
   .next-steps-title {
     font-family: 'DM Mono', monospace;
     font-size: 11px;
@@ -488,6 +583,8 @@ fbq('track', 'PageView');
     text-transform: uppercase;
     margin-bottom: 14px;
   }
+
+  .next-steps.bank-next .next-steps-title { color: var(--blue); }
 
   .next-step-item {
     display: flex;
@@ -514,6 +611,8 @@ fbq('track', 'PageView');
     font-weight: 900;
     flex-shrink: 0;
   }
+
+  .step-num.blue { background: var(--blue); }
 
   /* SECURITY BADGES */
   .security-row {
@@ -646,10 +745,12 @@ fbq('track', 'PageView');
 
     <div class="form-section-title" style="margin-top:28px;">Package Selection</div>
 
-    <!-- PACKAGE SELECTOR -->
+    <!-- PACKAGE SELECTOR — 4 options in 2x2 grid -->
     <div class="form-group">
-      <label>Choose Your Delivery Speed <span class="required">*</span></label>
+      <label>Choose Your Delivery Speed & Payment Method <span class="required">*</span></label>
       <div class="package-selector">
+
+        <!-- STANDARD -->
         <div class="package-option">
           <input type="radio" name="package" id="standard" value="Standard (72 Hours)" checked>
           <label class="package-label" for="standard">
@@ -658,6 +759,8 @@ fbq('track', 'PageView');
             <span class="package-label-price">₦180,000</span>
           </label>
         </div>
+
+        <!-- EXPRESS -->
         <div class="package-option">
           <input type="radio" name="package" id="express" value="Express (3-5 Days Priority)">
           <label class="package-label" for="express">
@@ -666,6 +769,8 @@ fbq('track', 'PageView');
             <span class="package-label-price">₦180,000</span>
           </label>
         </div>
+
+        <!-- SPLIT PAYMENT -->
         <div class="package-option">
           <input type="radio" name="package" id="split" value="Split Payment Plan (₦100k now + ₦80k balance)">
           <label class="package-label" for="split">
@@ -675,6 +780,18 @@ fbq('track', 'PageView');
             <span class="package-label-price">₦100k + ₦80k</span>
           </label>
         </div>
+
+        <!-- BANK TRANSFER -->
+        <div class="package-option bank-option">
+          <input type="radio" name="package" id="bank" value="Bank Transfer (Direct — PalmPay)">
+          <label class="package-label" for="bank">
+            <span class="bank-badge">Direct</span>
+            <span class="package-label-title">🏦 Bank Transfer</span>
+            <span class="package-label-time">Pay Directly to PalmPay</span>
+            <span class="package-label-price">₦180,000</span>
+          </label>
+        </div>
+
       </div>
 
       <!-- SPLIT PAYMENT WARNING — shows only when Split Pay selected -->
@@ -685,6 +802,28 @@ fbq('track', 'PageView');
         <strong>Account details will NOT be shared until full payment is confirmed.</strong>
       </div>
 
+      <!-- BANK TRANSFER DETAILS — shows only when Bank Transfer selected -->
+      <div class="bank-details" id="bankDetails">
+        <div class="bank-details-title">🏦 PalmPay Account Details</div>
+        <div class="bank-detail-row">
+          <span class="bank-detail-label">Bank</span>
+          <span class="bank-detail-value">PalmPay</span>
+        </div>
+        <div class="bank-detail-row">
+          <span class="bank-detail-label">Account Number</span>
+          <span class="bank-detail-value accent">8142717585</span>
+        </div>
+        <div class="bank-detail-row">
+          <span class="bank-detail-label">Account Name</span>
+          <span class="bank-detail-value">Richard Ojukwu</span>
+        </div>
+        <div class="bank-detail-row">
+          <span class="bank-detail-label">Amount</span>
+          <span class="bank-detail-value" style="color:var(--gold);font-size:18px;">₦180,000</span>
+        </div>
+        <p class="bank-details-note">⚠️ <strong>Important:</strong> After submitting this form, transfer <strong>₦180,000</strong> to the account above, then send your payment receipt + ID to Richard on WhatsApp to confirm your order and start your setup.</p>
+      </div>
+
     <!-- IMPORTANT NOTE -->
     <div class="important-box">
       <div class="important-box-title">📌 Important — Read Before Submitting</div>
@@ -692,43 +831,45 @@ fbq('track', 'PageView');
         <li>Double-check all spelling — this info goes directly into your PayPal account</li>
         <li>Use real details — this ensures your account stays stable long-term</li>
         <li>All information must match exactly with your Government ID</li>
-        <li>After submitting you will proceed to secure payment via Flutterwave</li>
+        <li>After submitting you will proceed to complete your payment</li>
       </ul>
     </div>
 
-    <!-- SUBMIT BUTTON -->
+    <!-- SUBMIT BUTTON — text changes dynamically via JS -->
     <button class="submit-btn" onclick="submitForm()" id="submitBtn">
       Proceed to Secure Payment
       <span class="arrow">→</span>
     </button>
 
-    <p class="submit-note">🔒 Your details are private and secure — used only for your PayPal setup</p>
+    <p class="submit-note" id="submitNote">🔒 Your details are private and secure — used only for your PayPal setup</p>
 
-    <!-- WHAT HAPPENS NEXT -->
-    <div class="next-steps">
-      <div class="next-steps-title">What Happens After You Submit</div>
-      <div class="next-step-item">
-        <div class="step-num">1</div>
-        <span>You'll be taken to our secure Flutterwave payment page to pay ₦180,000</span>
-      </div>
-      <div class="next-step-item">
-        <div class="step-num">2</div>
-        <span>After payment you'll be redirected to confirm your order on WhatsApp</span>
-      </div>
-      <div class="next-step-item">
-        <div class="step-num">3</div>
-        <span>Richard receives your details + payment confirmation and begins your setup immediately</span>
-      </div>
-      <div class="next-step-item">
-        <div class="step-num">4</div>
-        <span>Your fully configured PayPal account is delivered within your chosen timeframe</span>
+    <!-- WHAT HAPPENS NEXT — swaps content based on selection -->
+    <div class="next-steps" id="nextStepsBox">
+      <div class="next-steps-title" id="nextStepsTitle">What Happens After You Submit</div>
+      <div id="nextStepsContent">
+        <div class="next-step-item">
+          <div class="step-num">1</div>
+          <span>You'll be taken to our secure Flutterwave payment page to pay ₦180,000</span>
+        </div>
+        <div class="next-step-item">
+          <div class="step-num">2</div>
+          <span>After payment you'll be redirected to confirm your order on WhatsApp</span>
+        </div>
+        <div class="next-step-item">
+          <div class="step-num">3</div>
+          <span>Richard receives your details + payment confirmation and begins your setup immediately</span>
+        </div>
+        <div class="next-step-item">
+          <div class="step-num">4</div>
+          <span>Your fully configured PayPal account is delivered within your chosen timeframe</span>
+        </div>
       </div>
     </div>
 
     <!-- SECURITY BADGES -->
     <div class="security-row">
       <div class="security-badge">🔒 SSL Secured</div>
-      <div class="security-badge">✅ Flutterwave Protected</div>
+      <div class="security-badge" id="paymentBadge">✅ Flutterwave Protected</div>
       <div class="security-badge">🛡️ Privacy Guaranteed</div>
     </div>
 
@@ -744,14 +885,84 @@ fbq('track', 'PageView');
     e.target.value = v;
   });
 
-  // Show/hide split payment warning based on package selection
+  // Handle package selection changes
   document.querySelectorAll('input[name="package"]').forEach(radio => {
     radio.addEventListener('change', function() {
-      const warning = document.getElementById('splitWarning');
-      if (this.value.includes('Split')) {
-        warning.classList.add('show');
+      const splitWarning = document.getElementById('splitWarning');
+      const bankDetails  = document.getElementById('bankDetails');
+      const submitBtn    = document.getElementById('submitBtn');
+      const submitNote   = document.getElementById('submitNote');
+      const nextStepsBox = document.getElementById('nextStepsBox');
+      const nextStepsTitle = document.getElementById('nextStepsTitle');
+      const nextStepsContent = document.getElementById('nextStepsContent');
+      const paymentBadge = document.getElementById('paymentBadge');
+
+      const isSplit = this.value.includes('Split');
+      const isBank  = this.value.includes('Bank Transfer');
+
+      // Show/hide split warning
+      splitWarning.classList.toggle('show', isSplit);
+
+      // Show/hide bank details
+      bankDetails.classList.toggle('show', isBank);
+
+      if (isBank) {
+        // Bank transfer UI state
+        submitBtn.className = 'submit-btn bank-btn';
+        submitBtn.innerHTML = "I'll Complete Payment via Bank Transfer <span class='arrow'>→</span>";
+        submitNote.textContent = '🏦 You will be directed to WhatsApp to send your receipt after submitting';
+        nextStepsBox.className = 'next-steps bank-next';
+        nextStepsTitle.textContent = 'What Happens After You Submit';
+        paymentBadge.textContent = '🏦 PalmPay Direct Transfer';
+        nextStepsContent.innerHTML = `
+          <div class="next-step-item">
+            <div class="step-num blue">1</div>
+            <span>Your order details are saved and sent to our system immediately</span>
+          </div>
+          <div class="next-step-item">
+            <div class="step-num blue">2</div>
+            <span>Transfer <strong>₦180,000</strong> to PalmPay — Account: <strong>8142717585</strong> (Richard Ojukwu)</span>
+          </div>
+          <div class="next-step-item">
+            <div class="step-num blue">3</div>
+            <span>You'll be taken to a confirmation page with a WhatsApp button — send Richard your payment receipt to confirm</span>
+          </div>
+          <div class="next-step-item">
+            <div class="step-num blue">4</div>
+            <span>Richard confirms payment and begins your PayPal setup immediately</span>
+          </div>
+        `;
       } else {
-        warning.classList.remove('show');
+        // Flutterwave UI state
+        submitBtn.className = 'submit-btn';
+        submitBtn.innerHTML = "Proceed to Secure Payment <span class='arrow'>→</span>";
+        submitNote.textContent = '🔒 Your details are private and secure — used only for your PayPal setup';
+        nextStepsBox.className = 'next-steps';
+        nextStepsTitle.textContent = 'What Happens After You Submit';
+        paymentBadge.textContent = '✅ Flutterwave Protected';
+
+        const step1Text = isSplit
+          ? "You'll be taken to our secure Flutterwave payment page to pay ₦100,000 (deposit)"
+          : "You'll be taken to our secure Flutterwave payment page to pay ₦180,000";
+
+        nextStepsContent.innerHTML = `
+          <div class="next-step-item">
+            <div class="step-num">1</div>
+            <span>${step1Text}</span>
+          </div>
+          <div class="next-step-item">
+            <div class="step-num">2</div>
+            <span>After payment you'll be redirected to confirm your order on WhatsApp</span>
+          </div>
+          <div class="next-step-item">
+            <div class="step-num">3</div>
+            <span>Richard receives your details + payment confirmation and begins your setup immediately</span>
+          </div>
+          <div class="next-step-item">
+            <div class="step-num">4</div>
+            <span>Your fully configured PayPal account is delivered within your chosen timeframe</span>
+          </div>
+        `;
       }
     });
   });
@@ -831,6 +1042,8 @@ fbq('track', 'PageView');
 
     // ── Build order data object ───────────────────────────────
     const timestamp = new Date().toLocaleString('en-NG', { timeZone: 'Africa/Lagos' });
+    const isBank  = packageType.includes('Bank Transfer');
+    const isSplit = packageType.includes('Split');
 
     const orderData = {
       fullName,
@@ -840,6 +1053,7 @@ fbq('track', 'PageView');
       businessType,
       idType,
       packageType,
+      paymentMethod: isBank ? 'Bank Transfer' : 'Flutterwave',
       timestamp
     };
 
@@ -862,34 +1076,37 @@ fbq('track', 'PageView');
           '💼 Business Type':    businessType,
           '🪪 ID Type':          idType,
           '📦 Package Selected': packageType,
+          '💳 Payment Method':   isBank ? '🏦 Bank Transfer (PalmPay)' : '💳 Flutterwave',
           '🕐 Submitted At':     timestamp,
-          '_subject': `🔔 New GGS Order — ${fullName} (${phone})`
+          '_subject': `🔔 New GGS Order — ${fullName} (${phone}) — ${isBank ? 'Bank Transfer' : 'Flutterwave'}`
         })
       });
     } catch (err) {
-      // Formspree failed silently — still proceed to payment
       console.warn('Formspree submission failed:', err);
     }
 
     // ── Track Lead with Facebook Pixel ───────────────────────
-    // Fires HERE because this is the true lead moment:
-    // person has filled the form with real intent before payment
     if (typeof fbq !== 'undefined') {
       fbq('track', 'Lead');
     }
 
-    // ── Redirect to correct Flutterwave payment link ──────────
-    // Split payment → ₦100k link | Full payment → ₦180k link
-    const isSplit = packageType.includes('Split');
-    const paymentUrl = isSplit
-      ? 'https://flutterwave.com/pay/halfpay'
-      : 'https://flutterwave.com/pay/paypalbusiness';
+    if (isBank) {
+      // ── Bank Transfer: redirect directly to Thank You page ──
+      btn.innerHTML = '✅ Details saved! Redirecting...';
+      setTimeout(() => {
+        window.location.href = 'https://digitatecsolution.github.io/ggs-global/thankyou.html';
+      }, 1200);
+    } else {
+      // ── Flutterwave redirect (existing logic unchanged) ──────
+      const paymentUrl = isSplit
+        ? 'https://flutterwave.com/pay/halfpay'
+        : 'https://flutterwave.com/pay/paypalbusiness';
 
-    btn.innerHTML = '✅ Details saved! Redirecting to payment...';
-
-    setTimeout(() => {
-      window.location.href = paymentUrl;
-    }, 1200);
+      btn.innerHTML = '✅ Details saved! Redirecting to payment...';
+      setTimeout(() => {
+        window.location.href = paymentUrl;
+      }, 1200);
+    }
   }
 </script>
 

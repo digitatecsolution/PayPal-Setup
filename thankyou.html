@@ -18,7 +18,6 @@ s.parentNode.insertBefore(t,s)}(window, document,'script',
 fbq('init', '631335109208440');
 fbq('track', 'PageView');
 // ✅ Purchase fires ONCE only — in the script below after order data loads
-// Do NOT fire Purchase here to avoid double-counting
 </script>
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=631335109208440&ev=PageView&noscript=1"/></noscript>
 
@@ -31,11 +30,14 @@ fbq('track', 'PageView');
     --green: #00C853;
     --green-dim: rgba(0,200,83,0.1);
     --orange: #FF6B35;
+    --blue: #3B82F6;
+    --blue-dim: rgba(59,130,246,0.1);
     --white: #FFFFFF;
     --text: #E2E8F0;
     --muted: #94A3B8;
     --border: rgba(255,255,255,0.08);
     --border-gold: rgba(245,200,66,0.2);
+    --border-blue: rgba(59,130,246,0.25);
     --card: rgba(255,255,255,0.04);
   }
 
@@ -59,6 +61,8 @@ fbq('track', 'PageView');
     font-weight: 800;
     color: var(--navy);
   }
+
+  .topbar.bank { background: var(--blue); }
 
   /* PROGRESS BAR */
   .progress-bar {
@@ -84,6 +88,7 @@ fbq('track', 'PageView');
 
   .progress-step.done { color: var(--green); }
   .progress-step.active { color: var(--gold); }
+  .progress-step.pending { color: var(--orange); }
 
   .progress-track {
     height: 3px;
@@ -97,6 +102,11 @@ fbq('track', 'PageView');
     width: 100%;
     background: linear-gradient(90deg, var(--green), var(--gold));
     border-radius: 2px;
+  }
+
+  .progress-fill.bank-fill {
+    background: linear-gradient(90deg, var(--blue), var(--gold));
+    width: 66%;
   }
 
   /* CONTAINER */
@@ -119,6 +129,11 @@ fbq('track', 'PageView');
     font-size: 48px;
     margin: 0 auto 28px;
     animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+  }
+
+  .success-circle.bank {
+    background: var(--blue-dim);
+    border-color: var(--blue);
   }
 
   @keyframes popIn {
@@ -153,6 +168,12 @@ fbq('track', 'PageView');
     margin-bottom: 20px;
   }
 
+  .success-tag.bank {
+    background: var(--blue-dim);
+    border-color: rgba(59,130,246,0.3);
+    color: var(--blue);
+  }
+
   .page-header h1 {
     font-family: 'Bebas Neue', sans-serif;
     font-size: clamp(36px, 8vw, 58px);
@@ -163,6 +184,7 @@ fbq('track', 'PageView');
   }
 
   .page-header h1 span { color: var(--green); }
+  .page-header h1 span.blue { color: var(--blue); }
   .page-header p { font-size: 15px; color: var(--muted); line-height: 1.7; }
   .page-header p strong { color: var(--white); }
 
@@ -183,6 +205,10 @@ fbq('track', 'PageView');
     top: 0; left: 0; right: 0;
     height: 3px;
     background: linear-gradient(90deg, var(--green), var(--gold));
+  }
+
+  .order-card.bank::before {
+    background: linear-gradient(90deg, var(--blue), var(--gold));
   }
 
   .order-card-title {
@@ -232,6 +258,117 @@ fbq('track', 'PageView');
 
   .order-detail-value.green { color: var(--green); }
   .order-detail-value.gold { color: var(--gold); font-size: 18px; }
+  .order-detail-value.blue { color: var(--blue); }
+  .order-detail-value.orange { color: var(--orange); font-weight: 900; }
+
+  /* BANK TRANSFER INSTRUCTION BOX */
+  .bank-transfer-box {
+    background: var(--blue-dim);
+    border: 1px solid var(--border-blue);
+    border-left: 4px solid var(--blue);
+    padding: 24px 28px;
+    margin-bottom: 24px;
+    animation: fadeUp 0.6s 0.45s ease both;
+  }
+
+  .bank-transfer-box-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--blue);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    font-weight: 700;
+  }
+
+  .bank-transfer-account {
+    background: rgba(0,0,0,0.3);
+    border: 1px solid var(--border-blue);
+    padding: 16px 20px;
+    margin-bottom: 16px;
+  }
+
+  .bta-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(59,130,246,0.12);
+  }
+
+  .bta-row:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .bta-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.5px;
+  }
+
+  .bta-value {
+    font-weight: 800;
+    color: var(--white);
+    font-size: 15px;
+    text-align: right;
+  }
+
+  .bta-value.number {
+    font-family: 'DM Mono', monospace;
+    font-size: 22px;
+    color: var(--blue);
+    letter-spacing: 3px;
+  }
+
+  .bta-value.amount {
+    font-size: 20px;
+    color: var(--gold);
+  }
+
+  .bank-transfer-steps {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .bank-transfer-steps li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  .bank-transfer-steps li .bts-num {
+    width: 22px;
+    height: 22px;
+    background: var(--blue);
+    color: var(--navy);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 900;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .bank-transfer-steps li strong { color: var(--white); }
+
+  .bank-urgent-note {
+    margin-top: 14px;
+    padding: 12px 16px;
+    background: rgba(255,107,53,0.08);
+    border: 1px solid rgba(255,107,53,0.25);
+    border-left: 3px solid var(--orange);
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  .bank-urgent-note strong { color: var(--orange); }
 
   /* NEXT STEPS */
   .steps-card {
@@ -242,6 +379,11 @@ fbq('track', 'PageView');
     animation: fadeUp 0.6s 0.5s ease both;
   }
 
+  .steps-card.bank-steps {
+    background: var(--blue-dim);
+    border-color: var(--border-blue);
+  }
+
   .steps-title {
     font-family: 'DM Mono', monospace;
     font-size: 11px;
@@ -250,6 +392,8 @@ fbq('track', 'PageView');
     text-transform: uppercase;
     margin-bottom: 16px;
   }
+
+  .steps-card.bank-steps .steps-title { color: var(--blue); }
 
   .step-item {
     display: flex;
@@ -276,6 +420,8 @@ fbq('track', 'PageView');
     font-weight: 900;
     flex-shrink: 0;
   }
+
+  .step-circle.blue { background: var(--blue); }
 
   /* WHAT TO SEND BOX */
   .send-box {
@@ -367,16 +513,16 @@ fbq('track', 'PageView');
   .auto-redirect span { color: var(--orange); font-weight: 700; }
 
   @media(max-width: 480px) {
-    .order-card, .steps-card, .send-box { padding: 20px 16px; }
+    .order-card, .steps-card, .send-box, .bank-transfer-box { padding: 20px 16px; }
     .container { padding: 28px 16px 60px; }
   }
 </style>
 </head>
 <body>
 
-<!-- TOP BAR -->
-<div class="topbar">
-  ✅ Payment Confirmed — GGS Global | Setup Starting Now
+<!-- TOP BAR — set dynamically by JS -->
+<div class="topbar" id="topbar">
+  ✅ Order Received — GGS Global | Setup Starting Now
 </div>
 
 <!-- PROGRESS BAR -->
@@ -384,11 +530,11 @@ fbq('track', 'PageView');
   <div class="progress-inner">
     <div class="progress-label">
       <span class="progress-step done">① Details ✓</span>
-      <span class="progress-step done">② Payment ✓</span>
-      <span class="progress-step active">③ Setup Begins 🚀</span>
+      <span class="progress-step done" id="step2Label">② Payment ✓</span>
+      <span class="progress-step active" id="step3Label">③ Setup Begins 🚀</span>
     </div>
     <div class="progress-track">
-      <div class="progress-fill"></div>
+      <div class="progress-fill" id="progressFill"></div>
     </div>
   </div>
 </div>
@@ -397,18 +543,65 @@ fbq('track', 'PageView');
 <div class="container">
 
   <!-- SUCCESS ICON -->
-  <div class="success-circle">🎉</div>
+  <div class="success-circle" id="successCircle">🎉</div>
 
   <!-- HEADER -->
   <div class="page-header">
-    <div class="success-tag">✅ Payment Successful</div>
-    <h1>YOU'RE ALL SET!<br><span>SETUP BEGINS NOW</span></h1>
-    <p>Your payment has been confirmed and your order is now active.<br>
+    <div class="success-tag" id="successTag">✅ Order Received</div>
+    <h1 id="pageHeading">YOU'RE ALL SET!<br><span>SETUP BEGINS NOW</span></h1>
+    <p id="pageSubtext">Your payment has been confirmed and your order is now active.<br>
     <strong>One final step — tap the WhatsApp button below to send Richard your order details and receipt.</strong></p>
   </div>
 
+  <!-- BANK TRANSFER INSTRUCTION BOX — only shown for bank transfer clients -->
+  <div class="bank-transfer-box" id="bankTransferBox" style="display:none;">
+    <div class="bank-transfer-box-title">🏦 Complete Your Payment — Transfer ₦180,000 Now</div>
+
+    <div class="bank-transfer-account">
+      <div class="bta-row">
+        <span class="bta-label">Bank</span>
+        <span class="bta-value">PalmPay</span>
+      </div>
+      <div class="bta-row">
+        <span class="bta-label">Account Number</span>
+        <span class="bta-value number">8142717585</span>
+      </div>
+      <div class="bta-row">
+        <span class="bta-label">Account Name</span>
+        <span class="bta-value">Richard Ojukwu</span>
+      </div>
+      <div class="bta-row">
+        <span class="bta-label">Amount to Transfer</span>
+        <span class="bta-value amount">₦180,000</span>
+      </div>
+    </div>
+
+    <ul class="bank-transfer-steps">
+      <li>
+        <div class="bts-num">1</div>
+        <span>Open your banking app and transfer <strong>exactly ₦180,000</strong> to the PalmPay account above</span>
+      </li>
+      <li>
+        <div class="bts-num">2</div>
+        <span>Take a <strong>clear screenshot</strong> of your transfer confirmation / receipt</span>
+      </li>
+      <li>
+        <div class="bts-num">3</div>
+        <span>Tap the WhatsApp button below — it will open with your order details pre-filled. <strong>Add your receipt screenshot</strong> to the message before sending</span>
+      </li>
+      <li>
+        <div class="bts-num">4</div>
+        <span>Richard confirms your payment and <strong>begins your setup immediately</strong></span>
+      </li>
+    </ul>
+
+    <div class="bank-urgent-note">
+      ⚠️ <strong>Important:</strong> Your setup will NOT begin until payment is confirmed. Please complete your transfer and send the receipt to Richard on WhatsApp as soon as possible.
+    </div>
+  </div>
+
   <!-- ORDER SUMMARY -->
-  <div class="order-card">
+  <div class="order-card" id="orderCard">
     <div class="order-card-title">Your Order Summary</div>
 
     <div class="order-detail">
@@ -440,65 +633,62 @@ fbq('track', 'PageView');
       <span class="order-detail-value green" id="sum-package">—</span>
     </div>
     <div class="order-detail">
-      <span class="order-detail-label">Amount Paid</span>
+      <span class="order-detail-label">Payment Method</span>
+      <span class="order-detail-value" id="sum-method">—</span>
+    </div>
+    <div class="order-detail">
+      <span class="order-detail-label">Amount</span>
       <span class="order-detail-value gold" id="sum-amount">₦180,000</span>
     </div>
     <div class="order-detail">
       <span class="order-detail-label">Status</span>
-      <span class="order-detail-value green">✅ Payment Confirmed</span>
+      <span class="order-detail-value" id="sum-status">✅ Payment Confirmed</span>
     </div>
   </div>
 
   <!-- NEXT STEPS -->
-  <div class="steps-card">
-    <div class="steps-title">What Happens Next</div>
-    <div class="step-item">
-      <div class="step-circle">1</div>
-      <span><strong>Tap the WhatsApp button below</strong> — it will open a pre-filled message with all your order details sent to Richard automatically</span>
-    </div>
-    <div class="step-item">
-      <div class="step-circle">2</div>
-      <span><strong>Send your payment receipt</strong> — take a screenshot of your Flutterwave payment confirmation and send it in the chat</span>
-    </div>
-    <div class="step-item">
-      <div class="step-circle">3</div>
-      <span><strong>Richard confirms and begins immediately</strong> — your setup starts as soon as receipt is verified</span>
-    </div>
-    <div class="step-item">
-      <div class="step-circle">4</div>
-      <span><strong>Your PayPal is delivered</strong> within your chosen timeframe with full login details</span>
+  <div class="steps-card" id="stepsCard">
+    <div class="steps-title" id="stepsTitle">What Happens Next</div>
+    <div id="stepsContent">
+      <!-- populated by JS -->
     </div>
   </div>
 
   <!-- WHAT TO SEND -->
   <div class="send-box">
-    <div class="send-box-title">📸 Also Send These To Richard on WhatsApp</div>
-    <p>After tapping the button below, please also send:</p>
-    <p>✅ <strong>Screenshot of your Flutterwave payment receipt</strong></p>
-    <p>✅ <strong>Clear photo/scan of your Government ID</strong> (Passport / NIN / Driver's License)</p>
-    <p>✅ <strong>A clear passport photograph</strong> of your face</p>
+    <div class="send-box-title" id="sendBoxTitle">📸 Also Send These To Richard on WhatsApp</div>
+    <p id="sendBoxIntro">After tapping the button below, please also send:</p>
+    <div id="sendBoxItems">
+      <p>✅ <strong>Screenshot of your Flutterwave payment receipt</strong></p>
+      <p>✅ <strong>Clear photo/scan of your Government ID</strong> (Passport / NIN / Driver's License)</p>
+      <p>✅ <strong>A clear passport photograph</strong> of your face</p>
+    </div>
     <p style="color:var(--muted);font-size:13px;margin-top:8px;">These are required to complete your PayPal account setup. Your information is handled with complete confidentiality.</p>
   </div>
 
   <!-- WHATSAPP BUTTON -->
   <a href="#" class="wa-btn" id="waBtn">
     <span class="wa-icon">💬</span>
-    Tap Here To Send Your Details to Richard
+    <span id="waBtnText">Tap Here To Send Your Details to Richard</span>
   </a>
 
-  <p class="wa-note">Opens WhatsApp with your order details pre-filled — just tap Send</p>
+  <p class="wa-note" id="waNote">Opens WhatsApp with your order details pre-filled — just tap Send</p>
 
-  <div class="auto-redirect">
+  <div class="auto-redirect" id="autoRedirect">
     WhatsApp opening automatically in <span id="countdown">5</span> seconds...
   </div>
 
 </div>
 
 <script>
-  // Load order data from sessionStorage
+  // ── Load order data from sessionStorage ───────────────────
   const orderData = JSON.parse(sessionStorage.getItem('ggsOrder') || '{}');
 
-  // Populate order summary
+  const isSplit = (orderData.packageType || '').includes('Split');
+  const isBank  = (orderData.paymentMethod || '') === 'Bank Transfer'
+                  || (orderData.packageType || '').includes('Bank Transfer');
+
+  // ── Populate order summary ────────────────────────────────
   document.getElementById('sum-name').textContent     = orderData.fullName     || 'Not provided';
   document.getElementById('sum-business').textContent = orderData.businessName || 'N/A';
   document.getElementById('sum-phone').textContent    = orderData.phone        || 'Not provided';
@@ -506,21 +696,129 @@ fbq('track', 'PageView');
   document.getElementById('sum-type').textContent     = orderData.businessType || 'Not provided';
   document.getElementById('sum-id').textContent       = orderData.idType       || 'Not provided';
   document.getElementById('sum-package').textContent  = orderData.packageType  || 'Standard (72 Hours)';
-  const isSplit = (orderData.packageType || '').includes('Split');
-document.getElementById('sum-amount').textContent = isSplit ? '₦100,000 (Deposit Paid)' : '₦180,000';
+  document.getElementById('sum-method').textContent   = isBank ? '🏦 Bank Transfer (PalmPay)' : '💳 Flutterwave';
 
-  // ✅ PURCHASE EVENT — fires ONCE here, correctly, after payment is confirmed
-  // This is the correct place: person has paid and landed on this page
-  if (typeof fbq !== 'undefined') {
-    fbq('track', 'Purchase', {
-currency: 'NGN',
-value: isSplit ? 100000 : 180000
-});
+  if (isBank) {
+    document.getElementById('sum-amount').textContent = '₦180,000';
+    document.getElementById('sum-amount').className = 'order-detail-value gold';
+  } else if (isSplit) {
+    document.getElementById('sum-amount').textContent = '₦100,000 (Deposit Paid)';
+  } else {
+    document.getElementById('sum-amount').textContent = '₦180,000';
   }
 
-  // Build WhatsApp pre-filled message
+  // ── Facebook Pixel Purchase event ─────────────────────────
+  // Fires once here — correct location after payment or order confirmed
+  if (typeof fbq !== 'undefined') {
+    fbq('track', 'Purchase', {
+      currency: 'NGN',
+      value: isBank ? 180000 : (isSplit ? 100000 : 180000)
+    });
+  }
+
+  // ── Bank Transfer: customize entire page ──────────────────
+  if (isBank) {
+    // Top bar
+    document.getElementById('topbar').textContent = '🏦 Order Confirmed — Transfer ₦180,000 to PalmPay to Start Your Setup';
+    document.getElementById('topbar').classList.add('bank');
+
+    // Progress bar — step 2 still pending (payment not yet made)
+    document.getElementById('progressFill').classList.add('bank-fill');
+    document.getElementById('step2Label').textContent = '② Transfer Payment ⏳';
+    document.getElementById('step2Label').className = 'progress-step pending';
+    document.getElementById('step3Label').textContent = '③ Setup Begins After Receipt';
+    document.getElementById('step3Label').className = 'progress-step inactive';
+
+    // Success circle
+    document.getElementById('successCircle').textContent = '🏦';
+    document.getElementById('successCircle').classList.add('bank');
+
+    // Header
+    document.getElementById('successTag').textContent = '🏦 Order Details Saved';
+    document.getElementById('successTag').classList.add('bank');
+    document.getElementById('pageHeading').innerHTML = "ALMOST DONE!<br><span class='blue'>TRANSFER TO START</span>";
+    document.getElementById('pageSubtext').innerHTML = "Your order details are saved and ready.<br><strong>Complete your bank transfer below, then tap the WhatsApp button to send Richard your receipt and start your setup.</strong>";
+
+    // Order card accent
+    document.getElementById('orderCard').classList.add('bank');
+
+    // Payment status in summary
+    document.getElementById('sum-status').textContent = '⏳ Awaiting Payment Transfer';
+    document.getElementById('sum-status').className = 'order-detail-value orange';
+
+    // Show bank transfer instruction box
+    document.getElementById('bankTransferBox').style.display = 'block';
+
+    // Next steps — bank version
+    document.getElementById('stepsCard').classList.add('bank-steps');
+    document.getElementById('stepsTitle').textContent = 'Complete These Steps Now';
+    document.getElementById('stepsContent').innerHTML = `
+      <div class="step-item">
+        <div class="step-circle blue">1</div>
+        <span><strong>Transfer ₦180,000</strong> to PalmPay account <strong>8142717585</strong> (Richard Ojukwu)</span>
+      </div>
+      <div class="step-item">
+        <div class="step-circle blue">2</div>
+        <span><strong>Screenshot your payment receipt</strong> from your banking app</span>
+      </div>
+      <div class="step-item">
+        <div class="step-circle blue">3</div>
+        <span><strong>Tap the WhatsApp button below</strong> — your order details are pre-filled. Add your receipt photo and send</span>
+      </div>
+      <div class="step-item">
+        <div class="step-circle blue">4</div>
+        <span>Richard confirms your payment and <strong>begins your PayPal setup immediately</strong></span>
+      </div>
+    `;
+
+    // Send box — bank version
+    document.getElementById('sendBoxTitle').textContent = '📸 Send These To Richard on WhatsApp';
+    document.getElementById('sendBoxIntro').textContent = 'After tapping the button below, please send:';
+    document.getElementById('sendBoxItems').innerHTML = `
+      <p>✅ <strong>Screenshot of your PalmPay / bank transfer receipt</strong> (showing ₦180,000 sent)</p>
+      <p>✅ <strong>Clear photo/scan of your Government ID</strong> (Passport / NIN / Driver's License)</p>
+      <p>✅ <strong>A clear passport photograph</strong> of your face</p>
+    `;
+
+    // WhatsApp button text
+    document.getElementById('waBtnText').textContent = 'Send Receipt & Order Details to Richard on WhatsApp';
+    document.getElementById('waNote').textContent = 'Opens WhatsApp with your order details pre-filled — add your receipt screenshot and tap Send';
+
+    // Hide auto-redirect countdown for bank transfer (they need to transfer first)
+    document.getElementById('autoRedirect').style.display = 'none';
+  } else {
+    // ── Flutterwave flow: existing next steps ─────────────────
+    document.getElementById('stepsContent').innerHTML = `
+      <div class="step-item">
+        <div class="step-circle">1</div>
+        <span><strong>Tap the WhatsApp button below</strong> — it will open a pre-filled message with all your order details sent to Richard automatically</span>
+      </div>
+      <div class="step-item">
+        <div class="step-circle">2</div>
+        <span><strong>Send your payment receipt</strong> — take a screenshot of your Flutterwave payment confirmation and send it in the chat</span>
+      </div>
+      <div class="step-item">
+        <div class="step-circle">3</div>
+        <span><strong>Richard confirms and begins immediately</strong> — your setup starts as soon as receipt is verified</span>
+      </div>
+      <div class="step-item">
+        <div class="step-circle">4</div>
+        <span><strong>Your PayPal is delivered</strong> within your chosen timeframe with full login details</span>
+      </div>
+    `;
+  }
+
+  // ── Build WhatsApp pre-filled message ─────────────────────
   function buildWaMessage() {
-    const msg = `✅ *NEW ORDER — GGS Global PayPal Setup*
+    const paymentLine = isBank
+      ? `💰 *Payment Method:* Bank Transfer to PalmPay ⏳ (Receipt attached)`
+      : `💰 *Payment:* ₦${isSplit ? '100,000' : '180,000'} via Flutterwave ✅`;
+
+    const bankNotice = isBank
+      ? `\n\n🏦 *Bank Transfer Details Used:*\nBank: PalmPay\nAccount: 8142717585\nName: Richard Ojukwu\nAmount: ₦180,000`
+      : '';
+
+    const msg = `${isBank ? '🏦' : '✅'} *NEW ORDER — GGS Global PayPal Setup*
 
 *ACCOUNT SETUP DETAILS:*
 
@@ -532,11 +830,12 @@ value: isSplit ? 100000 : 180000
 6. *Government ID Type:* ${orderData.idType || 'N/A'}
 7. *Package Selected:* ${orderData.packageType || 'Standard (72 Hours)'}
 
-💰 *Payment:* ₦180,000 via Flutterwave ✅
+${paymentLine}${bankNotice}
 🕐 *Order Time:* ${orderData.timestamp || new Date().toLocaleString()}
 
-📸 *I will now send:*
-- My Flutterwave payment receipt screenshot
+📸 *I will now send:*${isBank ? `
+- My PalmPay transfer receipt screenshot (₦180,000)` : `
+- My Flutterwave payment receipt screenshot`}
 - My Government ID photo
 - My passport photograph
 
@@ -545,28 +844,29 @@ Please confirm receipt and begin my setup. Thank you! 🙏`;
     return encodeURIComponent(msg);
   }
 
-  // Set WhatsApp button href
+  // ── Set WhatsApp button href ──────────────────────────────
   const waUrl = `https://wa.me/2348106334849?text=${buildWaMessage()}`;
   document.getElementById('waBtn').href = waUrl;
 
-  // Auto-countdown and redirect to WhatsApp
-  let seconds = 5;
-  const countdownEl = document.getElementById('countdown');
+  // ── Auto-countdown (only for Flutterwave clients) ─────────
+  if (!isBank) {
+    let seconds = 5;
+    const countdownEl = document.getElementById('countdown');
 
-  const timer = setInterval(() => {
-    seconds--;
-    countdownEl.textContent = seconds;
-    if (seconds <= 0) {
+    const timer = setInterval(() => {
+      seconds--;
+      countdownEl.textContent = seconds;
+      if (seconds <= 0) {
+        clearInterval(timer);
+        window.location.href = waUrl;
+      }
+    }, 1000);
+
+    document.getElementById('waBtn').addEventListener('click', () => {
       clearInterval(timer);
-      window.location.href = waUrl;
-    }
-  }, 1000);
-
-  // If they click manually, stop auto-redirect
-  document.getElementById('waBtn').addEventListener('click', () => {
-    clearInterval(timer);
-    document.querySelector('.auto-redirect').style.display = 'none';
-  });
+      document.querySelector('.auto-redirect').style.display = 'none';
+    });
+  }
 </script>
 
 </body>
