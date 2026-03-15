@@ -483,7 +483,8 @@ fbq('track', 'PageView');
   .upload-title { font-size:15px; font-weight:800; color:var(--white); margin-bottom:4px; }
   .upload-sub   { font-size:12px; color:var(--muted); font-family:'DM Mono',monospace; }
   .upload-filename { font-size:13px; color:var(--green); font-weight:700; margin-top:8px; display:none; }
-  .upload-formats { font-size:11px; color:var(--muted); font-family:'DM Mono',monospace; margin-bottom:16px; letter-spacing:0.3px; }
+  .upload-formats { font-size:11px; color:var(--muted); font-family:'DM Mono',monospace; margin-bottom:8px; letter-spacing:0.3px; }
+  .whatsapp-receipt-note { font-size:13px; color:#25D366; font-weight:700; margin-bottom:16px; line-height:1.5; }
 
   /* Processing overlay */
   .processing-msg {
@@ -823,6 +824,7 @@ fbq('track', 'PageView');
               <div class="upload-filename" id="uploadFilename"></div>
             </div>
             <div class="upload-formats">Accepted formats: JPG &nbsp;·&nbsp; PNG &nbsp;·&nbsp; PDF &nbsp;·&nbsp; Maximum size 5MB</div>
+            <div class="whatsapp-receipt-note">After uploading your receipt here — also send a copy directly to WhatsApp: <strong>+2348106334849</strong> for fastest verification 📲</div>
             <div class="bank-error-msg" id="bankReceiptError">Please upload your transfer receipt</div>
             <div class="bank-error-msg" id="bankFileTypeError">Please upload an image or PDF of your receipt only</div>
             <div class="bank-error-msg" id="bankFileSizeError">File too large — please upload a file under 5MB</div>
@@ -1083,7 +1085,7 @@ fbq('track', 'PageView');
   }
 
   // ── SEND BANK TRANSFER ORDER (with Base64 receipt) ──────────
-  async function sendBankOrderToWeb3Forms(d, bankAmount, receiptBase64, receiptName) {
+  async function sendBankOrderToWeb3Forms(d, bankAmount, receiptName) {
     const body =
 `NEW ORDER RECEIVED — BANK TRANSFER
 
@@ -1097,8 +1099,9 @@ Payment Method: Direct Bank Transfer — PalmPay
 Amount Transferred: ${bankAmount}
 Submitted At: ${d.timestamp}
 
-Receipt File: ${receiptName}
-Receipt (Base64): ${receiptBase64}
+Receipt Filename: ${receiptName}
+Receipt Status: Successfully uploaded by client
+Note: Client has been instructed to send receipt directly on WhatsApp if email attachment is not visible
 
 ACTION REQUIRED: Verify payment in PalmPay before beginning setup.`;
 
@@ -1268,18 +1271,9 @@ Submitted At: ${d.timestamp}`;
     const pixelValue      = bankAmount.includes('180') ? 180000 : 100000;
     const receiptFilename = receiptFile.files[0].name;
 
-    // Convert receipt to Base64
-    let receiptBase64 = '';
-    try {
-      receiptBase64 = await fileToBase64(receiptFile.files[0]);
-    } catch(e) {
-      console.warn('File read error:', e);
-      receiptBase64 = '[File read failed — receipt: ' + receiptFilename + ']';
-    }
-
     // Submit to Web3Forms
     try {
-      await sendBankOrderToWeb3Forms(d, bankAmount, receiptBase64, receiptFilename);
+      await sendBankOrderToWeb3Forms(d, bankAmount, receiptFilename);
     } catch(e) {
       console.warn('Submission error:', e);
       // Continue regardless
@@ -1290,12 +1284,15 @@ Submitted At: ${d.timestamp}`;
 
     // Build thank you URL
     const thankyouUrl = buildThankyouUrl({
-      payment: 'bank',
-      name   : d.fullName,
-      phone  : d.phone,
-      package: 'Standard — Bank Transfer',
-      amount : bankAmount,
-      id     : d.idType
+      payment     : 'bank',
+      name        : d.fullName,
+      phone       : d.phone,
+      dob         : d.dob,
+      business    : d.businessType,
+      businessname: d.businessName || '',
+      package     : 'Standard — Bank Transfer',
+      amount      : bankAmount,
+      id          : d.idType
     });
 
     confirmBtn.innerHTML = '✅ Order Confirmed — Redirecting...';

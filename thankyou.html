@@ -442,52 +442,68 @@ fbq('track', 'PageView');
      PART 1 — READ CLIENT DETAILS
   ══════════════════════════════════════════════════════ */
 
-  const urlParams     = new URLSearchParams(window.location.search);
-  const urlPayment    = urlParams.get('payment');
-  const urlName       = urlParams.get('name');
-  const urlPhone      = urlParams.get('phone');
-  const urlPackage    = urlParams.get('package');
-  const urlAmount     = urlParams.get('amount');
-  const urlID         = urlParams.get('id');
+  const urlParams        = new URLSearchParams(window.location.search);
+  const urlPayment       = urlParams.get('payment');
+  const urlName          = urlParams.get('name');
+  const urlPhone         = urlParams.get('phone');
+  const urlPackage       = urlParams.get('package');
+  const urlAmount        = urlParams.get('amount');
+  const urlID            = urlParams.get('id');
+  const urlDOB           = urlParams.get('dob');
+  const urlBusiness      = urlParams.get('business');
+  const urlBusinessName  = urlParams.get('businessname');
 
-  const ssPayment     = sessionStorage.getItem('ggs_payment');
-  const ssName        = sessionStorage.getItem('ggs_name');
-  const ssPhone       = sessionStorage.getItem('ggs_phone');
-  const ssPackage     = sessionStorage.getItem('ggs_package');
-  const ssAmount      = sessionStorage.getItem('ggs_amount');
-  const ssID          = sessionStorage.getItem('ggs_id');
+  const ssPayment      = sessionStorage.getItem('ggs_payment');
+  const ssName         = sessionStorage.getItem('ggs_name');
+  const ssPhone        = sessionStorage.getItem('ggs_phone');
+  const ssPackage      = sessionStorage.getItem('ggs_package');
+  const ssAmount       = sessionStorage.getItem('ggs_amount');
+  const ssID           = sessionStorage.getItem('ggs_id');
+  const ssDOB          = sessionStorage.getItem('ggs_dob');
+  const ssBusiness     = sessionStorage.getItem('ggs_business');
+  const ssBusinessName = sessionStorage.getItem('ggs_businessname');
 
   // Clear sessionStorage after reading
-  ['ggs_payment','ggs_name','ggs_phone','ggs_package','ggs_amount','ggs_id']
+  ['ggs_payment','ggs_name','ggs_phone','ggs_package','ggs_amount','ggs_id','ggs_dob','ggs_business','ggs_businessname']
     .forEach(k => sessionStorage.removeItem(k));
 
   // Priority: URL params first (bank), then sessionStorage (Flutterwave), then fallback
-  let paymentType, clientName, clientPhone, clientPackage, clientAmount, clientID, dataSource;
+  let paymentType, clientName, clientPhone, clientPackage, clientAmount, clientID,
+      clientDOB, clientBusiness, clientBusinessName, dataSource;
 
   if (urlPayment) {
-    paymentType   = urlPayment;
-    clientName    = urlName    || 'Client';
-    clientPhone   = urlPhone   || '—';
-    clientPackage = urlPackage || 'Standard Package';
-    clientAmount  = urlAmount  || '₦180,000';
-    clientID      = urlID      || '—';
-    dataSource    = 'url';
+    paymentType        = urlPayment;
+    clientName         = urlName         || 'Client';
+    clientPhone        = urlPhone        || '—';
+    clientPackage      = urlPackage      || 'Standard Package';
+    clientAmount       = urlAmount       || '₦180,000';
+    clientID           = urlID           || '—';
+    clientDOB          = urlDOB          || '—';
+    clientBusiness     = urlBusiness     || '—';
+    clientBusinessName = urlBusinessName || '—';
+    dataSource         = 'url';
   } else if (ssPayment) {
-    paymentType   = ssPayment;
-    clientName    = ssName    || 'Client';
-    clientPhone   = ssPhone   || '—';
-    clientPackage = ssPackage || 'Standard Package';
-    clientAmount  = ssAmount  || '₦180,000';
-    clientID      = ssID      || '—';
-    dataSource    = 'session';
+    paymentType        = ssPayment;
+    clientName         = ssName         || 'Client';
+    clientPhone        = ssPhone        || '—';
+    clientPackage      = ssPackage      || 'Standard Package';
+    clientAmount       = ssAmount       || '₦180,000';
+    clientID           = ssID           || '—';
+    clientDOB          = ssDOB          || '—';
+    clientBusiness     = ssBusiness     || '—';
+    clientBusinessName = ssBusinessName || '—';
+    dataSource         = 'session';
   } else {
-    paymentType   = 'fallback';
-    clientName    = 'Client';
-    clientPhone   = '—';
-    clientPackage = '—';
-    clientAmount  = '—';
-    clientID      = '—';
-    dataSource    = 'none';
+    paymentType        = 'fallback';
+    clientName         = 'Client';
+    clientPhone        = '—';
+    clientPackage      = '—';
+    clientAmount       = '—';
+    clientID           = '—';
+    clientDOB          = '—';
+    clientBusiness     = '—';
+    clientBusinessName = '—';
+    dataSource         = 'none';
   }
 
   // Normalise amount display — ensure ₦ prefix
@@ -694,7 +710,7 @@ fbq('track', 'PageView');
     topbarClass = 'orange';
     topbarText  = '⏳ Order Received — GGS Global | Verifying Your Payment Now';
 
-    const waMsg = `Hi Richard ✅ I just submitted my PayPal setup order and uploaded my bank transfer receipt.\n\nHere are my details:\nFull Name: ${clientName}\nPhone: ${clientPhone}\nPackage: ${clientPackage}\nPayment Method: Direct Bank Transfer — PalmPay\nAmount Transferred: ${clientAmount}\nReceipt: Uploaded on order form ✅\n\nPlease verify my payment and confirm my setup slot. Thank you 🙏`;
+    const waMsg = `Hi Richard ✅ I just submitted my PayPal setup order and uploaded my bank transfer receipt.\n\nHere are my details:\nFull Name: ${clientName}\nBusiness Name: ${clientBusinessName}\nPhone: ${clientPhone}\nDate of Birth: ${clientDOB}\nBusiness Type: ${clientBusiness}\nGovernment ID: ${clientID}\nPackage: ${clientPackage}\nPayment Method: Direct Bank Transfer — PalmPay\nAmount Transferred: ${clientAmount}\nReceipt: Uploaded on order form ✅\n\nPlease verify my payment and confirm my setup slot. Thank you 🙏`;
     waUrl = buildWaUrl(waMsg);
     waLabel = 'Message Richard to Confirm Your Receipt';
     waNoteText = 'message Richard so he can verify your transfer and lock your slot immediately';
