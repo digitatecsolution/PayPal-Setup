@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Start Your PayPal Setup — GGS Global</title>
 
-<!-- Facebook Pixel -->
+<!-- Facebook Pixel Base Code -->
 <script>
 !function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -16,7 +16,20 @@ t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
 fbq('init', '924866965267790');
+
+// STAGE 1 — PageView: fires on page load (traffic quality measurement)
 fbq('track', 'PageView');
+
+// STAGE 2 — InitiateCheckout: fires on order form page load
+// Every visitor who reaches this form is a high-intent prospect.
+// This builds a mid-funnel retargeting audience — warmer than link clickers,
+// cooler than leads. These are people who saw the form but did not submit.
+fbq('track', 'InitiateCheckout', {
+  value: 180000,
+  currency: 'NGN',
+  content_name: 'PayPal Setup — Order Form',
+  content_category: 'Digital Service'
+});
 </script>
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=924866965267790&ev=PageView&noscript=1"/></noscript>
 
@@ -113,60 +126,110 @@ fbq('track', 'PageView');
   .trust-item { display:flex; align-items:center; gap:6px; font-size:12px; color:var(--muted); font-family:'DM Mono',monospace; letter-spacing:0.5px; }
   .trust-item .icon { color:var(--green); font-size:14px; }
 
-  /* ── QUALIFICATION GATE ── */
+  /* ══════════════════════════════════════════
+     SLIM QUALIFICATION GATE
+  ══════════════════════════════════════════ */
   .qual-gate {
-    background: var(--red-dim);
-    border: 2px solid var(--red);
-    border-left: 5px solid var(--red);
-    border-radius:6px; padding:28px 28px 24px; margin-bottom:28px;
-    box-shadow: 0 0 0 1px rgba(231,76,60,0.15), 0 8px 32px rgba(231,76,60,0.18);
+    background: rgba(11,22,40,0.98);
+    border: 1.5px solid rgba(245,200,66,0.35);
+    border-radius: 10px;
+    padding: 20px 22px;
+    margin-bottom: 28px;
+    box-shadow: 0 4px 24px rgba(245,200,66,0.08);
+    position: relative;
+    overflow: hidden;
   }
-  .qual-gate-header { display:flex; align-items:flex-start; gap:12px; margin-bottom:20px; }
-  .qual-gate-icon { font-size:28px; line-height:1; flex-shrink:0; margin-top:2px; }
-  .qual-gate-title {
-    font-family:'Bebas Neue',sans-serif;
-    font-size: clamp(18px,5vw,24px);
-    color:var(--white); letter-spacing:1.5px; line-height:1.1;
+  .qual-gate::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), var(--green), var(--gold));
+    background-size: 200% 100%;
+    animation: shimmer 3s linear infinite;
   }
-  .qual-gate-title span { color:var(--gold); }
-  .qual-gate-subtitle { font-size:13px; color:var(--muted); font-family:'DM Mono',monospace; letter-spacing:0.5px; margin-top:4px; }
-  .qual-divider { height:1px; background:rgba(231,76,60,0.25); margin:16px 0; }
-  .qual-section-label {
-    font-family:'DM Mono',monospace; font-size:10px; font-weight:700;
-    letter-spacing:2.5px; text-transform:uppercase; margin-bottom:10px;
-    display:flex; align-items:center; gap:8px;
-  }
-  .qual-section-label.green { color:var(--green); }
-  .qual-section-label.red   { color:var(--red); }
-  .qual-section-label::after { content:''; flex:1; height:1px; background:currentColor; opacity:0.2; }
-  .qual-list { list-style:none; display:flex; flex-direction:column; gap:8px; margin-bottom:16px; }
-  .qual-list li { font-size:14px; font-weight:700; color:var(--text); display:flex; align-items:flex-start; gap:10px; line-height:1.4; }
-  .qual-list li .qi { flex-shrink:0; font-size:15px; margin-top:1px; }
-  .qual-bottom-msg {
-    background:rgba(245,200,66,0.07); border:1px solid rgba(245,200,66,0.2);
-    border-radius:4px; padding:14px 16px; margin-top:16px;
-    font-size:13px; color:var(--text); line-height:1.65;
-  }
-  .qual-bottom-msg strong { color:var(--gold); }
-  .qual-bottom-msg em { color:var(--muted); font-style:normal; font-family:'DM Mono',monospace; font-size:12px; }
 
-  /* CHECKBOX GATE */
-  .gate-checkbox-wrap {
-    margin-top:20px; background:rgba(0,0,0,0.25);
-    border:1.5px solid var(--gold-border); border-radius:6px;
-    padding:16px 18px; display:flex; align-items:flex-start; gap:14px;
-    cursor:pointer; transition:border-color 0.2s, background 0.2s;
+  /* Social Proof Strip */
+  .qual-social-strip {
+    background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(245,200,66,0.15);
+    border-radius: 6px;
+    padding: 11px 16px;
+    text-align: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.5px;
+    line-height: 1.7;
+    margin-bottom: 16px;
   }
-  .gate-checkbox-wrap:hover { border-color:rgba(245,200,66,0.6); background:rgba(245,200,66,0.04); }
-  .gate-checkbox-wrap input[type="checkbox"] { width:22px; height:22px; min-width:22px; accent-color:var(--green); cursor:pointer; margin-top:2px; }
-  .gate-checkbox-label { font-size:14px; font-weight:800; color:var(--white); line-height:1.5; cursor:pointer; user-select:none; }
-  .gate-checkbox-label span { color:var(--green); }
-  .gate-not-ready-msg { font-family:'DM Mono',monospace; font-size:12px; color:var(--red); margin-top:10px; padding-left:4px; display:none; letter-spacing:0.3px; }
-  .gate-not-ready-msg.show { display:block; }
+
+  /* Confirmation Checkbox */
+  .gate-checkbox-wrap {
+    background: rgba(0,200,83,0.06);
+    border: 1.5px solid rgba(0,200,83,0.3);
+    border-radius: 8px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 13px;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .gate-checkbox-wrap:hover {
+    border-color: rgba(0,200,83,0.6);
+    background: rgba(0,200,83,0.1);
+  }
+  .gate-checkbox-wrap.confirmed {
+    border-color: var(--green);
+    background: rgba(0,200,83,0.1);
+  }
+  .gate-checkbox-wrap input[type="checkbox"] {
+    width: 20px; height: 20px; min-width: 20px;
+    accent-color: var(--green);
+    cursor: pointer;
+    margin-top: 2px;
+  }
+  .gate-checkbox-label {
+    font-size: 13.5px;
+    font-weight: 800;
+    color: var(--white);
+    line-height: 1.5;
+    cursor: pointer;
+    user-select: none;
+  }
+  .gate-checkbox-label span.green { color: var(--green); }
+
+  .gate-not-ready-msg {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--gold);
+    margin-top: 8px;
+    padding-left: 4px;
+    display: none;
+    letter-spacing: 0.3px;
+  }
+  .gate-not-ready-msg.show { display: block; }
 
   /* ── FORM LOCK STATE ── */
-  .form-body { transition: opacity 0.3s, filter 0.3s; }
-  .form-body.locked { opacity:0.35; filter:grayscale(0.6); pointer-events:none; user-select:none; }
+  .form-body {
+    transition: opacity 0.35s ease, filter 0.35s ease;
+  }
+  .form-body.locked {
+    opacity: 0.35;
+    filter: grayscale(0.6);
+    pointer-events: none;
+    user-select: none;
+  }
+  .form-body.unlocking {
+    animation: unlockPulse 0.4s ease forwards;
+  }
+  @keyframes unlockPulse {
+    0%   { opacity: 0.35; filter: grayscale(0.6); }
+    50%  { opacity: 0.85; filter: grayscale(0.1); }
+    100% { opacity: 1;    filter: grayscale(0); }
+  }
 
   /* ── FORM CARD ── */
   .form-card {
@@ -564,7 +627,7 @@ fbq('track', 'PageView');
   @media(max-width:480px) {
     .form-card { padding:24px 16px; }
     .container { padding:28px 16px 60px; }
-    .qual-gate { padding:20px 16px 18px; }
+    .qual-gate { padding:16px 14px; }
     .bank-panel-inner { padding:20px 16px; }
   }
 </style>
@@ -588,51 +651,27 @@ fbq('track', 'PageView');
 
 <div class="container">
 
-  <!-- ===== QUALIFICATION GATE ===== -->
+  <!-- ===== SLIM QUALIFICATION GATE ===== -->
   <div class="qual-gate">
-    <div class="qual-gate-header">
-      <div class="qual-gate-icon">⚠️</div>
-      <div>
-        <div class="qual-gate-title">IMPORTANT — <span>READ BEFORE</span><br>FILLING THIS FORM</div>
-        <div class="qual-gate-subtitle">This form is strictly for serious individuals who are:</div>
-      </div>
+
+    <!-- Social Proof Strip -->
+    <div class="qual-social-strip">
+      ⭐ Trusted Since 2019 &nbsp;·&nbsp; ✅ 500+ Accounts Delivered &nbsp;·&nbsp; ⚡ 72-Hour Delivery &nbsp;·&nbsp; 🔒 Split Payment Available
     </div>
 
-    <div class="qual-section-label green">✅ You qualify if you are</div>
-    <ul class="qual-list">
-      <li><span class="qi">✅</span> Ready to pay ₦180,000 in full OR ₦100,000 split payment <strong>today</strong></li>
-      <li><span class="qi">✅</span> Actively earning or looking to earn from international clients</li>
-      <li><span class="qi">✅</span> Prepared to proceed within 24 hours of submitting</li>
-    </ul>
-
-    <div class="qual-divider"></div>
-
-    <div class="qual-section-label red">❌ Do NOT fill this form if you are</div>
-    <ul class="qual-list">
-      <li><span class="qi">❌</span> Just browsing or gathering information</li>
-      <li><span class="qi">❌</span> Not ready to make payment today</li>
-      <li><span class="qi">❌</span> Looking to negotiate the price below what is stated</li>
-    </ul>
-
-    <div class="qual-bottom-msg">
-      Our slots are limited and reserved strictly for clients ready to proceed immediately. Filling this form without intention to pay <strong>wastes a slot that a serious client needs.</strong>
-      <br><br>
-      <strong>If you are ready and serious — welcome. Please proceed below. 👇</strong>
-      <br>
-      <em>If you are not ready yet — bookmark this page and return when you are.</em>
-    </div>
-
-    <label class="gate-checkbox-wrap" for="gateConfirm">
+    <!-- Confirmation Checkbox -->
+    <label class="gate-checkbox-wrap" for="gateConfirm" id="gateCheckboxWrap">
       <input type="checkbox" id="gateConfirm" onchange="toggleGate(this)">
       <span class="gate-checkbox-label">
-        <span>✅</span> I confirm I have read the above, I am serious about getting this done today and I am <strong>ready to make payment upon submission</strong>
+        <span class="green">✅</span> Yes — I am ready to proceed and make payment today
       </span>
     </label>
     <div class="gate-not-ready-msg" id="gateNotReadyMsg">
-      ↑ Please confirm you are ready to proceed before filling the form
+      ↑ Please confirm you are ready to proceed before filling your details
     </div>
+
   </div>
-  <!-- ===== END QUALIFICATION GATE ===== -->
+  <!-- ===== END SLIM QUALIFICATION GATE ===== -->
 
   <div class="page-header">
     <div class="step-badge">Step 1 of 3 — Your Details</div>
@@ -898,29 +937,67 @@ fbq('track', 'PageView');
 </div><!-- /container -->
 
 <script>
+  // ══════════════════════════════════════════════════════════════
+  //  PIXEL HELPER — SAFE WRAPPER
+  //  All fbq calls go through this to prevent JS errors if pixel
+  //  hasn't loaded yet (slow connections, ad blockers, etc.)
+  // ══════════════════════════════════════════════════════════════
+  function safePixel(event, params) {
+    try {
+      if (typeof fbq !== 'undefined') {
+        if (params) {
+          fbq('track', event, params);
+        } else {
+          fbq('track', event);
+        }
+      }
+    } catch(e) {
+      console.warn('Pixel fire failed:', event, e);
+    }
+  }
+
+  // STAGE 3 — Lead pixel helper
+  // Fires after form validation passes, before redirect.
+  // Audience: Form Abandoners — high intent but didn't pay.
+  // Use for re-engagement ads targeting people who filled but didn't pay.
+  function firePixelLead() {
+    safePixel('Lead');
+  }
+
   // ── GATE TOGGLE ──────────────────────────────────────────────
   function toggleGate(checkbox) {
     const formBody    = document.getElementById('formBody');
     const submitBtn   = document.getElementById('submitBtn');
     const notReadyMsg = document.getElementById('gateNotReadyMsg');
+    const wrap        = document.getElementById('gateCheckboxWrap');
 
     if (checkbox.checked) {
+      // Smooth unlock animation
       formBody.classList.remove('locked');
+      formBody.classList.add('unlocking');
+      setTimeout(() => formBody.classList.remove('unlocking'), 400);
       submitBtn.disabled = false;
       notReadyMsg.classList.remove('show');
+      wrap.classList.add('confirmed');
     } else {
       formBody.classList.add('locked');
       submitBtn.disabled = true;
+      wrap.classList.remove('confirmed');
     }
   }
 
+  // Click on locked form area — show helpful message
   document.getElementById('formBody').addEventListener('click', function(e) {
     if (this.classList.contains('locked')) {
       const msg  = document.getElementById('gateNotReadyMsg');
-      const wrap = document.getElementById('gateConfirm').closest('.gate-checkbox-wrap');
+      const wrap = document.getElementById('gateCheckboxWrap');
       msg.classList.add('show');
-      wrap.style.borderColor = 'var(--red)';
-      setTimeout(() => { wrap.style.borderColor = ''; }, 1200);
+      wrap.style.borderColor = 'rgba(245,200,66,0.8)';
+      wrap.style.background  = 'rgba(245,200,66,0.06)';
+      setTimeout(() => {
+        wrap.style.borderColor = '';
+        wrap.style.background  = '';
+      }, 1400);
     }
   }, true);
 
@@ -973,7 +1050,6 @@ fbq('track', 'PageView');
   }
 
   function onReceiptUpload(input) {
-    // Clear previous file errors
     document.getElementById('bankFileTypeError').classList.remove('show');
     document.getElementById('bankFileSizeError').classList.remove('show');
     document.getElementById('bankReceiptError').classList.remove('show');
@@ -981,7 +1057,6 @@ fbq('track', 'PageView');
     if (input.files && input.files[0]) {
       const file = input.files[0];
 
-      // Validate file type
       const allowed = ['image/jpeg','image/jpg','image/png','image/gif','image/webp','application/pdf'];
       if (!allowed.includes(file.type) && !file.name.match(/\.(jpg|jpeg|png|gif|webp|pdf)$/i)) {
         document.getElementById('bankFileTypeError').classList.add('show');
@@ -989,7 +1064,6 @@ fbq('track', 'PageView');
         return;
       }
 
-      // Validate file size (5MB)
       if (file.size > 5 * 1024 * 1024) {
         document.getElementById('bankFileSizeError').classList.add('show');
         input.value = '';
@@ -1041,28 +1115,14 @@ fbq('track', 'PageView');
     }
 
     check('fullName',     'fullName-error',     d.fullName !== '');
-    // Phone must be exactly 11 digits
     const phoneDigits = d.phone.replace(/\D/g, '');
     check('phone',        'phone-error',        phoneDigits.length === 11);
-    // DOB must be valid DD/MM/YYYY
     const dobValid = /^\d{2}\/\d{2}\/\d{4}$/.test(d.dob);
     check('dob',          'dob-error',          dobValid);
     check('businessType', 'businessType-error', d.businessType !== '');
     check('idType',       'idType-error',       d.idType !== '');
 
     return valid;
-  }
-
-  // ── PIXEL HELPERS ────────────────────────────────────────────
-  function firePixelLead() {
-    try { if (typeof fbq !== 'undefined') fbq('track', 'Lead'); } catch(e) {}
-  }
-  function firePixelPurchase(value) {
-    try {
-      if (typeof fbq !== 'undefined') {
-        fbq('track', 'Purchase', { value: value, currency: 'NGN' });
-      }
-    } catch(e) {}
   }
 
   // ── SEND TO WEB3FORMS (JSON) ─────────────────────────────────
@@ -1084,7 +1144,7 @@ fbq('track', 'PageView');
     }
   }
 
-  // ── SEND BANK TRANSFER ORDER (with Base64 receipt) ──────────
+  // ── SEND BANK TRANSFER ORDER ─────────────────────────────────
   async function sendBankOrderToWeb3Forms(d, bankAmount, receiptName) {
     const body =
 `NEW ORDER RECEIVED — BANK TRANSFER
@@ -1134,8 +1194,8 @@ ACTION REQUIRED: Verify payment in PalmPay before beginning setup.`;
 
   // ── BUILD THANK YOU PAGE URL ─────────────────────────────────
   function buildThankyouUrl(params) {
-    const base   = 'thankyou.html';
-    const query  = Object.entries(params)
+    const base  = 'thankyou.html';
+    const query = Object.entries(params)
       .map(([k,v]) => `${encodeURIComponent(k)}=${encodeURIComponent(v)}`)
       .join('&');
     return `${base}?${query}`;
@@ -1143,6 +1203,12 @@ ACTION REQUIRED: Verify payment in PalmPay before beginning setup.`;
 
   // ══════════════════════════════════════════════════════════════
   //  MAIN SUBMIT — FLUTTERWAVE PATHS
+  //
+  //  PIXEL FIRING ORDER HERE:
+  //  1. PageView      — already fired on page load ✅
+  //  2. InitiateCheckout — already fired on page load ✅
+  //  3. Lead          — fires HERE, before redirect ← STAGE 3
+  //  4. Purchase      — fires on thankyou.html only ✅
   // ══════════════════════════════════════════════════════════════
   async function submitForm() {
     if (!document.getElementById('gateConfirm').checked) {
@@ -1163,17 +1229,16 @@ ACTION REQUIRED: Verify payment in PalmPay before beginning setup.`;
 
     const isSplit = d.paymentMethod.includes('Split');
 
-    // Determine values
-    const pixelValue  = isSplit ? 100000 : 180000;
-    const amountLabel = isSplit ? '₦100,000' : '₦180,000';
-    const packageLabel= isSplit ? 'Split Payment — 1st Payment ₦100,000' : 'Standard — Full Payment ₦180,000';
-    const subject     = isSplit
+    const pixelValue   = isSplit ? 100000 : 180000;
+    const amountLabel  = isSplit ? '₦100,000' : '₦180,000';
+    const packageLabel = isSplit ? 'Split Payment — 1st Payment ₦100,000' : 'Standard — Full Payment ₦180,000';
+    const subject      = isSplit
       ? 'NEW ORDER — GGS Global PayPal Setup — Split Payment'
       : 'NEW ORDER — GGS Global PayPal Setup — Full Payment';
     const flutterwaveUrl = isSplit
       ? 'https://flutterwave.com/pay/halfpay'
       : 'https://flutterwave.com/pay/paypalbusiness';
-    const paymentKey  = isSplit ? 'split' : 'full';
+    const paymentKey   = isSplit ? 'split' : 'full';
 
     const bodyText =
 `NEW ORDER RECEIVED${isSplit ? ' — SPLIT PAYMENT' : ' — FULL PAYMENT'}
@@ -1188,10 +1253,12 @@ Payment Method: ${d.paymentMethod}
 Amount: ${amountLabel}
 Submitted At: ${d.timestamp}`;
 
-    // Fire Lead pixel
+    // ── STAGE 3: Fire Lead pixel BEFORE redirect ──────────────
+    // These are Form Abandoners — people who submitted details
+    // but may not complete payment. Highest-intent retarget segment.
     firePixelLead();
 
-    // Submit to Web3Forms (don't block on failure)
+    // Submit to Web3Forms (non-blocking)
     sendToWeb3Forms(subject, bodyText).catch(e => console.warn(e));
 
     // Store in sessionStorage for thank you page
@@ -1213,6 +1280,12 @@ Submitted At: ${d.timestamp}`;
 
   // ══════════════════════════════════════════════════════════════
   //  BANK TRANSFER CONFIRM
+  //
+  //  PIXEL FIRING ORDER HERE:
+  //  1. PageView         — already fired on page load ✅
+  //  2. InitiateCheckout — already fired on page load ✅
+  //  3. Lead             — fires HERE, before redirect ← STAGE 3
+  //  4. Purchase         — fires on thankyou.html only ✅
   // ══════════════════════════════════════════════════════════════
   async function confirmBankPayment() {
     if (!document.getElementById('gateConfirm').checked) {
@@ -1221,14 +1294,12 @@ Submitted At: ${d.timestamp}`;
       return;
     }
 
-    // Validate main form
     const d = collectData();
     if (!validateForm(d)) {
       document.querySelector('.form-input.error')?.scrollIntoView({ behavior:'smooth', block:'center' });
       return;
     }
 
-    // Validate bank-specific fields
     const bankAmountEl = document.querySelector('input[name="bankAmount"]:checked');
     const receiptFile  = document.getElementById('receiptFile');
     let   bankValid    = true;
@@ -1245,7 +1316,6 @@ Submitted At: ${d.timestamp}`;
       bankValid = false;
     } else {
       document.getElementById('bankReceiptError').classList.remove('show');
-      // Re-check file type and size
       const file = receiptFile.files[0];
       const allowed = ['image/jpeg','image/jpg','image/png','image/gif','image/webp','application/pdf'];
       if (!allowed.includes(file.type) && !file.name.match(/\.(jpg|jpeg|png|gif|webp|pdf)$/i)) {
@@ -1259,7 +1329,6 @@ Submitted At: ${d.timestamp}`;
 
     if (!bankValid) return;
 
-    // Prevent double submission
     const confirmBtn = document.getElementById('confirmPaymentBtn');
     confirmBtn.disabled = true;
     confirmBtn.innerHTML = '⏳ Processing...';
@@ -1267,7 +1336,7 @@ Submitted At: ${d.timestamp}`;
     const processingMsg = document.getElementById('processingMsg');
     processingMsg.classList.add('show');
 
-    const bankAmount      = bankAmountEl.value;  // "₦180,000" or "₦100,000"
+    const bankAmount      = bankAmountEl.value;
     const pixelValue      = bankAmount.includes('180') ? 180000 : 100000;
     const receiptFilename = receiptFile.files[0].name;
 
@@ -1276,13 +1345,14 @@ Submitted At: ${d.timestamp}`;
       await sendBankOrderToWeb3Forms(d, bankAmount, receiptFilename);
     } catch(e) {
       console.warn('Submission error:', e);
-      // Continue regardless
     }
 
-    // Fire Pixel events
+    // ── STAGE 3: Fire Lead pixel BEFORE redirect ──────────────
+    // Fires here for bank transfer path — same stage 3 event.
+    // Lead audience = submitted form but payment not yet confirmed.
     firePixelLead();
 
-    // Build thank you URL
+    // Build thank you URL with all params
     const thankyouUrl = buildThankyouUrl({
       payment     : 'bank',
       name        : d.fullName,
