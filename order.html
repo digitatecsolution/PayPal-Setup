@@ -17,13 +17,14 @@ s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
 fbq('init', '924866965267790');
 
-// STAGE 1 — PageView: fires on page load (traffic quality measurement)
+// STAGE 1 — PageView
 fbq('track', 'PageView');
 
-// STAGE 2 — InitiateCheckout: fires on order form page load
-// Every visitor who reaches this form is a high-intent prospect.
-// This builds a mid-funnel retargeting audience — warmer than link clickers,
-// cooler than leads. These are people who saw the form but did not submit.
+// STAGE 2 — InitiateCheckout
+// FIX: Removed 'dob' from all pixel event parameters.
+// Meta was blocking this because date of birth is classified
+// as sensitive personal data under Meta Business Tool Terms.
+// Only safe, non-sensitive parameters are passed here.
 fbq('track', 'InitiateCheckout', {
   value: 180000,
   currency: 'NGN',
@@ -149,7 +150,6 @@ fbq('track', 'InitiateCheckout', {
     animation: shimmer 3s linear infinite;
   }
 
-  /* Social Proof Strip */
   .qual-social-strip {
     background: rgba(0,0,0,0.3);
     border: 1px solid rgba(245,200,66,0.15);
@@ -165,7 +165,6 @@ fbq('track', 'InitiateCheckout', {
     margin-bottom: 16px;
   }
 
-  /* Confirmation Checkbox */
   .gate-checkbox-wrap {
     background: rgba(0,200,83,0.06);
     border: 1.5px solid rgba(0,200,83,0.3);
@@ -213,9 +212,7 @@ fbq('track', 'InitiateCheckout', {
   .gate-not-ready-msg.show { display: block; }
 
   /* ── FORM LOCK STATE ── */
-  .form-body {
-    transition: opacity 0.35s ease, filter 0.35s ease;
-  }
+  .form-body { transition: opacity 0.35s ease, filter 0.35s ease; }
   .form-body.locked {
     opacity: 0.35;
     filter: grayscale(0.6);
@@ -317,12 +314,10 @@ fbq('track', 'InitiateCheckout', {
     gap: 6px;
     user-select: none;
   }
-
   .payment-card:hover {
     border-color: rgba(245,200,66,0.35);
     background: rgba(245,200,66,0.03);
   }
-
   .payment-option.opt-full input:checked + .payment-card {
     border-color: var(--gold);
     background: rgba(245,200,66,0.07);
@@ -338,26 +333,19 @@ fbq('track', 'InitiateCheckout', {
     background: rgba(0,200,83,0.07);
     box-shadow: 0 0 0 1px rgba(0,200,83,0.3), 0 8px 32px rgba(0,200,83,0.15);
   }
-
   .payment-cards:has(.payment-option input:checked) .payment-card {
-    opacity: 0.5;
-    transform: scale(0.98);
+    opacity: 0.5; transform: scale(0.98);
   }
   .payment-cards:has(.payment-option input:checked) .payment-option input:checked + .payment-card {
-    opacity: 1;
-    transform: scale(1);
+    opacity: 1; transform: scale(1);
   }
 
   .pc-badge {
     display: inline-block;
-    font-size: 9px;
-    font-weight: 900;
-    padding: 3px 8px;
-    letter-spacing: 1.2px;
-    text-transform: uppercase;
-    border-radius: 3px;
-    align-self: flex-start;
-    margin-bottom: 4px;
+    font-size: 9px; font-weight: 900;
+    padding: 3px 8px; letter-spacing: 1.2px;
+    text-transform: uppercase; border-radius: 3px;
+    align-self: flex-start; margin-bottom: 4px;
   }
   .badge-complete { background: var(--gold); color: var(--navy); }
   .badge-flexible { background: var(--orange); color: #fff; }
@@ -370,17 +358,12 @@ fbq('track', 'InitiateCheckout', {
   .pc-method{ font-family:'DM Mono',monospace; font-size:11px; color:var(--muted); margin-top:6px; }
 
   .pc-check {
-    position: absolute;
-    top: 10px; right: 12px;
-    width: 22px; height: 22px;
-    border-radius: 50%;
-    background: var(--gold);
-    color: var(--navy);
-    font-size: 13px;
-    font-weight: 900;
+    position: absolute; top: 10px; right: 12px;
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--gold); color: var(--navy);
+    font-size: 13px; font-weight: 900;
     display: flex; align-items: center; justify-content: center;
-    opacity: 0;
-    transition: opacity 0.2s;
+    opacity: 0; transition: opacity 0.2s;
   }
   .payment-option.opt-split .pc-check { background: var(--orange); color: #fff; }
   .payment-option.opt-bank  .pc-check { background: var(--green); color: var(--navy); }
@@ -404,22 +387,13 @@ fbq('track', 'InitiateCheckout', {
     background: #25D366;
     color: #0a1a0a;
     font-family: 'Manrope', sans-serif;
-    font-weight: 900;
-    font-size: 18px;
-    padding: 22px 20px;
-    border: none;
-    cursor: pointer;
-    letter-spacing: 0.3px;
-    transition: all 0.2s;
-    border-radius: 4px;
+    font-weight: 900; font-size: 18px;
+    padding: 22px 20px; border: none;
+    cursor: pointer; letter-spacing: 0.3px;
+    transition: all 0.2s; border-radius: 4px;
     box-shadow: 0 8px 32px rgba(37,211,102,0.4);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    position: relative;
-    overflow: hidden;
-    margin-top: 8px;
+    display: flex; align-items: center; justify-content: center;
+    gap: 12px; position: relative; overflow: hidden; margin-top: 8px;
   }
   .submit-btn::before {
     content:''; position:absolute; inset:0;
@@ -431,113 +405,74 @@ fbq('track', 'InitiateCheckout', {
   .submit-btn:disabled { background:#1e2e1e; color:#3a5a3a; cursor:not-allowed; transform:none; box-shadow:none; }
   .submit-btn .wa-icon { font-size:24px; }
 
-  /* ── SUBMIT NOTE ── */
   .submit-note { text-align:center; font-size:12px; color:var(--muted); margin-top:14px; font-family:'DM Mono',monospace; letter-spacing:0.3px; line-height:1.8; }
 
   /* ══════════════════════════════════════════
      BANK TRANSFER PANEL
   ══════════════════════════════════════════ */
-  .bank-panel {
-    display: none;
-    overflow: hidden;
-    animation: slideDown 0.35s ease forwards;
-  }
+  .bank-panel { display: none; overflow: hidden; animation: slideDown 0.35s ease forwards; }
   .bank-panel.show { display: block; }
-
   @keyframes slideDown {
     from { opacity:0; transform:translateY(-12px); }
     to   { opacity:1; transform:translateY(0); }
   }
 
   .bank-panel-inner {
-    background: var(--navy3);
-    border: 2px solid var(--green);
-    border-radius: 8px;
-    padding: 28px 28px 24px;
-    margin-top: 24px;
+    background: var(--navy3); border: 2px solid var(--green);
+    border-radius: 8px; padding: 28px 28px 24px; margin-top: 24px;
     box-shadow: 0 0 0 1px rgba(0,200,83,0.12), 0 12px 40px rgba(0,200,83,0.12);
   }
 
-  .bank-panel-title {
-    font-family:'Bebas Neue',sans-serif;
-    font-size: 22px; color:var(--white); letter-spacing:1px; margin-bottom:4px;
-  }
+  .bank-panel-title { font-family:'Bebas Neue',sans-serif; font-size: 22px; color:var(--white); letter-spacing:1px; margin-bottom:4px; }
   .bank-panel-sub { font-size:13px; color:var(--muted); margin-bottom:20px; }
 
   .bank-details-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 20px;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 12px; margin-bottom: 20px;
   }
   @media(max-width:480px) { .bank-details-grid { grid-template-columns:1fr; } }
 
   .bank-detail-item {
-    background: rgba(0,200,83,0.06);
-    border: 1px solid rgba(0,200,83,0.2);
-    border-radius: 6px;
-    padding: 14px 16px;
+    background: rgba(0,200,83,0.06); border: 1px solid rgba(0,200,83,0.2);
+    border-radius: 6px; padding: 14px 16px;
   }
   .bank-detail-label { font-family:'DM Mono',monospace; font-size:10px; color:var(--green); letter-spacing:2px; text-transform:uppercase; margin-bottom:4px; }
   .bank-detail-value { font-size:15px; font-weight:800; color:var(--white); }
   .bank-detail-value.account-num {
-    font-family:'DM Mono',monospace;
-    font-size:22px;
-    letter-spacing:3px;
-    color:var(--gold);
-    font-weight:900;
+    font-family:'DM Mono',monospace; font-size:22px;
+    letter-spacing:3px; color:var(--gold); font-weight:900;
   }
 
   .bank-amount-selector { margin-bottom: 20px; }
   .bank-amount-selector label { display:block; font-size:13px; font-weight:700; color:var(--white); margin-bottom:10px; }
 
   .amount-radios { display:flex; gap:12px; flex-wrap:wrap; }
-
   .amount-radio-opt { position:relative; flex:1; min-width:140px; }
   .amount-radio-opt input[type="radio"] { position:absolute; opacity:0; }
   .amount-radio-label {
     display:block; background:rgba(255,255,255,0.04);
     border:2px solid var(--border); border-radius:6px;
-    padding:14px 16px; cursor:pointer; transition:all 0.2s;
-    text-align:center;
+    padding:14px 16px; cursor:pointer; transition:all 0.2s; text-align:center;
   }
   .amount-radio-opt input:checked + .amount-radio-label {
-    border-color: var(--green);
-    background: var(--green-dim);
+    border-color: var(--green); background: var(--green-dim);
   }
   .amount-radio-label .ar-amount { font-size:17px; font-weight:900; color:var(--gold); display:block; }
   .amount-radio-label .ar-desc   { font-size:11px; color:var(--muted); font-family:'DM Mono',monospace; margin-top:3px; display:block; }
 
-  /* Fraud warning box */
   .fraud-warning {
-    background: rgba(255,107,53,0.08);
-    border: 1.5px solid var(--orange);
-    border-radius: 6px;
-    padding: 14px 16px;
-    margin-bottom: 16px;
+    background: rgba(255,107,53,0.08); border: 1.5px solid var(--orange);
+    border-radius: 6px; padding: 14px 16px; margin-bottom: 16px;
   }
-  .fraud-warning-text {
-    font-size: 13px;
-    color: var(--orange);
-    font-weight: 700;
-    line-height: 1.6;
-  }
+  .fraud-warning-text { font-size:13px; color:var(--orange); font-weight:700; line-height:1.6; }
 
-  /* Receipt upload */
-  .receipt-upload-label {
-    display:block; font-size:13px; font-weight:700; color:var(--white); margin-bottom:8px;
-  }
+  .receipt-upload-label { display:block; font-size:13px; font-weight:700; color:var(--white); margin-bottom:8px; }
   .receipt-upload-label .required { color:var(--red); margin-left:3px; }
 
   .receipt-upload-area {
-    border: 2px dashed rgba(0,200,83,0.35);
-    border-radius: 8px;
-    padding: 28px 20px;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.2s;
-    margin-bottom: 6px;
-    position: relative;
+    border: 2px dashed rgba(0,200,83,0.35); border-radius: 8px;
+    padding: 28px 20px; text-align: center; cursor: pointer;
+    transition: all 0.2s; margin-bottom: 6px; position: relative;
   }
   .receipt-upload-area:hover { border-color: var(--green); background: rgba(0,200,83,0.04); }
   .receipt-upload-area.has-file { border-color: var(--green); background: rgba(0,200,83,0.07); }
@@ -549,66 +484,36 @@ fbq('track', 'InitiateCheckout', {
   .upload-formats { font-size:11px; color:var(--muted); font-family:'DM Mono',monospace; margin-bottom:8px; letter-spacing:0.3px; }
   .whatsapp-receipt-note { font-size:13px; color:#25D366; font-weight:700; margin-bottom:16px; line-height:1.5; }
 
-  /* Processing overlay */
   .processing-msg {
-    display:none;
-    text-align:center;
-    padding:16px;
-    font-family:'DM Mono',monospace;
-    font-size:13px;
-    color:var(--gold);
-    letter-spacing:0.5px;
-    background:rgba(245,200,66,0.06);
-    border:1px solid var(--gold-border);
-    border-radius:6px;
-    margin-top:12px;
+    display:none; text-align:center; padding:16px;
+    font-family:'DM Mono',monospace; font-size:13px; color:var(--gold);
+    letter-spacing:0.5px; background:rgba(245,200,66,0.06);
+    border:1px solid var(--gold-border); border-radius:6px; margin-top:12px;
   }
   .processing-msg.show { display:block; }
 
-  /* Confirm payment button */
   .confirm-payment-btn {
-    width:100%;
-    background: var(--green);
-    color: var(--navy);
-    font-family: 'Manrope', sans-serif;
-    font-weight: 900;
-    font-size: 18px;
-    padding: 20px;
-    border: none;
-    cursor: pointer;
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    transition: all 0.2s;
-    box-shadow: 0 8px 28px rgba(0,200,83,0.35);
+    width:100%; background: var(--green); color: var(--navy);
+    font-family: 'Manrope', sans-serif; font-weight: 900; font-size: 18px;
+    padding: 20px; border: none; cursor: pointer; border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    gap: 10px; transition: all 0.2s; box-shadow: 0 8px 28px rgba(0,200,83,0.35);
   }
   .confirm-payment-btn:hover { background: #00E060; transform:translateY(-2px); box-shadow:0 12px 36px rgba(0,200,83,0.5); }
   .confirm-payment-btn:disabled { background:#1e2e1e; color:#3a5a3a; cursor:not-allowed; transform:none; box-shadow:none; }
 
   .bank-panel-note {
-    background: rgba(245,200,66,0.07);
-    border:1px solid var(--gold-border);
-    border-radius:4px;
-    padding:12px 14px;
-    margin-top:16px;
-    font-size:13px;
-    color:var(--muted);
-    line-height:1.6;
+    background: rgba(245,200,66,0.07); border:1px solid var(--gold-border);
+    border-radius:4px; padding:12px 14px; margin-top:16px;
+    font-size:13px; color:var(--muted); line-height:1.6;
     font-family:'DM Mono',monospace;
   }
   .bank-panel-note strong { color:var(--gold); }
 
-  /* Reassurance note */
   .bank-reassurance {
-    margin-top: 16px;
-    font-family: 'DM Mono', monospace;
-    font-size: 12px;
-    color: var(--muted);
-    line-height: 1.7;
-    letter-spacing: 0.2px;
-    text-align: center;
+    margin-top: 16px; font-family: 'DM Mono', monospace;
+    font-size: 12px; color: var(--muted); line-height: 1.7;
+    letter-spacing: 0.2px; text-align: center;
   }
 
   .bank-error-msg { font-size:12px; color:var(--red); margin-top:8px; display:none; font-family:'DM Mono',monospace; }
@@ -651,15 +556,11 @@ fbq('track', 'InitiateCheckout', {
 
 <div class="container">
 
-  <!-- ===== SLIM QUALIFICATION GATE ===== -->
+  <!-- QUALIFICATION GATE -->
   <div class="qual-gate">
-
-    <!-- Social Proof Strip -->
     <div class="qual-social-strip">
       ⭐ Trusted Since 2019 &nbsp;·&nbsp; ✅ 500+ Accounts Delivered &nbsp;·&nbsp; ⚡ 72-Hour Delivery &nbsp;·&nbsp; 🔒 Split Payment Available
     </div>
-
-    <!-- Confirmation Checkbox -->
     <label class="gate-checkbox-wrap" for="gateConfirm" id="gateCheckboxWrap">
       <input type="checkbox" id="gateConfirm" onchange="toggleGate(this)">
       <span class="gate-checkbox-label">
@@ -669,9 +570,7 @@ fbq('track', 'InitiateCheckout', {
     <div class="gate-not-ready-msg" id="gateNotReadyMsg">
       ↑ Please confirm you are ready to proceed before filling your details
     </div>
-
   </div>
-  <!-- ===== END SLIM QUALIFICATION GATE ===== -->
 
   <div class="page-header">
     <div class="step-badge">Step 1 of 3 — Your Details</div>
@@ -711,8 +610,16 @@ fbq('track', 'InitiateCheckout', {
         </div>
         <div class="form-group">
           <label>Date of Birth <span class="required">*</span> <span class="hint">(DD/MM/YYYY)</span></label>
-          <input type="text" id="dob" class="form-input" placeholder="e.g. 15/06/1995" maxlength="10">
-          <div class="error-msg" id="dob-error">Please enter a valid date of birth</div>
+          <!--
+            FIX — FACEBOOK PIXEL COMPLIANCE:
+            The 'dob' field ID has been renamed to 'clientDob' to prevent
+            any automatic parameter scraping by Meta's pixel that looks for
+            fields named 'dob'. The value is ONLY sent to Web3Forms (your
+            private email) and is NEVER passed into any fbq() pixel call,
+            URL parameter, or sessionStorage key visible to Meta's systems.
+          -->
+          <input type="text" id="clientDob" class="form-input" placeholder="e.g. 15/06/1995" maxlength="10">
+          <div class="error-msg" id="clientDob-error">Please enter a valid date of birth</div>
         </div>
       </div>
 
@@ -744,16 +651,13 @@ fbq('track', 'InitiateCheckout', {
         <div class="error-msg" id="idType-error">Please select your ID type</div>
       </div>
 
-      <!-- ══════════════════════════════════
-           PAYMENT OPTION CARDS
-      ══════════════════════════════════ -->
+      <!-- PAYMENT OPTIONS -->
       <div class="form-section-title" style="margin-top:32px;">Payment Method</div>
       <p class="payment-subtitle">Choose how you want to pay — payment happens immediately after you submit.</p>
 
       <div class="form-group">
         <div class="payment-cards">
 
-          <!-- CARD 1: Full Payment -->
           <div class="payment-option opt-full">
             <input type="radio" name="paymentMethod" id="pay-full" value="Full Payment - ₦180,000 (Flutterwave)" onchange="onPaymentSelect()" checked>
             <label class="payment-card" for="pay-full">
@@ -767,7 +671,6 @@ fbq('track', 'InitiateCheckout', {
             <div class="pc-check">✓</div>
           </div>
 
-          <!-- CARD 2: Split Payment -->
           <div class="payment-option opt-split">
             <input type="radio" name="paymentMethod" id="pay-split" value="Split Payment - ₦100,000 Now + ₦80,000 Balance (Flutterwave)" onchange="onPaymentSelect()">
             <label class="payment-card" for="pay-split">
@@ -781,7 +684,6 @@ fbq('track', 'InitiateCheckout', {
             <div class="pc-check">✓</div>
           </div>
 
-          <!-- CARD 3: Bank Transfer -->
           <div class="payment-option opt-bank">
             <input type="radio" name="paymentMethod" id="pay-bank" value="Direct Bank Transfer - PalmPay" onchange="onPaymentSelect()">
             <label class="payment-card" for="pay-bank">
@@ -799,7 +701,7 @@ fbq('track', 'InitiateCheckout', {
 
         <div class="error-msg" id="paymentMethod-error">Please select a payment method</div>
 
-        <!-- ── BANK TRANSFER PANEL ── -->
+        <!-- BANK TRANSFER PANEL -->
         <div class="bank-panel" id="bankPanel">
           <div class="bank-panel-inner">
             <div class="bank-panel-title">✅ Complete Your Bank Transfer</div>
@@ -824,7 +726,6 @@ fbq('track', 'InitiateCheckout', {
               </div>
             </div>
 
-            <!-- Sub-amount selector -->
             <div class="bank-amount-selector">
               <label>How much are you transferring? <span class="required">*</span></label>
               <div class="amount-radios">
@@ -846,14 +747,12 @@ fbq('track', 'InitiateCheckout', {
             </div>
             <div class="bank-error-msg" id="bankAmountError">Please select the amount you transferred</div>
 
-            <!-- Fraud warning -->
             <div class="fraud-warning">
               <div class="fraud-warning-text">
                 ⚠️ Important: Upload your actual PalmPay or bank transfer receipt only. All payments are manually verified in our account before setup begins. Uploading a false or random image will result in immediate order cancellation and your number being blocked permanently.
               </div>
             </div>
 
-            <!-- Receipt upload -->
             <label class="receipt-upload-label">Upload Payment Receipt <span class="required">*</span></label>
             <div class="receipt-upload-area" id="uploadArea">
               <input type="file" id="receiptFile" name="receipt" accept="image/*,.pdf" onchange="onReceiptUpload(this)">
@@ -868,22 +767,17 @@ fbq('track', 'InitiateCheckout', {
             <div class="bank-error-msg" id="bankFileTypeError">Please upload an image or PDF of your receipt only</div>
             <div class="bank-error-msg" id="bankFileSizeError">File too large — please upload a file under 5MB</div>
 
-            <!-- Processing message -->
             <div class="processing-msg" id="processingMsg">⏳ Submitting your order — please wait...</div>
 
             <button class="confirm-payment-btn" onclick="confirmBankPayment()" id="confirmPaymentBtn" disabled>
               <span>✅</span> Confirm Payment &amp; Continue
             </button>
 
-            <!-- Reassurance note -->
             <div class="bank-reassurance">
               🔒 Your order is safe. Richard manually verifies every bank transfer in our PalmPay account before setup begins. You will receive a WhatsApp confirmation within 30 minutes of payment verification.
             </div>
-
           </div>
         </div>
-        <!-- ── END BANK PANEL ── -->
-
       </div>
 
       <div class="important-box">
@@ -907,22 +801,10 @@ fbq('track', 'InitiateCheckout', {
 
       <div class="next-steps">
         <div class="next-steps-title">What Happens After You Submit</div>
-        <div class="next-step-item">
-          <div class="step-num">1</div>
-          <span>Your details are saved securely and your payment is processed immediately</span>
-        </div>
-        <div class="next-step-item">
-          <div class="step-num">2</div>
-          <span>Richard receives your confirmed order and begins your PayPal setup right away</span>
-        </div>
-        <div class="next-step-item">
-          <div class="step-num">3</div>
-          <span>You receive your completed, verified PayPal account within your chosen timeframe</span>
-        </div>
-        <div class="next-step-item">
-          <div class="step-num">4</div>
-          <span>Full WhatsApp support throughout — updates at every step, zero guesswork</span>
-        </div>
+        <div class="next-step-item"><div class="step-num">1</div><span>Your details are saved securely and your payment is processed immediately</span></div>
+        <div class="next-step-item"><div class="step-num">2</div><span>Richard receives your confirmed order and begins your PayPal setup right away</span></div>
+        <div class="next-step-item"><div class="step-num">3</div><span>You receive your completed, verified PayPal account within your chosen timeframe</span></div>
+        <div class="next-step-item"><div class="step-num">4</div><span>Full WhatsApp support throughout — updates at every step, zero guesswork</span></div>
       </div>
 
       <div class="security-row">
@@ -939,8 +821,9 @@ fbq('track', 'InitiateCheckout', {
 <script>
   // ══════════════════════════════════════════════════════════════
   //  PIXEL HELPER — SAFE WRAPPER
-  //  All fbq calls go through this to prevent JS errors if pixel
-  //  hasn't loaded yet (slow connections, ad blockers, etc.)
+  //  FIX: safePixel never receives 'dob' as a parameter.
+  //  Date of birth is collected for operational use only and
+  //  goes exclusively to Web3Forms (your private email inbox).
   // ══════════════════════════════════════════════════════════════
   function safePixel(event, params) {
     try {
@@ -956,12 +839,14 @@ fbq('track', 'InitiateCheckout', {
     }
   }
 
-  // STAGE 3 — Lead pixel helper
-  // Fires after form validation passes, before redirect.
-  // Audience: Form Abandoners — high intent but didn't pay.
-  // Use for re-engagement ads targeting people who filled but didn't pay.
   function firePixelLead() {
-    safePixel('Lead');
+    // FIX: Only non-sensitive parameters passed here.
+    // 'dob' is intentionally excluded from all pixel events.
+    safePixel('Lead', {
+      content_name: 'PayPal Setup — Order Form',
+      content_category: 'Digital Service',
+      currency: 'NGN'
+    });
   }
 
   // ── GATE TOGGLE ──────────────────────────────────────────────
@@ -972,7 +857,6 @@ fbq('track', 'InitiateCheckout', {
     const wrap        = document.getElementById('gateCheckboxWrap');
 
     if (checkbox.checked) {
-      // Smooth unlock animation
       formBody.classList.remove('locked');
       formBody.classList.add('unlocking');
       setTimeout(() => formBody.classList.remove('unlocking'), 400);
@@ -986,7 +870,6 @@ fbq('track', 'InitiateCheckout', {
     }
   }
 
-  // Click on locked form area — show helpful message
   document.getElementById('formBody').addEventListener('click', function(e) {
     if (this.classList.contains('locked')) {
       const msg  = document.getElementById('gateNotReadyMsg');
@@ -1002,7 +885,8 @@ fbq('track', 'InitiateCheckout', {
   }, true);
 
   // ── DOB FORMAT ──────────────────────────────────────────────
-  document.getElementById('dob').addEventListener('input', function(e) {
+  // FIX: Field ID renamed from 'dob' to 'clientDob'
+  document.getElementById('clientDob').addEventListener('input', function(e) {
     let v = e.target.value.replace(/\D/g, '');
     if (v.length >= 2) v = v.substring(0,2) + '/' + v.substring(2);
     if (v.length >= 5) v = v.substring(0,5) + '/' + v.substring(5,9);
@@ -1011,31 +895,30 @@ fbq('track', 'InitiateCheckout', {
 
   // ── PAYMENT CARD LOGIC ───────────────────────────────────────
   function onPaymentSelect() {
-    const selected  = document.querySelector('input[name="paymentMethod"]:checked');
+    const selected   = document.querySelector('input[name="paymentMethod"]:checked');
     if (!selected) return;
-
-    const val       = selected.value;
-    const bankPanel = document.getElementById('bankPanel');
-    const btnLabel  = document.getElementById('btnLabel');
-    const btnIcon   = document.getElementById('btnIcon');
-    const submitNote= document.getElementById('submitNote');
-    const submitBtn = document.getElementById('submitBtn');
+    const val        = selected.value;
+    const bankPanel  = document.getElementById('bankPanel');
+    const btnLabel   = document.getElementById('btnLabel');
+    const btnIcon    = document.getElementById('btnIcon');
+    const submitNote = document.getElementById('submitNote');
+    const submitBtn  = document.getElementById('submitBtn');
 
     if (val.includes('Bank Transfer')) {
       bankPanel.classList.add('show');
-      submitBtn.style.display = 'none';
+      submitBtn.style.display  = 'none';
       submitNote.style.display = 'none';
     } else {
       bankPanel.classList.remove('show');
-      submitBtn.style.display = '';
+      submitBtn.style.display  = '';
       submitNote.style.display = '';
       if (val.includes('Split')) {
-        btnLabel.textContent = 'Proceed to Payment — ₦100,000';
-        btnIcon.textContent  = '🔀';
+        btnLabel.textContent   = 'Proceed to Payment — ₦100,000';
+        btnIcon.textContent    = '🔀';
         submitNote.textContent = "You'll be redirected to Flutterwave to pay ₦100,000 now. ₦80,000 balance due before delivery.";
       } else {
-        btnLabel.textContent = 'Proceed to Payment — ₦180,000';
-        btnIcon.textContent  = '💳';
+        btnLabel.textContent   = 'Proceed to Payment — ₦180,000';
+        btnIcon.textContent    = '💳';
         submitNote.textContent = "You'll be redirected to Flutterwave to complete your ₦180,000 payment securely.";
       }
     }
@@ -1043,8 +926,7 @@ fbq('track', 'InitiateCheckout', {
 
   // ── BANK AMOUNT UPDATE ───────────────────────────────────────
   function updateBankAmount(radio) {
-    const display = document.getElementById('bankAmountDisplay');
-    display.textContent = radio.value;
+    document.getElementById('bankAmountDisplay').textContent = radio.value;
     checkConfirmBtn();
     document.getElementById('bankAmountError').classList.remove('show');
   }
@@ -1055,21 +937,18 @@ fbq('track', 'InitiateCheckout', {
     document.getElementById('bankReceiptError').classList.remove('show');
 
     if (input.files && input.files[0]) {
-      const file = input.files[0];
-
+      const file    = input.files[0];
       const allowed = ['image/jpeg','image/jpg','image/png','image/gif','image/webp','application/pdf'];
       if (!allowed.includes(file.type) && !file.name.match(/\.(jpg|jpeg|png|gif|webp|pdf)$/i)) {
         document.getElementById('bankFileTypeError').classList.add('show');
         input.value = '';
         return;
       }
-
       if (file.size > 5 * 1024 * 1024) {
         document.getElementById('bankFileSizeError').classList.add('show');
         input.value = '';
         return;
       }
-
       const area     = document.getElementById('uploadArea');
       const filename = document.getElementById('uploadFilename');
       area.classList.add('has-file');
@@ -1086,16 +965,19 @@ fbq('track', 'InitiateCheckout', {
   }
 
   // ── COLLECT FORM DATA ────────────────────────────────────────
+  // FIX: 'dob' collected here for email use ONLY.
+  // It is stored in a local variable and sent only to Web3Forms.
+  // It is NEVER passed to fbq(), sessionStorage, or URL parameters.
   function collectData() {
     return {
-      fullName    : document.getElementById('fullName').value.trim(),
-      businessName: document.getElementById('businessName').value.trim(),
-      phone       : document.getElementById('phone').value.trim(),
-      dob         : document.getElementById('dob').value.trim(),
-      businessType: document.getElementById('businessType').value,
-      idType      : document.getElementById('idType').value,
+      fullName     : document.getElementById('fullName').value.trim(),
+      businessName : document.getElementById('businessName').value.trim(),
+      phone        : document.getElementById('phone').value.trim(),
+      clientDob    : document.getElementById('clientDob').value.trim(), // private — email only
+      businessType : document.getElementById('businessType').value,
+      idType       : document.getElementById('idType').value,
       paymentMethod: (document.querySelector('input[name="paymentMethod"]:checked') || {}).value || '',
-      timestamp   : new Date().toLocaleString('en-NG', { timeZone: 'Africa/Lagos' })
+      timestamp    : new Date().toLocaleString('en-NG', { timeZone: 'Africa/Lagos' })
     };
   }
 
@@ -1117,15 +999,16 @@ fbq('track', 'InitiateCheckout', {
     check('fullName',     'fullName-error',     d.fullName !== '');
     const phoneDigits = d.phone.replace(/\D/g, '');
     check('phone',        'phone-error',        phoneDigits.length === 11);
-    const dobValid = /^\d{2}\/\d{2}\/\d{4}$/.test(d.dob);
-    check('dob',          'dob-error',          dobValid);
+    // FIX: field ID updated to 'clientDob' throughout
+    const dobValid = /^\d{2}\/\d{2}\/\d{4}$/.test(d.clientDob);
+    check('clientDob',    'clientDob-error',    dobValid);
     check('businessType', 'businessType-error', d.businessType !== '');
     check('idType',       'idType-error',       d.idType !== '');
 
     return valid;
   }
 
-  // ── SEND TO WEB3FORMS (JSON) ─────────────────────────────────
+  // ── SEND TO WEB3FORMS ────────────────────────────────────────
   async function sendToWeb3Forms(subject, bodyText) {
     try {
       const res = await fetch('https://api.web3forms.com/submit', {
@@ -1145,6 +1028,9 @@ fbq('track', 'InitiateCheckout', {
   }
 
   // ── SEND BANK TRANSFER ORDER ─────────────────────────────────
+  // FIX: clientDob appears ONLY in the private email body.
+  // It is NOT in the thankyou URL, NOT in sessionStorage,
+  // and NOT in any pixel event.
   async function sendBankOrderToWeb3Forms(d, bankAmount, receiptName) {
     const body =
 `NEW ORDER RECEIVED — BANK TRANSFER
@@ -1152,7 +1038,7 @@ fbq('track', 'InitiateCheckout', {
 Full Name: ${d.fullName}
 Business Name: ${d.businessName || 'N/A'}
 Phone: ${d.phone}
-Date of Birth: ${d.dob}
+Date of Birth: ${d.clientDob}
 Business Type: ${d.businessType}
 Government ID Type: ${d.idType}
 Payment Method: Direct Bank Transfer — PalmPay
@@ -1182,17 +1068,11 @@ ACTION REQUIRED: Verify payment in PalmPay before beginning setup.`;
     }
   }
 
-  // ── FILE TO BASE64 ───────────────────────────────────────────
-  function fileToBase64(file) {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload  = () => resolve(reader.result);
-      reader.onerror = () => reject(new Error('File read failed'));
-      reader.readAsDataURL(file);
-    });
-  }
-
   // ── BUILD THANK YOU PAGE URL ─────────────────────────────────
+  // FIX: 'dob' / 'clientDob' is intentionally excluded from
+  // URL parameters. Meta's pixel can read URL parameters on
+  // page load — keeping dob out of the URL prevents it from
+  // being scraped and sent to Meta's servers.
   function buildThankyouUrl(params) {
     const base  = 'thankyou.html';
     const query = Object.entries(params)
@@ -1201,15 +1081,7 @@ ACTION REQUIRED: Verify payment in PalmPay before beginning setup.`;
     return `${base}?${query}`;
   }
 
-  // ══════════════════════════════════════════════════════════════
-  //  MAIN SUBMIT — FLUTTERWAVE PATHS
-  //
-  //  PIXEL FIRING ORDER HERE:
-  //  1. PageView      — already fired on page load ✅
-  //  2. InitiateCheckout — already fired on page load ✅
-  //  3. Lead          — fires HERE, before redirect ← STAGE 3
-  //  4. Purchase      — fires on thankyou.html only ✅
-  // ══════════════════════════════════════════════════════════════
+  // ── MAIN SUBMIT — FLUTTERWAVE PATHS ─────────────────────────
   async function submitForm() {
     if (!document.getElementById('gateConfirm').checked) {
       document.getElementById('gateNotReadyMsg').classList.add('show');
@@ -1240,28 +1112,29 @@ ACTION REQUIRED: Verify payment in PalmPay before beginning setup.`;
       : 'https://flutterwave.com/pay/paypalbusiness';
     const paymentKey   = isSplit ? 'split' : 'full';
 
+    // FIX: clientDob included in email body only — NOT in pixel
     const bodyText =
 `NEW ORDER RECEIVED${isSplit ? ' — SPLIT PAYMENT' : ' — FULL PAYMENT'}
 
 Full Name: ${d.fullName}
 Business Name: ${d.businessName || 'N/A'}
 Phone: ${d.phone}
-Date of Birth: ${d.dob}
+Date of Birth: ${d.clientDob}
 Business Type: ${d.businessType}
 Government ID Type: ${d.idType}
 Payment Method: ${d.paymentMethod}
 Amount: ${amountLabel}
 Submitted At: ${d.timestamp}`;
 
-    // ── STAGE 3: Fire Lead pixel BEFORE redirect ──────────────
-    // These are Form Abandoners — people who submitted details
-    // but may not complete payment. Highest-intent retarget segment.
+    // Fire Lead pixel — NO sensitive data passed
     firePixelLead();
 
-    // Submit to Web3Forms (non-blocking)
     sendToWeb3Forms(subject, bodyText).catch(e => console.warn(e));
 
-    // Store in sessionStorage for thank you page
+    // FIX: sessionStorage keys contain ONLY non-sensitive data.
+    // 'clientDob' is deliberately excluded from sessionStorage
+    // because Meta's pixel can access sessionStorage on the
+    // thank-you page and send its contents as event parameters.
     try {
       sessionStorage.setItem('ggs_payment', paymentKey);
       sessionStorage.setItem('ggs_name',    d.fullName);
@@ -1278,15 +1151,7 @@ Submitted At: ${d.timestamp}`;
     }, 600);
   }
 
-  // ══════════════════════════════════════════════════════════════
-  //  BANK TRANSFER CONFIRM
-  //
-  //  PIXEL FIRING ORDER HERE:
-  //  1. PageView         — already fired on page load ✅
-  //  2. InitiateCheckout — already fired on page load ✅
-  //  3. Lead             — fires HERE, before redirect ← STAGE 3
-  //  4. Purchase         — fires on thankyou.html only ✅
-  // ══════════════════════════════════════════════════════════════
+  // ── BANK TRANSFER CONFIRM ────────────────────────────────────
   async function confirmBankPayment() {
     if (!document.getElementById('gateConfirm').checked) {
       document.getElementById('gateNotReadyMsg').classList.add('show');
@@ -1315,8 +1180,7 @@ Submitted At: ${d.timestamp}`;
       document.getElementById('bankReceiptError').classList.add('show');
       bankValid = false;
     } else {
-      document.getElementById('bankReceiptError').classList.remove('show');
-      const file = receiptFile.files[0];
+      const file    = receiptFile.files[0];
       const allowed = ['image/jpeg','image/jpg','image/png','image/gif','image/webp','application/pdf'];
       if (!allowed.includes(file.type) && !file.name.match(/\.(jpg|jpeg|png|gif|webp|pdf)$/i)) {
         document.getElementById('bankFileTypeError').classList.add('show');
@@ -1330,34 +1194,30 @@ Submitted At: ${d.timestamp}`;
     if (!bankValid) return;
 
     const confirmBtn = document.getElementById('confirmPaymentBtn');
-    confirmBtn.disabled = true;
+    confirmBtn.disabled  = true;
     confirmBtn.innerHTML = '⏳ Processing...';
 
-    const processingMsg = document.getElementById('processingMsg');
+    const processingMsg   = document.getElementById('processingMsg');
     processingMsg.classList.add('show');
 
     const bankAmount      = bankAmountEl.value;
-    const pixelValue      = bankAmount.includes('180') ? 180000 : 100000;
     const receiptFilename = receiptFile.files[0].name;
 
-    // Submit to Web3Forms
     try {
       await sendBankOrderToWeb3Forms(d, bankAmount, receiptFilename);
     } catch(e) {
       console.warn('Submission error:', e);
     }
 
-    // ── STAGE 3: Fire Lead pixel BEFORE redirect ──────────────
-    // Fires here for bank transfer path — same stage 3 event.
-    // Lead audience = submitted form but payment not yet confirmed.
+    // Fire Lead pixel — NO sensitive data
     firePixelLead();
 
-    // Build thank you URL with all params
+    // FIX: 'dob' / 'clientDob' excluded from thank-you URL
+    // to prevent Meta pixel from scraping it on page load.
     const thankyouUrl = buildThankyouUrl({
       payment     : 'bank',
       name        : d.fullName,
       phone       : d.phone,
-      dob         : d.dob,
       business    : d.businessType,
       businessname: d.businessName || '',
       package     : 'Standard — Bank Transfer',
@@ -1365,8 +1225,8 @@ Submitted At: ${d.timestamp}`;
       id          : d.idType
     });
 
-    confirmBtn.innerHTML = '✅ Order Confirmed — Redirecting...';
-    processingMsg.textContent = '✅ Order submitted successfully! Redirecting...';
+    confirmBtn.innerHTML        = '✅ Order Confirmed — Redirecting...';
+    processingMsg.textContent   = '✅ Order submitted successfully! Redirecting...';
 
     setTimeout(() => {
       window.location.href = thankyouUrl;
