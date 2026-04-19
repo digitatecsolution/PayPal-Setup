@@ -13,137 +13,291 @@ document,'script','https://connect.facebook.net/en_US/fbevents.js');
 fbq('init','924866965267790');
 fbq('track','PageView');
 </script>
-<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=924866965267790&ev=PageView&noscript=1"/></noscript>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=924866965267790&ev=PageView&noscript=1"/></noscript>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--navy:#070E1C;--navy2:#0B1628;--navy3:#0F1D35;--gold:#F5C842;--gold-dim:rgba(245,200,66,0.1);--gold-border:rgba(245,200,66,0.3);--green:#00C853;--green-dim:rgba(0,200,83,0.1);--orange:#FF6B35;--red:#E74C3C;--white:#FFFFFF;--text:#E2E8F0;--muted:#94A3B8;--border:rgba(255,255,255,0.08);--border-gold:rgba(245,200,66,0.2)}
-*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+/* ─── TOKENS ─── */
+:root{
+  --navy:#070E1C;--navy2:#0B1628;--navy3:#0F1D35;
+  --gold:#F5C842;--gold-dim:rgba(245,200,66,0.1);--gold-border:rgba(245,200,66,0.3);
+  --green:#00C853;--green-dim:rgba(0,200,83,0.1);
+  --orange:#FF6B35;--red:#E74C3C;
+  --white:#FFFFFF;--text:#E2E8F0;--muted:#94A3B8;
+  --border:rgba(255,255,255,0.08);--border-gold:rgba(245,200,66,0.2);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
 body{background:var(--navy);color:var(--text);font-family:'Manrope',sans-serif;line-height:1.6;min-height:100vh}
+
+/* ─── TOPBAR ─── */
 .topbar{background:linear-gradient(90deg,#006400,var(--green),#006400);background-size:200% 100%;animation:shimmer 3s linear infinite;padding:10px 20px;text-align:center;font-size:13px;font-weight:800;color:var(--navy);position:sticky;top:0;z-index:100}
 @keyframes shimmer{0%{background-position:0%}100%{background-position:200%}}
+
+/* ─── PROGRESS ─── */
 .progress-bar{background:var(--navy2);padding:16px 24px;border-bottom:1px solid var(--border)}
-.progress-inner{max-width:680px;margin:0 auto}
+.progress-inner{max-width:900px;margin:0 auto}
 .progress-label{display:flex;justify-content:space-between;margin-bottom:8px}
 .progress-step{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase}
 .progress-step.active{color:var(--gold)}.progress-step.done{color:var(--green)}.progress-step.inactive{color:var(--muted)}
 .progress-track{height:3px;background:rgba(255,255,255,0.1);border-radius:2px;overflow:hidden}
 .progress-fill{height:100%;width:66%;background:linear-gradient(90deg,var(--green),var(--gold));border-radius:2px}
-.container{max-width:680px;margin:0 auto;padding:40px 24px 80px}
-/* CLIENT SUMMARY */
-.client-summary{background:rgba(0,200,83,0.06);border:1px solid rgba(0,200,83,0.2);border-radius:10px;padding:16px 20px;margin-bottom:28px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-.cs-icon{font-size:28px;flex-shrink:0}
-.cs-text{font-size:13px;color:var(--muted);line-height:1.7}
-.cs-text strong{color:var(--white);font-size:15px;display:block;margin-bottom:2px}
+
+/* ─── LAYOUT ─── */
+.outer{max-width:900px;margin:0 auto;padding:40px 24px 80px}
+
+/* Two-column layout on desktop */
+.two-col{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:start}
+@media(max-width:760px){.two-col{grid-template-columns:1fr}}
+
+/* ─── CLIENT SUMMARY ─── */
+.client-summary{background:rgba(0,200,83,0.06);border:1px solid rgba(0,200,83,0.2);border-radius:10px;padding:14px 18px;margin-bottom:24px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.cs-icon{font-size:24px;flex-shrink:0}
+.cs-text{font-size:13px;color:var(--muted);line-height:1.65}
+.cs-text strong{color:var(--white);font-size:14px;display:block;margin-bottom:1px}
 .cs-text span{color:var(--green);font-family:'DM Mono',monospace;font-size:11px}
-/* PAGE HEADER */
-.page-header{text-align:center;margin-bottom:32px}
-.step-badge{display:inline-flex;align-items:center;gap:8px;background:var(--gold-dim);border:1px solid var(--gold-border);padding:6px 16px;font-family:'DM Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:18px}
-.page-header h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(28px,6vw,46px);color:var(--white);line-height:1;letter-spacing:1px;margin-bottom:10px}
+
+/* ─── PAGE HEADER ─── */
+.page-header{text-align:center;margin-bottom:22px}
+.step-badge{display:inline-flex;align-items:center;gap:8px;background:var(--gold-dim);border:1px solid var(--gold-border);padding:6px 16px;font-family:'DM Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:14px}
+.page-header h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(26px,5.5vw,42px);color:var(--white);line-height:1;letter-spacing:1px;margin-bottom:8px}
 .page-header h1 span{color:var(--gold)}
-.page-header p{font-size:14px;color:var(--muted);line-height:1.7}
-/* PAYMENT CARDS GRID */
-.payment-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:8px}
+.page-header p{font-size:13.5px;color:var(--muted);line-height:1.7}
+
+/* ════════════════════════════════════════
+   TRUST VIDEO SECTION
+════════════════════════════════════════ */
+.video-trust-section{
+  background:var(--navy2);
+  border:1px solid var(--border-gold);
+  border-radius:12px;
+  overflow:hidden;
+  margin-bottom:24px;
+  position:relative;
+}
+.video-trust-section::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--gold),var(--green),var(--gold));
+  background-size:200% 100%;animation:shimmer 3s linear infinite;
+}
+.video-trust-header{
+  padding:16px 20px 12px;
+  display:flex;align-items:center;gap:10px;
+}
+.video-trust-label{
+  font-family:'DM Mono',monospace;font-size:9.5px;color:var(--gold);
+  letter-spacing:0.14em;text-transform:uppercase;
+}
+.video-live-dot{
+  width:8px;height:8px;border-radius:50%;background:#FF4455;flex-shrink:0;
+  animation:livePulse 2s ease-in-out infinite;
+}
+@keyframes livePulse{0%,100%{box-shadow:0 0 0 0 rgba(255,68,85,0.6)}50%{box-shadow:0 0 0 7px rgba(255,68,85,0)}}
+
+/* Video placeholder — Richard replaces src with his video file or YouTube embed */
+.video-wrapper{
+  position:relative;width:100%;
+  background:#000;
+}
+/* Portrait ratio for phone-recorded video */
+.video-wrapper{position:relative}
+.video-wrapper iframe,
+.video-wrapper video{
+  width:100%;
+  display:block;
+  border:none;
+  aspect-ratio:16/9;
+}
+@keyframes nudgePop{from{opacity:0;transform:translateX(-50%) translateY(6px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+
+.video-script-preview{
+  padding:16px 20px;
+  background:rgba(0,0,0,0.25);
+  border-top:1px solid var(--border);
+}
+.vsp-label{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:10px}
+.vsp-points{display:flex;flex-direction:column;gap:7px}
+.vsp-point{display:flex;align-items:flex-start;gap:9px;font-size:12.5px;color:var(--fog,#8B95A8);line-height:1.6}
+.vsp-point .vsp-time{font-family:'DM Mono',monospace;font-size:9px;color:var(--gold);background:rgba(245,200,66,0.1);padding:2px 7px;border-radius:3px;flex-shrink:0;margin-top:2px}
+
+/* ════════════════════════════════════════
+   PAYMENT CARDS
+════════════════════════════════════════ */
+.payment-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:8px}
 @media(max-width:600px){.payment-grid{grid-template-columns:1fr}}
 .pay-option{position:relative}
 .pay-option input[type="radio"]{position:absolute;opacity:0;width:0;height:0}
-.pay-card{
-  background:rgba(255,255,255,0.03);border:2px solid rgba(255,255,255,0.1);
-  border-radius:12px;padding:24px 18px 20px;cursor:pointer;
-  transition:all .22s ease;display:flex;flex-direction:column;gap:7px;
-  user-select:none;height:100%;position:relative;
-}
+.pay-card{background:rgba(255,255,255,0.03);border:2px solid rgba(255,255,255,0.1);border-radius:12px;padding:22px 16px 18px;cursor:pointer;transition:all .22s ease;display:flex;flex-direction:column;gap:7px;user-select:none;height:100%;position:relative}
 .pay-card:hover{border-color:rgba(245,200,66,0.4);background:rgba(245,200,66,0.03)}
 .opt-full input:checked+.pay-card{border-color:var(--gold);background:rgba(245,200,66,0.07);box-shadow:0 0 0 1px rgba(245,200,66,0.25),0 8px 32px rgba(245,200,66,0.15)}
 .opt-split input:checked+.pay-card{border-color:var(--orange);background:rgba(255,107,53,0.07);box-shadow:0 0 0 1px rgba(255,107,53,0.3),0 8px 32px rgba(255,107,53,0.15)}
 .opt-bank input:checked+.pay-card{border-color:var(--green);background:rgba(0,200,83,0.07);box-shadow:0 0 0 1px rgba(0,200,83,0.3),0 8px 32px rgba(0,200,83,0.15)}
 .payment-grid:has(.pay-option input:checked) .pay-card{opacity:.45;transform:scale(0.97)}
 .payment-grid:has(.pay-option input:checked) .pay-option input:checked+.pay-card{opacity:1;transform:scale(1)}
-.pc-badge{display:inline-block;font-size:9px;font-weight:900;padding:3px 9px;letter-spacing:1.2px;text-transform:uppercase;border-radius:3px;align-self:flex-start;margin-bottom:6px}
+.pc-badge{display:inline-block;font-size:9px;font-weight:900;padding:3px 9px;letter-spacing:1.2px;text-transform:uppercase;border-radius:3px;align-self:flex-start;margin-bottom:5px}
 .badge-complete{background:var(--gold);color:var(--navy)}.badge-flexible{background:var(--orange);color:#fff}.badge-popular{background:var(--green);color:var(--navy)}
-.pc-icon{font-size:28px;margin-bottom:4px}
-.pc-title{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--white);letter-spacing:1px;line-height:1.05}
-.pc-amount{font-size:19px;font-weight:900;color:var(--gold);margin-top:2px}
-.pc-sub{font-size:12px;color:var(--muted);line-height:1.55}
-.pc-method{font-family:'DM Mono',monospace;font-size:10.5px;color:var(--muted);margin-top:6px}
-.pc-check{position:absolute;top:12px;right:14px;width:22px;height:22px;border-radius:50%;background:var(--gold);color:var(--navy);font-size:12px;font-weight:900;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s}
+.pc-icon{font-size:26px;margin-bottom:3px}
+.pc-title{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--white);letter-spacing:1px;line-height:1.05}
+.pc-amount{font-size:18px;font-weight:900;color:var(--gold);margin-top:1px}
+.pc-sub{font-size:11.5px;color:var(--muted);line-height:1.55}
+.pc-method{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);margin-top:5px}
+.pc-check{position:absolute;top:11px;right:13px;width:21px;height:21px;border-radius:50%;background:var(--gold);color:var(--navy);font-size:11px;font-weight:900;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s}
 .opt-split .pc-check{background:var(--orange);color:#fff}.opt-bank .pc-check{background:var(--green);color:var(--navy)}
 .pay-option input:checked~.pc-check{opacity:1}
 .error-msg{font-size:12px;color:var(--red);margin-top:6px;display:none;font-family:'DM Mono',monospace}
 .error-msg.show{display:block}
-/* SELECTION PANELS */
-.selection-panel{display:none;margin-top:24px;animation:slideDown .3s ease}
+
+/* ─── TRUST ICONS STRIP ─── */
+.trust-icon-strip{
+  display:flex;justify-content:center;flex-wrap:wrap;gap:10px;
+  margin:16px 0;
+}
+.ti{
+  display:flex;align-items:center;gap:6px;
+  background:rgba(255,255,255,0.03);
+  border:1px solid var(--border);
+  border-radius:50px;padding:7px 14px;
+  font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);
+  white-space:nowrap;
+}
+.ti .ti-icon{font-size:13px}
+.ti.ti-green{border-color:rgba(0,200,83,0.2);color:var(--green)}
+.ti.ti-gold{border-color:rgba(245,200,66,0.2);color:var(--gold)}
+
+/* ─── SELECTION PANELS ─── */
+.selection-panel{display:none;margin-top:22px;animation:slideDown .3s ease}
 .selection-panel.show{display:block}
 @keyframes slideDown{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:none}}
-/* FLUTTERWAVE PANEL */
-.flw-panel{background:var(--navy2);border:1px solid var(--border-gold);border-radius:10px;padding:28px 24px}
+
+/* ─── FLUTTERWAVE PANEL ─── */
+.flw-panel{background:var(--navy2);border:1px solid var(--border-gold);border-radius:10px;padding:26px 22px}
 .flw-panel-title{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--white);letter-spacing:1px;margin-bottom:6px}
-.flw-panel-sub{font-size:13px;color:var(--muted);margin-bottom:22px;line-height:1.7}
-.flw-summary{background:rgba(245,200,66,0.06);border:1px solid rgba(245,200,66,0.2);border-radius:8px;padding:16px 18px;margin-bottom:22px}
+.flw-panel-sub{font-size:13px;color:var(--muted);margin-bottom:20px;line-height:1.7}
+.flw-summary{background:rgba(245,200,66,0.06);border:1px solid rgba(245,200,66,0.2);border-radius:8px;padding:14px 16px;margin-bottom:20px}
 .flw-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.05)}
 .flw-row:last-child{border-bottom:none}
 .flw-label{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted)}
 .flw-value{font-size:13px;font-weight:700;color:var(--text)}
 .flw-value.highlight{color:var(--gold);font-size:16px}
-/* BANK TRANSFER PANEL */
-.bank-panel-inner{background:var(--navy3);border:2px solid var(--green);border-radius:10px;padding:28px 24px}
+
+/* ─── BANK PANEL ─── */
+.bank-panel-inner{background:var(--navy3);border:2px solid var(--green);border-radius:10px;padding:26px 22px}
 .bank-panel-title{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--white);letter-spacing:1px;margin-bottom:6px}
-.bank-panel-sub{font-size:13px;color:var(--muted);margin-bottom:20px;line-height:1.7}
-.bank-details-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+.bank-panel-sub{font-size:13px;color:var(--muted);margin-bottom:18px;line-height:1.7}
+.bank-details-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}
 @media(max-width:480px){.bank-details-grid{grid-template-columns:1fr}}
-.bank-detail-item{background:rgba(0,200,83,0.06);border:1px solid rgba(0,200,83,0.2);border-radius:6px;padding:14px 16px}
-.bank-detail-label{font-family:'DM Mono',monospace;font-size:10px;color:var(--green);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px}
-.bank-detail-value{font-size:15px;font-weight:800;color:var(--white)}
-.bank-detail-value.account-num{font-family:'DM Mono',monospace;font-size:24px;letter-spacing:4px;color:var(--gold);font-weight:900}
-.bank-amount-selector{margin-bottom:20px}
+.bank-detail-item{background:rgba(0,200,83,0.06);border:1px solid rgba(0,200,83,0.2);border-radius:6px;padding:12px 14px}
+.bank-detail-label{font-family:'DM Mono',monospace;font-size:9px;color:var(--green);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px}
+.bank-detail-value{font-size:14px;font-weight:800;color:var(--white)}
+.bank-detail-value.account-num{font-family:'DM Mono',monospace;font-size:22px;letter-spacing:4px;color:var(--gold);font-weight:900}
+.bank-amount-selector{margin-bottom:18px}
 .bank-amount-selector label{display:block;font-size:13px;font-weight:700;color:var(--white);margin-bottom:10px}
 .amount-radios{display:flex;gap:12px;flex-wrap:wrap}
-.amount-radio-opt{position:relative;flex:1;min-width:140px}
+.amount-radio-opt{position:relative;flex:1;min-width:130px}
 .amount-radio-opt input[type="radio"]{position:absolute;opacity:0}
-.amount-radio-label{display:block;background:rgba(255,255,255,0.04);border:2px solid var(--border);border-radius:6px;padding:14px 16px;cursor:pointer;transition:all .2s;text-align:center}
+.amount-radio-label{display:block;background:rgba(255,255,255,0.04);border:2px solid var(--border);border-radius:6px;padding:12px 14px;cursor:pointer;transition:all .2s;text-align:center}
 .amount-radio-opt input:checked+.amount-radio-label{border-color:var(--green);background:var(--green-dim)}
 .amount-radio-label .ar-amount{font-size:17px;font-weight:900;color:var(--gold);display:block}
-.amount-radio-label .ar-desc{font-size:11px;color:var(--muted);font-family:'DM Mono',monospace;margin-top:3px;display:block}
-.fraud-warning{background:rgba(255,107,53,0.08);border:1.5px solid var(--orange);border-radius:6px;padding:14px 16px;margin-bottom:16px}
-.fraud-warning-text{font-size:13px;color:var(--orange);font-weight:700;line-height:1.6}
-.receipt-upload-label{display:block;font-size:13px;font-weight:700;color:var(--white);margin-bottom:8px}
-.receipt-upload-label .required{color:var(--red);margin-left:3px}
-.receipt-upload-area{border:2px dashed rgba(0,200,83,0.35);border-radius:8px;padding:28px 20px;text-align:center;cursor:pointer;transition:all .2s;margin-bottom:6px;position:relative}
-.receipt-upload-area:hover{border-color:var(--green);background:rgba(0,200,83,0.04)}
-.receipt-upload-area.has-file{border-color:var(--green);background:rgba(0,200,83,0.07)}
+.amount-radio-label .ar-desc{font-size:11px;color:var(--muted);font-family:'DM Mono',monospace;margin-top:2px;display:block}
+.fraud-warning{background:rgba(255,107,53,0.08);border:1.5px solid var(--orange);border-radius:6px;padding:12px 14px;margin-bottom:14px}
+.fraud-warning-text{font-size:12.5px;color:var(--orange);font-weight:700;line-height:1.6}
+.receipt-upload-label{display:block;font-size:13px;font-weight:700;color:var(--white);margin-bottom:7px}
+.receipt-upload-area{border:2px dashed rgba(0,200,83,0.35);border-radius:8px;padding:24px 18px;text-align:center;cursor:pointer;transition:all .2s;margin-bottom:6px;position:relative}
+.receipt-upload-area:hover,.receipt-upload-area.has-file{border-color:var(--green);background:rgba(0,200,83,0.05)}
 #receiptFile{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
-.upload-icon{font-size:36px;margin-bottom:8px}.upload-title{font-size:15px;font-weight:800;color:var(--white);margin-bottom:4px}.upload-sub{font-size:12px;color:var(--muted);font-family:'DM Mono',monospace}
-.upload-filename{font-size:13px;color:var(--green);font-weight:700;margin-top:8px;display:none}
-.upload-formats{font-size:11px;color:var(--muted);font-family:'DM Mono',monospace;margin-bottom:8px;letter-spacing:0.3px}
-.wa-receipt-note{font-size:13px;color:#25D366;font-weight:700;margin-bottom:16px;line-height:1.5}
-.bank-reassurance{margin-top:14px;font-family:'DM Mono',monospace;font-size:11.5px;color:var(--muted);line-height:1.7;text-align:center}
-/* BUTTONS */
-.btn-proceed{width:100%;background:var(--gold);color:#100800;font-family:'Manrope',sans-serif;font-weight:900;font-size:18px;padding:22px 20px;border:none;cursor:pointer;border-radius:4px;box-shadow:0 8px 32px rgba(245,200,66,0.3);display:flex;align-items:center;justify-content:center;gap:10px;transition:all .2s;position:relative;overflow:hidden;margin-top:6px}
+.upload-icon{font-size:32px;margin-bottom:7px}.upload-title{font-size:14px;font-weight:800;color:var(--white);margin-bottom:3px}.upload-sub{font-size:11px;color:var(--muted);font-family:'DM Mono',monospace}
+.upload-filename{font-size:12px;color:var(--green);font-weight:700;margin-top:7px;display:none}
+.upload-formats{font-size:10.5px;color:var(--muted);font-family:'DM Mono',monospace;margin-bottom:8px}
+.wa-receipt-note{font-size:12.5px;color:#25D366;font-weight:700;margin-bottom:14px;line-height:1.5}
+.bank-reassurance{margin-top:12px;font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.7;text-align:center}
+.processing-msg{display:none;text-align:center;padding:12px;font-family:'DM Mono',monospace;font-size:12px;color:var(--gold);background:rgba(245,200,66,0.06);border:1px solid rgba(245,200,66,0.3);border-radius:6px;margin-top:10px}
+.processing-msg.show{display:block}
+
+/* ─── BUTTONS ─── */
+.btn-proceed{width:100%;background:var(--gold);color:#100800;font-family:'Manrope',sans-serif;font-weight:900;font-size:17px;padding:20px;border:none;cursor:pointer;border-radius:4px;box-shadow:0 8px 28px rgba(245,200,66,0.3);display:flex;align-items:center;justify-content:center;gap:10px;transition:all .2s;position:relative;overflow:hidden;margin-top:4px}
 .btn-proceed::before{content:'';position:absolute;inset:0;background:linear-gradient(45deg,transparent 30%,rgba(255,255,255,0.18) 50%,transparent 70%);transform:translateX(-100%);transition:transform .5s}
 .btn-proceed:hover::before{transform:translateX(100%)}
 .btn-proceed:hover{background:#FFE062;transform:translateY(-2px)}
 .btn-proceed:disabled{background:#2a2408;color:#5a4a10;cursor:not-allowed;transform:none;box-shadow:none}
-.btn-confirm-bank{width:100%;background:var(--green);color:var(--navy);font-family:'Manrope',sans-serif;font-weight:900;font-size:18px;padding:20px;border:none;cursor:pointer;border-radius:6px;display:flex;align-items:center;justify-content:center;gap:10px;transition:all .2s;box-shadow:0 8px 28px rgba(0,200,83,0.35);margin-top:8px}
+.btn-confirm-bank{width:100%;background:var(--green);color:var(--navy);font-family:'Manrope',sans-serif;font-weight:900;font-size:17px;padding:18px;border:none;cursor:pointer;border-radius:6px;display:flex;align-items:center;justify-content:center;gap:10px;transition:all .2s;box-shadow:0 8px 28px rgba(0,200,83,0.3);margin-top:8px}
 .btn-confirm-bank:hover{background:#00E060;transform:translateY(-2px)}
 .btn-confirm-bank:disabled{background:#1e2e1e;color:#3a5a3a;cursor:not-allowed;transform:none;box-shadow:none}
-.submit-note{text-align:center;font-size:12px;color:var(--muted);margin-top:12px;font-family:'DM Mono',monospace;letter-spacing:0.3px;line-height:1.8}
-.processing-msg{display:none;text-align:center;padding:14px;font-family:'DM Mono',monospace;font-size:12px;color:var(--gold);letter-spacing:0.5px;background:rgba(245,200,66,0.06);border:1px solid rgba(245,200,66,0.3);border-radius:6px;margin-top:12px}
-.processing-msg.show{display:block}
-/* GUARANTEE BOX */
-.guarantee-strip{background:rgba(0,200,83,0.06);border:1px solid rgba(0,200,83,0.2);border-radius:8px;padding:16px 20px;margin-top:28px;display:flex;align-items:flex-start;gap:12px}
-.guarantee-strip-icon{font-size:24px;flex-shrink:0}
-.guarantee-strip-text{font-size:13px;color:var(--muted);line-height:1.75}
+.submit-note{text-align:center;font-size:11.5px;color:var(--muted);margin-top:10px;font-family:'DM Mono',monospace;letter-spacing:0.3px;line-height:1.8}
+
+/* ════════════════════════════════════════
+   RIGHT SIDEBAR — SOCIAL PROOF
+════════════════════════════════════════ */
+.sidebar{}
+.sidebar-card{background:var(--navy2);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:16px}
+.sidebar-card-header{background:rgba(245,200,66,0.06);border-bottom:1px solid var(--border-gold);padding:11px 16px;font-family:'DM Mono',monospace;font-size:9.5px;color:var(--gold);letter-spacing:0.12em;text-transform:uppercase;display:flex;align-items:center;gap:7px}
+
+/* Live ticker */
+.live-ticker-wrap{padding:14px 16px;display:flex;flex-direction:column;gap:10px}
+.live-ticker-item{display:flex;align-items:flex-start;gap:10px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.live-ticker-item:last-child{border-bottom:none;padding-bottom:0}
+.lt-avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--green),#007733);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;border:2px solid rgba(0,200,83,0.25)}
+.lt-body{flex:1}
+.lt-name{font-size:12px;font-weight:700;color:var(--white);margin-bottom:2px}
+.lt-msg{font-size:11.5px;color:var(--muted);line-height:1.55;font-style:italic}
+.lt-time{font-family:'DM Mono',monospace;font-size:9px;color:rgba(0,200,83,0.7);margin-top:3px}
+
+/* Guarantee card */
+.guarantee-card{padding:16px;background:rgba(0,200,83,0.04)}
+.gc-icon{font-size:28px;margin-bottom:10px}
+.gc-title{font-weight:800;font-size:14px;color:var(--white);margin-bottom:6px}
+.gc-body{font-size:12px;color:var(--muted);line-height:1.75}
+.gc-sig{font-family:'DM Mono',monospace;font-size:9.5px;color:var(--green);margin-top:8px}
+
+/* Stats card */
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border)}
+.stat-box{background:var(--navy2);padding:14px 12px;text-align:center}
+.stat-val{font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--gold);line-height:1}
+.stat-lbl{font-family:'DM Mono',monospace;font-size:8.5px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-top:3px;line-height:1.4}
+
+/* ════════════════════════════════════════
+   TALK TO HUMAN SAFETY NET
+════════════════════════════════════════ */
+.talk-human-section{
+  margin-top:28px;text-align:center;
+  padding:20px;
+  background:rgba(255,255,255,0.02);
+  border:1px dashed rgba(255,255,255,0.1);
+  border-radius:10px;
+}
+.th-label{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:10px}
+.th-text{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:14px}
+.btn-talk-human{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  background:#25D366;color:#fff;
+  font-family:'Manrope',sans-serif;font-weight:700;font-size:14px;
+  padding:13px 24px;border-radius:50px;border:none;cursor:pointer;
+  text-decoration:none;
+  box-shadow:0 4px 20px rgba(37,211,102,0.3);
+  transition:all .22s;
+}
+.btn-talk-human:hover{background:#1fba58;transform:translateY(-1px);box-shadow:0 6px 28px rgba(37,211,102,0.45)}
+.btn-talk-human svg{width:18px;height:18px;fill:#fff;flex-shrink:0}
+.th-note{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);margin-top:10px;line-height:1.6}
+
+/* ─── GUARANTEE STRIP (bottom) ─── */
+.guarantee-strip{background:rgba(0,200,83,0.05);border:1px solid rgba(0,200,83,0.2);border-radius:8px;padding:14px 18px;margin-top:24px;display:flex;align-items:flex-start;gap:12px}
+.guarantee-strip-icon{font-size:22px;flex-shrink:0}
+.guarantee-strip-text{font-size:12.5px;color:var(--muted);line-height:1.75}
 .guarantee-strip-text strong{color:var(--white)}
-@media(max-width:480px){.container{padding:28px 16px 60px}.bank-panel-inner{padding:20px 16px}.flw-panel{padding:22px 16px}}
-/* PROCESSING OVERLAY */
-.processing-overlay{display:none;position:fixed;inset:0;z-index:9999;background:rgba(7,14,28,0.96);backdrop-filter:blur(10px);align-items:center;justify-content:center;flex-direction:column;gap:22px}
+
+/* ─── PROCESSING OVERLAY ─── */
+.processing-overlay{display:none;position:fixed;inset:0;z-index:9999;background:rgba(7,14,28,0.97);backdrop-filter:blur(10px);align-items:center;justify-content:center;flex-direction:column;gap:22px}
 .processing-overlay.show{display:flex}
-.processing-spinner{width:52px;height:52px;border:3px solid rgba(245,200,66,0.2);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite}
+.processing-spinner{width:52px;height:52px;border:3px solid rgba(245,200,66,0.15);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 .processing-text{font-family:'DM Mono',monospace;font-size:13px;color:var(--gold);letter-spacing:0.5px;text-align:center;line-height:2}
+
+@media(max-width:480px){.outer{padding:24px 16px 60px}.bank-panel-inner,.flw-panel{padding:18px 14px}}
 </style>
 </head>
 <body>
 
+<!-- Processing Overlay -->
 <div class="processing-overlay" id="processingOverlay">
   <div class="processing-spinner"></div>
   <div class="processing-text" id="processingText">Processing your payment...<br>Please do not close this page.</div>
@@ -162,200 +316,456 @@ body{background:var(--navy);color:var(--text);font-family:'Manrope',sans-serif;l
   </div>
 </div>
 
-<div class="container">
+<div class="outer">
 
-  <!-- Client summary pulled from sessionStorage -->
+  <!-- Client summary -->
   <div class="client-summary" id="clientSummary">
     <div class="cs-icon">✅</div>
     <div class="cs-text">
-      <strong id="summaryName">Your details have been saved</strong>
-      <span id="summaryPhone"></span>
+      <strong id="summaryName">Your details have been saved successfully</strong>
+      <span id="summaryPhone">One final step — choose your payment method below to begin your setup.</span>
     </div>
   </div>
 
   <div class="page-header">
     <div class="step-badge">Step 2 of 3 — Choose Payment</div>
-    <h1>HOW WOULD YOU<br><span>LIKE TO PAY?</span></h1>
-    <p>Select the option that works best for you. Your setup begins immediately after payment is confirmed.</p>
+    <h1>YOU ARE ONE STEP<br><span>AWAY FROM YOUR SETUP</span></h1>
+    <p>Watch Richard's personal message below — then select your payment option. Your setup begins immediately after payment is confirmed.</p>
   </div>
 
-  <!-- PAYMENT SELECTION CARDS -->
-  <div class="payment-grid">
+  <!-- TWO COLUMN LAYOUT -->
+  <div class="two-col">
 
-    <!-- Full Payment -->
-    <div class="pay-option opt-full">
-      <input type="radio" name="payOpt" id="pay-full" value="full" onchange="onSelect('full')">
-      <label class="pay-card" for="pay-full">
-        <span class="pc-badge badge-complete">Complete</span>
-        <div class="pc-icon">💳</div>
-        <div class="pc-title">Full Payment</div>
-        <div class="pc-amount">₦180,000</div>
-        <div class="pc-sub">Everything included. Pay once and you are done.</div>
-        <div class="pc-method">Via Flutterwave — card, bank or USSD</div>
-      </label>
-      <div class="pc-check">✓</div>
-    </div>
+    <!-- LEFT: VIDEO + PAYMENT -->
+    <div>
 
-    <!-- Split Payment -->
-    <div class="pay-option opt-split">
-      <input type="radio" name="payOpt" id="pay-split" value="split" onchange="onSelect('split')">
-      <label class="pay-card" for="pay-split">
-        <span class="pc-badge badge-flexible">Flexible</span>
-        <div class="pc-icon">🔀</div>
-        <div class="pc-title">Split Payment</div>
-        <div class="pc-amount">₦100,000 Now</div>
-        <div class="pc-sub">Pay ₦100k today. ₦80k balance only after delivery.</div>
-        <div class="pc-method">Via Flutterwave — card, bank or USSD</div>
-      </label>
-      <div class="pc-check">✓</div>
-    </div>
-
-    <!-- Bank Transfer -->
-    <div class="pay-option opt-bank">
-      <input type="radio" name="payOpt" id="pay-bank" value="bank" onchange="onSelect('bank')">
-      <label class="pay-card" for="pay-bank">
-        <span class="pc-badge badge-popular">Most Popular</span>
-        <div class="pc-icon">🏦</div>
-        <div class="pc-title">Bank Transfer</div>
-        <div class="pc-amount">No Card Needed</div>
-        <div class="pc-sub">Transfer directly to Richard's verified Nigerian account.</div>
-        <div class="pc-method">PalmPay — direct transfer</div>
-      </label>
-      <div class="pc-check">✓</div>
-    </div>
-
-  </div>
-  <div class="error-msg" id="payOpt-error">Please select a payment method to continue</div>
-
-  <!-- ── FULL PAYMENT PANEL ── -->
-  <div class="selection-panel" id="panel-full">
-    <div class="flw-panel">
-      <div class="flw-panel-title">💳 Full Payment — ₦180,000</div>
-      <div class="flw-panel-sub">You will be redirected to Flutterwave to complete your payment securely. After payment is confirmed, Richard begins your setup immediately.</div>
-      <div class="flw-summary">
-        <div class="flw-row"><span class="flw-label">Service</span><span class="flw-value">GGS Global PayPal Setup — Full</span></div>
-        <div class="flw-row"><span class="flw-label">Amount</span><span class="flw-value highlight">₦180,000</span></div>
-        <div class="flw-row"><span class="flw-label">Delivery</span><span class="flw-value">Within 72 hours</span></div>
-        <div class="flw-row"><span class="flw-label">Support</span><span class="flw-value">30 days personal WhatsApp</span></div>
-        <div class="flw-row"><span class="flw-label">Payment Via</span><span class="flw-value">Flutterwave — card, bank or USSD</span></div>
-      </div>
-      <button class="btn-proceed" onclick="proceedFlutterwave('full')">
-        <span>💳</span>
-        <span>Pay ₦180,000 via Flutterwave →</span>
-      </button>
-      <p class="submit-note">You will be redirected to Flutterwave. Your setup begins as soon as payment clears.</p>
-    </div>
-  </div>
-
-  <!-- ── SPLIT PAYMENT PANEL ── -->
-  <div class="selection-panel" id="panel-split">
-    <div class="flw-panel">
-      <div class="flw-panel-title">🔀 Split Payment — ₦100,000 Now</div>
-      <div class="flw-panel-sub">Pay ₦100,000 today to begin your setup. You pay the ₦80,000 balance only after your account is delivered and confirmed working.</div>
-      <div class="flw-summary">
-        <div class="flw-row"><span class="flw-label">Pay Today</span><span class="flw-value highlight">₦100,000</span></div>
-        <div class="flw-row"><span class="flw-label">Balance on Delivery</span><span class="flw-value">₦80,000</span></div>
-        <div class="flw-row"><span class="flw-label">Total Investment</span><span class="flw-value">₦180,000</span></div>
-        <div class="flw-row"><span class="flw-label">Delivery</span><span class="flw-value">Within 72 hours</span></div>
-        <div class="flw-row"><span class="flw-label">Payment Via</span><span class="flw-value">Flutterwave — card, bank or USSD</span></div>
-      </div>
-      <button class="btn-proceed" onclick="proceedFlutterwave('split')">
-        <span>🔀</span>
-        <span>Pay ₦100,000 First Instalment →</span>
-      </button>
-      <p class="submit-note">Balance of ₦80,000 is only due after your account is delivered and working.</p>
-    </div>
-  </div>
-
-  <!-- ── BANK TRANSFER PANEL ── -->
-  <div class="selection-panel" id="panel-bank">
-    <div class="bank-panel-inner">
-      <div class="bank-panel-title">🏦 Bank Transfer — No Card Required</div>
-      <div class="bank-panel-sub">Transfer directly to Richard's verified PalmPay account. Upload your receipt here to confirm your slot immediately.</div>
-
-      <div class="bank-details-grid">
-        <div class="bank-detail-item">
-          <div class="bank-detail-label">🏦 Bank</div>
-          <div class="bank-detail-value">PalmPay</div>
+      <!-- ════ TRUST VIDEO SECTION ════ -->
+      <div class="video-trust-section">
+        <div class="video-trust-header">
+          <div class="video-live-dot"></div>
+          <div class="video-trust-label">Watch This Before You Pay — Richard Speaks Directly To You</div>
         </div>
-        <div class="bank-detail-item">
-          <div class="bank-detail-label">👤 Account Name</div>
-          <div class="bank-detail-value">Richard Ojukwu</div>
-        </div>
-        <div class="bank-detail-item" style="grid-column:1/-1">
-          <div class="bank-detail-label">🔢 Account Number</div>
-          <div class="bank-detail-value account-num">8142717585</div>
-        </div>
-        <div class="bank-detail-item" style="grid-column:1/-1">
-          <div class="bank-detail-label">💰 Amount to Transfer</div>
-          <div class="bank-detail-value" id="bankAmountDisplay" style="font-size:20px;color:var(--gold);font-weight:900">Select amount below ↓</div>
-        </div>
-      </div>
 
-      <!-- Amount selector -->
-      <div class="bank-amount-selector">
-        <label>How much are you transferring? <span style="color:var(--red)">*</span></label>
-        <div class="amount-radios">
-          <div class="amount-radio-opt">
-            <input type="radio" name="bankAmt" id="ba-full" value="₦180,000" onchange="updateBankAmt(this)">
-            <label class="amount-radio-label" for="ba-full">
-              <span class="ar-amount">₦180,000</span>
-              <span class="ar-desc">Full Payment</span>
-            </label>
+        <div class="video-wrapper" id="videoWrapper">
+          <iframe
+            id="trustVideo"
+            src="https://www.youtube.com/embed/M9mzL4_BhWA?rel=0&modestbranding=1&color=white&enablejsapi=1&mute=1"
+            title="A Personal Message From Richard — GGS Global PayPal Setup"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy">
+          </iframe>
+
+          <!-- Unmute nudge — appears 2s after autoplay starts -->
+          <div id="unmuteNudge" style="
+            display:none;position:absolute;bottom:12px;left:50%;transform:translateX(-50%);
+            background:rgba(6,6,8,0.88);backdrop-filter:blur(8px);
+            border:1px solid rgba(255,215,80,0.35);border-radius:50px;
+            padding:8px 18px;cursor:pointer;
+            font-family:'DM Mono',monospace;font-size:11px;color:#FFD750;
+            letter-spacing:0.08em;white-space:nowrap;
+            display:flex;align-items:center;gap:7px;
+            animation:nudgePop .4s ease;
+            z-index:10;
+          " onclick="unmuteVideo()">
+            <span style="font-size:14px">🔊</span> Tap to unmute — Richard is speaking
           </div>
-          <div class="amount-radio-opt">
-            <input type="radio" name="bankAmt" id="ba-split" value="₦100,000" onchange="updateBankAmt(this)">
-            <label class="amount-radio-label" for="ba-split">
-              <span class="ar-amount">₦100,000</span>
-              <span class="ar-desc">Split — Pay Now</span>
-            </label>
+        </div>
+
+        <div class="video-script-preview">
+          <div class="vsp-label">Why you should watch this before paying</div>
+          <div class="vsp-points">
+            <div class="vsp-point">
+              <span class="vsp-time">✅</span>
+              <span>Richard explains exactly what happens the moment your payment is confirmed — no guessing, no anxiety.</span>
+            </div>
+            <div class="vsp-point">
+              <span class="vsp-time">🔀</span>
+              <span>He walks you through both payment options — full ₦180,000 and split starting at ₦100,000 — so you can choose with confidence.</span>
+            </div>
+            <div class="vsp-point">
+              <span class="vsp-time">📱</span>
+              <span>You will see exactly how the 72-hour delivery works and what your WhatsApp onboarding looks like from day one.</span>
+            </div>
           </div>
         </div>
       </div>
-      <div class="error-msg" id="bankAmt-error">Please select the amount you are transferring</div>
 
-      <!-- Fraud warning -->
-      <div class="fraud-warning">
-        <div class="fraud-warning-text">⚠️ Upload your actual PalmPay or bank transfer receipt only. All payments are manually verified before setup begins. False receipts result in immediate cancellation and permanent block.</div>
+      <!-- ════ PAYMENT CARDS ════ -->
+      <div style="margin-bottom:12px">
+        <div style="font-family:'DM Mono',monospace;font-size:9.5px;color:var(--gold);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:8px">
+          <span>Select Your Payment Option</span>
+          <div style="flex:1;height:1px;background:var(--border-gold)"></div>
+        </div>
+
+        <div class="payment-grid">
+
+          <!-- Full Payment -->
+          <div class="pay-option opt-full">
+            <input type="radio" name="payOpt" id="pay-full" value="full" onchange="onSelect('full')">
+            <label class="pay-card" for="pay-full">
+              <span class="pc-badge badge-complete">Complete</span>
+              <div class="pc-icon">💳</div>
+              <div class="pc-title">Full Payment</div>
+              <div class="pc-amount">₦180,000</div>
+              <div class="pc-sub">Everything included. Priority processing.</div>
+              <div class="pc-method">Flutterwave — card, bank or USSD</div>
+            </label>
+            <div class="pc-check">✓</div>
+          </div>
+
+          <!-- Split Payment -->
+          <div class="pay-option opt-split">
+            <input type="radio" name="payOpt" id="pay-split" value="split" onchange="onSelect('split')">
+            <label class="pay-card" for="pay-split">
+              <span class="pc-badge badge-flexible">Flexible</span>
+              <div class="pc-icon">🔀</div>
+              <div class="pc-title">Split Payment</div>
+              <div class="pc-amount">₦100,000 Now</div>
+              <div class="pc-sub">₦80,000 balance due only after delivery.</div>
+              <div class="pc-method">Flutterwave — card, bank or USSD</div>
+            </label>
+            <div class="pc-check">✓</div>
+          </div>
+
+          <!-- Bank Transfer -->
+          <div class="pay-option opt-bank">
+            <input type="radio" name="payOpt" id="pay-bank" value="bank" onchange="onSelect('bank')">
+            <label class="pay-card" for="pay-bank">
+              <span class="pc-badge badge-popular">Most Popular</span>
+              <div class="pc-icon">🏦</div>
+              <div class="pc-title">Bank Transfer</div>
+              <div class="pc-amount">No Card Needed</div>
+              <div class="pc-sub">Transfer to Richard's verified PalmPay account.</div>
+              <div class="pc-method">PalmPay direct transfer</div>
+            </label>
+            <div class="pc-check">✓</div>
+          </div>
+
+        </div>
+        <div class="error-msg" id="payOpt-error">Please select a payment method to continue</div>
       </div>
 
-      <!-- Receipt upload -->
-      <label class="receipt-upload-label">Upload Payment Receipt <span class="required">*</span></label>
-      <div class="receipt-upload-area" id="uploadArea">
-        <input type="file" id="receiptFile" name="receipt" accept="image/*,.pdf" onchange="onReceiptUpload(this)">
-        <div class="upload-icon">📎</div>
-        <div class="upload-title">Tap to Upload Your Receipt</div>
-        <div class="upload-sub">JPG · PNG · PDF — Max 5MB</div>
-        <div class="upload-filename" id="uploadFilename"></div>
+      <!-- Trust icons strip -->
+      <div class="trust-icon-strip">
+        <div class="ti ti-green"><span class="ti-icon">⚡</span> Instant Activation</div>
+        <div class="ti ti-gold"><span class="ti-icon">🏦</span> Secure Transfer</div>
+        <div class="ti ti-green"><span class="ti-icon">🔒</span> 72-Hour Guarantee</div>
+        <div class="ti"><span class="ti-icon">📱</span> 30-Day Support</div>
       </div>
-      <div class="upload-formats">Accepted: JPG · PNG · PDF · Max 5MB</div>
-      <div class="wa-receipt-note">📲 Also send your receipt directly to WhatsApp <strong>+2348106334849</strong> for fastest verification</div>
-      <div class="error-msg" id="bankReceipt-error">Please upload your transfer receipt</div>
-      <div class="error-msg" id="bankFileType-error">Please upload an image or PDF only</div>
-      <div class="error-msg" id="bankFileSize-error">File too large — please upload under 5MB</div>
 
-      <div class="processing-msg" id="bankProcessingMsg">⏳ Submitting your order — please wait...</div>
+      <!-- ── FULL PAYMENT PANEL ── -->
+      <div class="selection-panel" id="panel-full">
+        <div class="flw-panel">
+          <div class="flw-panel-title">💳 Full Payment — ₦180,000</div>
+          <div class="flw-panel-sub">You will be redirected to Flutterwave to complete payment securely. After confirmation, Richard begins your setup immediately — same day.</div>
+          <div class="flw-summary">
+            <div class="flw-row"><span class="flw-label">Service</span><span class="flw-value">GGS Global PayPal Setup — Full</span></div>
+            <div class="flw-row"><span class="flw-label">Amount</span><span class="flw-value highlight">₦180,000</span></div>
+            <div class="flw-row"><span class="flw-label">Delivery</span><span class="flw-value">Within 72 hours</span></div>
+            <div class="flw-row"><span class="flw-label">Support</span><span class="flw-value">30 days personal WhatsApp</span></div>
+            <div class="flw-row"><span class="flw-label">After Payment</span><span class="flw-value" style="color:var(--green)">→ Redirected to Richard's WhatsApp</span></div>
+          </div>
+          <button class="btn-proceed" onclick="proceedFlutterwave('full')">
+            <span>💳</span><span>Pay ₦180,000 via Flutterwave →</span>
+          </button>
+          <p class="submit-note">After payment — you are automatically redirected to Richard's WhatsApp to begin onboarding.</p>
+        </div>
+      </div>
 
-      <button class="btn-confirm-bank" onclick="confirmBankPayment()" id="confirmBankBtn" disabled>
-        ✅ Confirm Payment &amp; Complete Order
-      </button>
+      <!-- ── SPLIT PAYMENT PANEL ── -->
+      <div class="selection-panel" id="panel-split">
+        <div class="flw-panel">
+          <div class="flw-panel-title">🔀 Split Payment — ₦100,000 Now</div>
+          <div class="flw-panel-sub">Pay ₦100,000 today. Your setup begins immediately. Pay the ₦80,000 balance only after your account is delivered and you confirm it is working.</div>
+          <div class="flw-summary">
+            <div class="flw-row"><span class="flw-label">Pay Today</span><span class="flw-value highlight">₦100,000</span></div>
+            <div class="flw-row"><span class="flw-label">Balance on Delivery</span><span class="flw-value">₦80,000</span></div>
+            <div class="flw-row"><span class="flw-label">Total Investment</span><span class="flw-value">₦180,000</span></div>
+            <div class="flw-row"><span class="flw-label">Delivery</span><span class="flw-value">Within 72 hours</span></div>
+            <div class="flw-row"><span class="flw-label">After Payment</span><span class="flw-value" style="color:var(--green)">→ Redirected to Richard's WhatsApp</span></div>
+          </div>
+          <button class="btn-proceed" onclick="proceedFlutterwave('split')">
+            <span>🔀</span><span>Pay ₦100,000 First Instalment →</span>
+          </button>
+          <p class="submit-note">Balance of ₦80,000 is only due after your account is delivered and working.</p>
+        </div>
+      </div>
 
-      <div class="bank-reassurance">🔒 Richard manually verifies every transfer in PalmPay before setup begins. WhatsApp confirmation within 30 minutes of verification.</div>
-    </div>
-  </div>
+      <!-- ── BANK TRANSFER PANEL ── -->
+      <div class="selection-panel" id="panel-bank">
+        <div class="bank-panel-inner">
+          <div class="bank-panel-title">🏦 Bank Transfer — No Card Required</div>
+          <div class="bank-panel-sub">Transfer to Richard's verified PalmPay account. Upload your receipt to confirm your slot immediately.</div>
 
-  <!-- GUARANTEE STRIP -->
-  <div class="guarantee-strip">
-    <div class="guarantee-strip-icon">🔒</div>
-    <div class="guarantee-strip-text">
-      <strong>The GGS Global Iron Guarantee —</strong> If your account is not delivered within 72 hours and working exactly as described, you receive a full refund of your deposit. No negotiations. No forms. Richard's word backed by 7 years of delivery.
-    </div>
-  </div>
+          <div class="bank-details-grid">
+            <div class="bank-detail-item">
+              <div class="bank-detail-label">🏦 Bank</div>
+              <div class="bank-detail-value">PalmPay</div>
+            </div>
+            <div class="bank-detail-item">
+              <div class="bank-detail-label">👤 Account Name</div>
+              <div class="bank-detail-value">Richard Ojukwu</div>
+            </div>
+            <div class="bank-detail-item" style="grid-column:1/-1">
+              <div class="bank-detail-label">🔢 Account Number</div>
+              <div class="bank-detail-value account-num">8142717585</div>
+            </div>
+            <div class="bank-detail-item" style="grid-column:1/-1">
+              <div class="bank-detail-label">💰 Amount</div>
+              <div class="bank-detail-value" id="bankAmountDisplay" style="font-size:18px;color:var(--gold);font-weight:900">Select amount below ↓</div>
+            </div>
+          </div>
 
-</div>
+          <div class="bank-amount-selector">
+            <label>How much are you transferring? <span style="color:var(--red)">*</span></label>
+            <div class="amount-radios">
+              <div class="amount-radio-opt">
+                <input type="radio" name="bankAmt" id="ba-full" value="₦180,000" onchange="updateBankAmt(this)">
+                <label class="amount-radio-label" for="ba-full">
+                  <span class="ar-amount">₦180,000</span><span class="ar-desc">Full Payment</span>
+                </label>
+              </div>
+              <div class="amount-radio-opt">
+                <input type="radio" name="bankAmt" id="ba-split" value="₦100,000" onchange="updateBankAmt(this)">
+                <label class="amount-radio-label" for="ba-split">
+                  <span class="ar-amount">₦100,000</span><span class="ar-desc">Split — Pay Now</span>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="error-msg" id="bankAmt-error">Please select the amount you are transferring</div>
+
+          <div class="fraud-warning">
+            <div class="fraud-warning-text">⚠️ Upload your actual PalmPay receipt only. All payments are manually verified before setup begins. False receipts result in immediate cancellation and permanent block.</div>
+          </div>
+
+          <label class="receipt-upload-label">Upload Payment Receipt <span style="color:var(--red)">*</span></label>
+          <div class="receipt-upload-area" id="uploadArea">
+            <input type="file" id="receiptFile" name="receipt" accept="image/*,.pdf" onchange="onReceiptUpload(this)">
+            <div class="upload-icon">📎</div>
+            <div class="upload-title">Tap to Upload Your Receipt</div>
+            <div class="upload-sub">JPG · PNG · PDF — Max 5MB</div>
+            <div class="upload-filename" id="uploadFilename"></div>
+          </div>
+          <div class="upload-formats">Accepted: JPG · PNG · PDF · Max 5MB</div>
+          <div class="wa-receipt-note">📲 Also send receipt directly to WhatsApp <strong>+2348106334849</strong> for fastest verification</div>
+          <div class="error-msg" id="bankReceipt-error">Please upload your transfer receipt</div>
+          <div class="error-msg" id="bankFileType-error">Please upload an image or PDF only</div>
+          <div class="error-msg" id="bankFileSize-error">File too large — please upload under 5MB</div>
+
+          <div class="processing-msg" id="bankProcessingMsg">⏳ Submitting your order — please wait...</div>
+
+          <button class="btn-confirm-bank" onclick="confirmBankPayment()" id="confirmBankBtn" disabled>
+            ✅ Confirm Payment &amp; Complete Order
+          </button>
+          <div class="bank-reassurance">🔒 Richard manually verifies every transfer in PalmPay before setup begins. WhatsApp confirmation within 30 minutes of verification.</div>
+        </div>
+      </div>
+
+      <!-- GUARANTEE STRIP -->
+      <div class="guarantee-strip">
+        <div class="guarantee-strip-icon">🔒</div>
+        <div class="guarantee-strip-text"><strong>The GGS Global Iron Guarantee —</strong> Account not delivered within 72 hours and working exactly as described? Full deposit refunded. No negotiations. No excuses. Richard's word — backed by 7 years of delivery.</div>
+      </div>
+
+      <!-- ════ TALK TO HUMAN SAFETY NET ════ -->
+      <div class="talk-human-section">
+        <div class="th-label">Still have a question before paying?</div>
+        <div class="th-text">80% of clients pay directly from this page. If you need to speak with Richard personally before proceeding — message him directly. He responds within minutes.</div>
+        <a href="https://wa.me/2348106334849?text=Hello%20Richard%2C%20I%20have%20seen%20the%20%E2%82%A6180%2C000%20investment%20and%20I%20am%20ready%20to%20proceed%20but%20have%20one%20quick%20question%20first."
+          target="_blank" rel="noopener" class="btn-talk-human">
+          <svg viewBox="0 0 32 32"><path d="M16 0C7.164 0 0 7.163 0 16c0 2.822.736 5.474 2.023 7.78L0 32l8.395-2.002A15.936 15.936 0 0016 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.333a13.276 13.276 0 01-6.773-1.849l-.487-.289-5.02 1.197 1.233-4.894-.318-.503A13.258 13.258 0 012.667 16C2.667 8.636 8.636 2.667 16 2.667c7.364 0 13.333 5.97 13.333 13.333S23.364 29.333 16 29.333zm7.32-9.96c-.4-.2-2.364-1.166-2.73-1.299-.366-.133-.633-.2-.9.2-.266.4-1.033 1.3-1.266 1.566-.233.267-.466.3-.866.1-.4-.2-1.687-.622-3.213-1.98-1.188-1.057-1.99-2.363-2.223-2.763-.233-.4-.025-.615.175-.814.18-.178.4-.466.6-.7.2-.233.266-.4.4-.666.133-.267.066-.5-.034-.7-.1-.2-.9-2.166-1.233-2.966-.324-.78-.654-.674-.9-.686l-.766-.014c-.267 0-.7.1-1.067.5-.366.4-1.4 1.366-1.4 3.333s1.433 3.866 1.633 4.133c.2.267 2.82 4.3 6.833 6.033.955.412 1.7.658 2.282.843.958.305 1.831.262 2.52.159.769-.114 2.364-.966 2.697-1.9.333-.933.333-1.733.233-1.9-.1-.167-.367-.267-.767-.467z"/></svg>
+          Talk to Richard Before Paying
+        </a>
+        <div class="th-note">Pre-filled message confirms you have seen the price — keeps the conversation qualified and serious.</div>
+      </div>
+
+    </div><!-- /left col -->
+
+    <!-- RIGHT: SOCIAL PROOF SIDEBAR -->
+    <div class="sidebar">
+
+      <!-- Stats -->
+      <div class="sidebar-card">
+        <div class="sidebar-card-header">📊 Verified Numbers</div>
+        <div class="stats-grid">
+          <div class="stat-box"><div class="stat-val" style="color:var(--green)">500+</div><div class="stat-lbl">Accounts Delivered</div></div>
+          <div class="stat-box"><div class="stat-val">2019</div><div class="stat-lbl">Active Since</div></div>
+          <div class="stat-box"><div class="stat-val" style="color:var(--green)">72hrs</div><div class="stat-lbl">Avg Delivery</div></div>
+          <div class="stat-box"><div class="stat-val">$2K</div><div class="stat-lbl">Single-Day Receipt</div></div>
+        </div>
+      </div>
+
+      <!-- Live testimonial ticker -->
+      <div class="sidebar-card">
+        <div class="sidebar-card-header">
+          <div style="width:7px;height:7px;border-radius:50%;background:var(--green);animation:livePulse 2s infinite"></div>
+          Recent Client Messages
+        </div>
+        <div class="live-ticker-wrap">
+          <div class="live-ticker-item">
+            <div class="lt-avatar">🙌</div>
+            <div class="lt-body">
+              <div class="lt-name">Chukwuemeka O. — Enugu</div>
+              <div class="lt-msg">"Received my first $300 from Fiverr the same day my account was delivered. 100% real."</div>
+              <div class="lt-time">⭐⭐⭐⭐⭐ · Verified Client</div>
+            </div>
+          </div>
+          <div class="live-ticker-item">
+            <div class="lt-avatar">💰</div>
+            <div class="lt-body">
+              <div class="lt-name">Victor M. — Lagos</div>
+              <div class="lt-msg">"This is the only verified and legit PayPal expert out here. Others are nothing."</div>
+              <div class="lt-time">⭐⭐⭐⭐⭐ · Verified Client</div>
+            </div>
+          </div>
+          <div class="live-ticker-item">
+            <div class="lt-avatar">⚡</div>
+            <div class="lt-body">
+              <div class="lt-name">Verified Client — Abuja</div>
+              <div class="lt-msg">"Withdrawal landed in 3 hours. No more third parties stealing my money."</div>
+              <div class="lt-time">⭐⭐⭐⭐⭐ · Verified Client</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Guarantee card -->
+      <div class="sidebar-card">
+        <div class="sidebar-card-header">🔒 The Guarantee</div>
+        <div class="guarantee-card">
+          <div class="gc-icon">🛡️</div>
+          <div class="gc-title">72-Hour Delivery or Full Refund</div>
+          <div class="gc-body">If your account is not delivered and working within 72 hours — your deposit is refunded in full. No negotiation. No excuses. No forms to fill.</div>
+          <div class="gc-sig">— Richard Ojukwu · GGS Global · Since 2019</div>
+        </div>
+      </div>
+
+      <!-- What happens next -->
+      <div class="sidebar-card">
+        <div class="sidebar-card-header">📋 What Happens After Payment</div>
+        <div style="padding:14px 16px;display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;align-items:flex-start;gap:9px;font-size:12px;color:var(--muted);line-height:1.6">
+            <span style="width:20px;height:20px;border-radius:50%;background:var(--green);color:var(--navy);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;flex-shrink:0">1</span>
+            <span>You are redirected to Richard's <strong style="color:var(--white)">private WhatsApp</strong> automatically</span>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:9px;font-size:12px;color:var(--muted);line-height:1.6">
+            <span style="width:20px;height:20px;border-radius:50%;background:var(--green);color:var(--navy);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;flex-shrink:0">2</span>
+            <span>Richard sends your <strong style="color:var(--white)">Onboarding Checklist</strong> — simple documents needed</span>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:9px;font-size:12px;color:var(--muted);line-height:1.6">
+            <span style="width:20px;height:20px;border-radius:50%;background:var(--green);color:var(--navy);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;flex-shrink:0">3</span>
+            <span>Your fully verified PayPal is delivered within <strong style="color:var(--white)">72 hours</strong></span>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:9px;font-size:12px;color:var(--muted);line-height:1.6">
+            <span style="width:20px;height:20px;border-radius:50%;background:var(--green);color:var(--navy);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;flex-shrink:0">4</span>
+            <span>Richard walks you through your <strong style="color:var(--white)">first withdrawal</strong> personally</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /sidebar -->
+  </div><!-- /two-col -->
+</div><!-- /outer -->
 
 <script>
-// ── PIXEL HELPER ──────────────────────────────────────────────
+// ── VIDEO AUTOPLAY ON SCROLL (YouTube IFrame API) ────────────
+// Loads YouTube IFrame API, then fires play+muted the moment
+// the video enters the viewport. Shows unmute nudge 2s later.
+// Pauses automatically when scrolled back out of view.
+var YT_READY=false;
+var ytPlayer=null;
+var videoPlayed=false;
+var nudgeShown=false;
+
+// Load YouTube IFrame API
+(function(){
+  var tag=document.createElement('script');
+  tag.src='https://www.youtube.com/iframe_api';
+  var first=document.getElementsByTagName('script')[0];
+  first.parentNode.insertBefore(tag,first);
+})();
+
+// Called automatically by YouTube API when ready
+function onYouTubeIframeAPIReady(){
+  YT_READY=true;
+  ytPlayer=new YT.Player('trustVideo',{
+    events:{
+      'onReady':function(e){
+        // Player ready — IntersectionObserver will trigger play
+      },
+      'onStateChange':function(e){
+        // If user manually plays — hide nudge and unmute
+        if(e.data===YT.PlayerState.PLAYING&&ytPlayer.isMuted()){
+          showNudge();
+        }
+      }
+    }
+  });
+}
+
+function showNudge(){
+  if(nudgeShown)return;
+  nudgeShown=true;
+  var nudge=document.getElementById('unmuteNudge');
+  if(nudge){
+    nudge.style.display='flex';
+    // Auto-hide nudge after 6 seconds if not tapped
+    setTimeout(function(){
+      if(nudge&&ytPlayer&&!ytPlayer.isMuted()){
+        nudge.style.display='none';
+      }
+    },6000);
+  }
+}
+
+function unmuteVideo(){
+  if(ytPlayer&&typeof ytPlayer.unMute==='function'){
+    ytPlayer.unMute();
+    ytPlayer.setVolume(100);
+    var nudge=document.getElementById('unmuteNudge');
+    if(nudge)nudge.style.display='none';
+  }
+}
+
+// IntersectionObserver — triggers autoplay when video enters viewport
+(function(){
+  var wrapper=document.getElementById('videoWrapper');
+  if(!wrapper||!window.IntersectionObserver)return;
+
+  var observer=new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        // Video in view — play muted if not already played
+        if(!videoPlayed&&YT_READY&&ytPlayer&&typeof ytPlayer.playVideo==='function'){
+          videoPlayed=true;
+          ytPlayer.mute();
+          ytPlayer.playVideo();
+          // Show unmute nudge after 2 seconds
+          setTimeout(showNudge,2000);
+        }
+        if(videoPlayed&&YT_READY&&ytPlayer&&typeof ytPlayer.getPlayerState==='function'){
+          var state=ytPlayer.getPlayerState();
+          // Resume if paused due to scroll-out
+          if(state===YT.PlayerState.PAUSED){
+            ytPlayer.playVideo();
+          }
+        }
+      } else {
+        // Video out of view — pause to save bandwidth
+        if(YT_READY&&ytPlayer&&typeof ytPlayer.pauseVideo==='function'){
+          var state=ytPlayer.getPlayerState();
+          if(state===YT.PlayerState.PLAYING){
+            ytPlayer.pauseVideo();
+          }
+        }
+      }
+    });
+  },{threshold:0.5}); // fires when 50% of video is visible
+
+  observer.observe(wrapper);
+})();
 function safePixel(ev,p){try{if(typeof fbq!=='undefined'){p?fbq('track',ev,p):fbq('track',ev)}}catch(e){}}
 
 // ── LOAD CLIENT SUMMARY ───────────────────────────────────────
@@ -363,8 +773,8 @@ function safePixel(ev,p){try{if(typeof fbq!=='undefined'){p?fbq('track',ev,p):fb
   try{
     const name=sessionStorage.getItem('ggs_name')||'';
     const phone=sessionStorage.getItem('ggs_phone')||'';
-    if(name){document.getElementById('summaryName').textContent=name+' — your details are saved ✅'}
-    if(phone){document.getElementById('summaryPhone').textContent='📱 '+phone+' · Setup begins after payment is confirmed'}
+    if(name){document.getElementById('summaryName').textContent=name+' — your details are confirmed ✅'}
+    if(phone){document.getElementById('summaryPhone').textContent='📱 '+phone+' · Select your payment method below to begin'}
   }catch(e){}
 })();
 
@@ -375,11 +785,10 @@ function onSelect(type){
     if(p)p.classList.toggle('show',t===type);
   });
   document.getElementById('payOpt-error').classList.remove('show');
-  // Scroll panel into view
   setTimeout(()=>{
-    const panel=document.getElementById('panel-'+type);
-    if(panel)panel.scrollIntoView({behavior:'smooth',block:'nearest'});
-  },120);
+    const p=document.getElementById('panel-'+type);
+    if(p)p.scrollIntoView({behavior:'smooth',block:'nearest'});
+  },140);
 }
 
 // ── BANK AMOUNT ───────────────────────────────────────────────
@@ -407,96 +816,57 @@ function onReceiptUpload(input){
   }
   checkBankBtn();
 }
-
 function checkBankBtn(){
-  const amtChosen=document.querySelector('input[name="bankAmt"]:checked');
-  const hasReceipt=document.getElementById('receiptFile').files.length>0;
-  document.getElementById('confirmBankBtn').disabled=!(amtChosen&&hasReceipt);
+  const a=document.querySelector('input[name="bankAmt"]:checked');
+  const r=document.getElementById('receiptFile').files.length>0;
+  document.getElementById('confirmBankBtn').disabled=!(a&&r);
 }
 
-// ── SEND BANK ORDER TO EMAIL ──────────────────────────────────
+// ── EMAIL HELPERS ─────────────────────────────────────────────
+async function sendFlwLead(type){
+  const name=sessionStorage.getItem('ggs_name')||'N/A';
+  const phone=sessionStorage.getItem('ggs_phone')||'N/A';
+  const business=sessionStorage.getItem('ggs_business')||'N/A';
+  const label=type==='split'?'Split Payment — ₦100,000':'Full Payment — ₦180,000';
+  const ts=new Date().toLocaleString('en-NG',{timeZone:'Africa/Lagos'});
+  const body=`PAYMENT IN PROGRESS — FLUTTERWAVE\n\nFull Name: ${name}\nPhone: ${phone}\nBusiness Type: ${business}\nPayment Option: ${label}\nRedirected At: ${ts}\n\n⚠️ If no payment confirmation arrives within 1 hour — follow up on WhatsApp immediately.`;
+  try{
+    await fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({access_key:'47cd5294-193b-4311-8e13-6bfa2e5b0660',subject:'⏳ PAYMENT IN PROGRESS — '+label,message:body})});
+  }catch(e){}
+}
+
 async function sendBankOrder(bankAmount,receiptName){
   const name=sessionStorage.getItem('ggs_name')||'N/A';
   const phone=sessionStorage.getItem('ggs_phone')||'N/A';
   const business=sessionStorage.getItem('ggs_business')||'N/A';
   const bname=sessionStorage.getItem('ggs_bname')||'N/A';
   const idType=sessionStorage.getItem('ggs_id')||'N/A';
-  const timestamp=new Date().toLocaleString('en-NG',{timeZone:'Africa/Lagos'});
-
-  const body=
-`NEW ORDER — BANK TRANSFER CONFIRMED
-
-Full Name: ${name}
-Business Name: ${bname}
-Phone: ${phone}
-Business Type: ${business}
-Government ID Type: ${idType}
-Payment Method: Direct Bank Transfer — PalmPay
-Amount Transferred: ${bankAmount}
-Receipt Filename: ${receiptName}
-Submitted At: ${timestamp}
-
-✅ Client has uploaded receipt.
-ACTION REQUIRED: Verify payment in PalmPay immediately then begin setup.`;
-
+  const ts=new Date().toLocaleString('en-NG',{timeZone:'Africa/Lagos'});
+  const body=`NEW ORDER — BANK TRANSFER\n\nFull Name: ${name}\nBusiness Name: ${bname}\nPhone: ${phone}\nBusiness Type: ${business}\nGovernment ID Type: ${idType}\nAmount Transferred: ${bankAmount}\nReceipt Filename: ${receiptName}\nSubmitted At: ${ts}\n\n✅ Client has uploaded receipt.\nACTION REQUIRED: Verify payment in PalmPay immediately then begin setup.`;
   try{
-    await fetch('https://api.web3forms.com/submit',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({access_key:'47cd5294-193b-4311-8e13-6bfa2e5b0660',subject:'✅ NEW ORDER — GGS Global PayPal Setup — Bank Transfer',message:body})
-    });
-  }catch(e){console.warn('Web3Forms:',e)}
-}
-
-// ── SEND FLUTTERWAVE ORDER LEAD TO EMAIL ──────────────────────
-async function sendFlwLead(type){
-  const name=sessionStorage.getItem('ggs_name')||'N/A';
-  const phone=sessionStorage.getItem('ggs_phone')||'N/A';
-  const business=sessionStorage.getItem('ggs_business')||'N/A';
-  const timestamp=new Date().toLocaleString('en-NG',{timeZone:'Africa/Lagos'});
-  const label=type==='split'?'Split Payment — ₦100,000':'Full Payment — ₦180,000';
-
-  const body=
-`PAYMENT IN PROGRESS — FLUTTERWAVE
-
-Full Name: ${name}
-Phone: ${phone}
-Business Type: ${business}
-Payment Option: ${label}
-Redirected At: ${timestamp}
-
-⚠️ Client has been redirected to Flutterwave.
-If no payment confirmation arrives within 1 hour — follow up on WhatsApp immediately.`;
-
-  try{
-    await fetch('https://api.web3forms.com/submit',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({access_key:'47cd5294-193b-4311-8e13-6bfa2e5b0660',subject:'⏳ PAYMENT IN PROGRESS — '+label,message:body})
-    });
-  }catch(e){console.warn('Web3Forms:',e)}
+    await fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({access_key:'47cd5294-193b-4311-8e13-6bfa2e5b0660',subject:'✅ NEW ORDER — Bank Transfer — GGS Global',message:body})});
+  }catch(e){}
 }
 
 // ── FLUTTERWAVE PROCEED ───────────────────────────────────────
+// After Flutterwave payment — thankyou.html redirects to WhatsApp automatically
 async function proceedFlutterwave(type){
   const btn=document.querySelector('#panel-'+type+' .btn-proceed');
-  if(btn){btn.disabled=true;btn.innerHTML='<span>⏳</span><span>Redirecting to payment...</span>'}
-
+  if(btn){btn.disabled=true;btn.innerHTML='<span>⏳</span><span>Redirecting...</span>'}
   document.getElementById('processingOverlay').classList.add('show');
-  document.getElementById('processingText').innerHTML='Redirecting to Flutterwave...<br>Complete your payment there.';
+  document.getElementById('processingText').innerHTML='Taking you to Flutterwave...<br>Complete your payment there and we begin immediately.';
 
-  // Fire pixel — no sensitive data
   const pixelVal=type==='split'?100000:180000;
   safePixel('AddPaymentInfo',{value:pixelVal,currency:'NGN',content_name:'PayPal Setup — '+(type==='split'?'Split':'Full'),content_category:'Digital Service'});
 
-  // Email Richard that client is on Flutterwave
   await sendFlwLead(type);
 
-  // Store payment type
   try{
     sessionStorage.setItem('ggs_payment',type);
     sessionStorage.setItem('ggs_amount',type==='split'?'₦100,000':'₦180,000');
-    sessionStorage.setItem('ggs_package',type==='split'?'Split Payment — 1st Instalment ₦100,000':'Standard — Full Payment ₦180,000');
+    sessionStorage.setItem('ggs_package',type==='split'?'Split Payment — ₦100,000 First Instalment':'Standard — Full Payment ₦180,000');
   }catch(e){}
 
   const url=type==='split'?'https://flutterwave.com/pay/halfpay':'https://flutterwave.com/pay/paypalbusiness';
@@ -508,7 +878,6 @@ async function confirmBankPayment(){
   const amtEl=document.querySelector('input[name="bankAmt"]:checked');
   const receiptFile=document.getElementById('receiptFile');
   let valid=true;
-
   if(!amtEl){document.getElementById('bankAmt-error').classList.add('show');valid=false}
   if(!receiptFile.files.length){document.getElementById('bankReceipt-error').classList.add('show');valid=false}
   else{
@@ -525,15 +894,11 @@ async function confirmBankPayment(){
 
   const bankAmount=amtEl.value;
   const receiptFilename=receiptFile.files[0].name;
-
-  // Fire pixel
   const pixelVal=bankAmount.includes('180')?180000:100000;
   safePixel('Purchase',{value:pixelVal,currency:'NGN',content_name:'PayPal Setup — Bank Transfer',content_category:'Digital Service'});
 
-  // Email Richard
   await sendBankOrder(bankAmount,receiptFilename);
 
-  // Store and redirect to thank you
   try{
     sessionStorage.setItem('ggs_payment','bank');
     sessionStorage.setItem('ggs_amount',bankAmount);
@@ -547,7 +912,6 @@ async function confirmBankPayment(){
   const phone=sessionStorage.getItem('ggs_phone')||'';
   const business=sessionStorage.getItem('ggs_business')||'';
   const id=sessionStorage.getItem('ggs_id')||'';
-
   const params=new URLSearchParams({payment:'bank',name,phone,business,package:'Standard — Bank Transfer',amount:bankAmount,id}).toString();
   setTimeout(()=>{window.location.href='thankyou.html?'+params},900);
 }
