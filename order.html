@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Start Your PayPal Setup — Step 1 of 3 — GGS Global</title>
+<title>Priority Deployment & Verification Form — GGS Global</title>
 <script>
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
@@ -12,26 +12,65 @@ t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
 document,'script','https://connect.facebook.net/en_US/fbevents.js');
 fbq('init','924866965267790');
 fbq('track','PageView');
-fbq('track','InitiateCheckout',{value:180000,currency:'NGN',content_name:'PayPal Setup — Order Form',content_category:'Digital Service'});
+fbq('track','InitiateCheckout',{value:180000,currency:'NGN',
+  content_name:'PayPal Setup — Allocation Form',content_category:'Digital Service'});
 </script>
-<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=924866965267790&ev=PageView&noscript=1"/></noscript>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=924866965267790&ev=PageView&noscript=1"/></noscript>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--navy:#070E1C;--navy2:#0B1628;--gold:#F5C842;--gold-dim:rgba(245,200,66,0.1);--gold-border:rgba(245,200,66,0.3);--green:#00C853;--green-dim:rgba(0,200,83,0.1);--red:#E74C3C;--white:#FFFFFF;--text:#E2E8F0;--muted:#94A3B8;--border:rgba(255,255,255,0.08);--border-gold:rgba(245,200,66,0.2)}
-*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+/* ─── TOKENS ─── */
+:root{
+  --navy:#070E1C;--navy2:#0B1628;--navy3:#0F1D35;
+  --gold:#F5C842;--gold-dim:rgba(245,200,66,0.1);--gold-border:rgba(245,200,66,0.3);
+  --green:#00C853;--green-dim:rgba(0,200,83,0.1);
+  --red:#E74C3C;--orange:#FF6B35;--blue:#3B82F6;
+  --white:#FFFFFF;--text:#E2E8F0;--muted:#94A3B8;
+  --border:rgba(255,255,255,0.08);--border-gold:rgba(245,200,66,0.2);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
 body{background:var(--navy);color:var(--text);font-family:'Manrope',sans-serif;line-height:1.6;min-height:100vh}
+
+/* ─── TOPBAR ─── */
 .topbar{background:linear-gradient(90deg,#006400,var(--green),#006400);background-size:200% 100%;animation:shimmer 3s linear infinite;padding:10px 20px;text-align:center;font-size:13px;font-weight:800;color:var(--navy);position:sticky;top:0;z-index:100}
 @keyframes shimmer{0%{background-position:0%}100%{background-position:200%}}
-.progress-bar{background:var(--navy2);padding:16px 24px;border-bottom:1px solid var(--border)}
+
+/* ─── MULTI-STEP PROGRESS BAR ─── */
+.progress-bar{background:var(--navy2);padding:18px 24px;border-bottom:1px solid var(--border)}
 .progress-inner{max-width:640px;margin:0 auto}
-.progress-label{display:flex;justify-content:space-between;margin-bottom:8px}
-.progress-step{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase}
-.progress-step.active{color:var(--gold)}.progress-step.inactive{color:var(--muted)}
-.progress-track{height:3px;background:rgba(255,255,255,0.1);border-radius:2px;overflow:hidden}
-.progress-fill{height:100%;width:33%;background:linear-gradient(90deg,var(--gold),var(--green));border-radius:2px}
-.container{max-width:640px;margin:0 auto;padding:40px 24px 80px}
-/* QUAL GATE */
-.qual-gate{background:rgba(11,22,40,0.98);border:1.5px solid rgba(245,200,66,0.35);border-radius:10px;padding:20px 22px;margin-bottom:28px;box-shadow:0 4px 24px rgba(245,200,66,0.08);position:relative;overflow:hidden}
+.progress-steps{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;position:relative}
+.progress-steps::before{content:'';position:absolute;top:14px;left:14px;right:14px;height:2px;background:rgba(255,255,255,0.08);z-index:0}
+.progress-step-item{display:flex;flex-direction:column;align-items:center;gap:6px;position:relative;z-index:1}
+.psi-dot{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:11px;font-weight:700;transition:all .3s}
+.psi-dot.done{background:var(--green);color:var(--navy)}
+.psi-dot.active{background:var(--gold);color:var(--navy);box-shadow:0 0 16px rgba(245,200,66,0.4)}
+.psi-dot.inactive{background:rgba(255,255,255,0.08);color:var(--muted)}
+.psi-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.08em;text-transform:uppercase;white-space:nowrap}
+.psi-label.active{color:var(--gold)}.psi-label.done{color:var(--green)}.psi-label.inactive{color:var(--muted)}
+.progress-track{height:3px;background:rgba(255,255,255,0.08);border-radius:2px;overflow:hidden}
+.progress-fill{height:100%;width:33%;background:linear-gradient(90deg,var(--gold),var(--green));border-radius:2px;transition:width .5s ease}
+
+/* ─── CONTAINER ─── */
+.container{max-width:640px;margin:0 auto;padding:36px 24px 80px}
+
+/* ─── SLOTS URGENCY BAR ─── */
+.slots-urgency{
+  background:rgba(255,68,85,0.07);
+  border:1px solid rgba(255,68,85,0.2);
+  border-radius:8px;padding:10px 16px;
+  margin-bottom:20px;
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+}
+.su-dots{display:flex;gap:4px}
+.su-dot{width:9px;height:9px;border-radius:50%;background:var(--green);animation:slotPulse 2s ease-in-out infinite}
+.su-dot.off{background:rgba(255,255,255,0.1);animation:none}
+@keyframes slotPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.7)}}
+.su-text{font-family:'DM Mono',monospace;font-size:10.5px;color:#FF8080;font-weight:700}
+.su-text b{color:var(--white)}
+
+/* ─── QUAL GATE ─── */
+.qual-gate{background:rgba(11,22,40,0.98);border:1.5px solid rgba(245,200,66,0.35);border-radius:10px;padding:20px 22px;margin-bottom:24px;box-shadow:0 4px 24px rgba(245,200,66,0.08);position:relative;overflow:hidden}
 .qual-gate::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),var(--green),var(--gold));background-size:200% 100%;animation:shimmer 3s linear infinite}
 .qual-price-warning{background:rgba(231,76,60,0.08);border:1.5px solid rgba(231,76,60,0.3);border-radius:8px;padding:14px 16px;margin-bottom:14px;font-family:'DM Mono',monospace;font-size:11px;color:#FF8080;font-weight:700;line-height:1.8;letter-spacing:0.3px}
 .qual-price-warning strong{color:#FFFFFF;font-size:13px;display:block;margin-bottom:4px}
@@ -44,25 +83,59 @@ body{background:var(--navy);color:var(--text);font-family:'Manrope',sans-serif;l
 .gate-checkbox-label .green{color:var(--green)}
 .gate-not-ready-msg{font-family:'DM Mono',monospace;font-size:12px;color:var(--gold);margin-top:8px;padding-left:4px;display:none;letter-spacing:0.3px}
 .gate-not-ready-msg.show{display:block}
-/* FORM LOCK */
+
+/* ─── PROCESS TIMELINE ─── */
+.process-timeline{
+  background:var(--navy3);
+  border:1px solid rgba(255,255,255,0.07);
+  border-radius:10px;
+  padding:18px 20px;
+  margin-bottom:24px;
+}
+.pt-label{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:14px}
+.pt-steps{display:flex;flex-direction:column;gap:0}
+.pt-step{display:flex;gap:14px;position:relative}
+.pt-step::before{content:'';position:absolute;left:15px;top:32px;bottom:-4px;width:2px;background:linear-gradient(180deg,rgba(245,200,66,0.3),rgba(245,200,66,0.05))}
+.pt-step:last-child::before{display:none}
+.pt-num{width:30px;height:30px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:12px;font-weight:900;border:2px solid;margin-bottom:14px}
+.pt-num.current{background:rgba(245,200,66,0.15);border-color:var(--gold);color:var(--gold)}
+.pt-num.next{background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.12);color:var(--muted)}
+.pt-content{padding-top:4px;flex:1}
+.pt-title{font-size:13px;font-weight:700;margin-bottom:2px}
+.pt-title.current{color:var(--gold)}.pt-title.next{color:var(--muted)}
+.pt-desc{font-size:11.5px;color:var(--muted);line-height:1.6;margin-bottom:14px}
+.pt-here{display:inline-flex;align-items:center;gap:5px;background:rgba(245,200,66,0.12);border:1px solid rgba(245,200,66,0.3);border-radius:50px;padding:3px 10px;font-family:'DM Mono',monospace;font-size:9px;color:var(--gold);font-weight:700;letter-spacing:0.08em}
+
+/* ─── FORM LOCK ─── */
 .form-body{transition:opacity .35s ease,filter .35s ease}
-.form-body.locked{opacity:0.3;filter:grayscale(0.7);pointer-events:none;user-select:none}
+.form-body.locked{opacity:0.28;filter:grayscale(0.7);pointer-events:none;user-select:none}
 .form-body.unlocking{animation:unlockPulse .4s ease forwards}
-@keyframes unlockPulse{0%{opacity:0.3;filter:grayscale(0.7)}50%{opacity:0.85;filter:grayscale(0.1)}100%{opacity:1;filter:none}}
-/* PAGE HEADER */
-.page-header{text-align:center;margin-bottom:28px}
-.step-badge{display:inline-flex;align-items:center;gap:8px;background:var(--gold-dim);border:1px solid var(--gold-border);padding:6px 16px;font-family:'DM Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:18px}
-.page-header h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(30px,7vw,48px);color:var(--white);line-height:1;letter-spacing:1px;margin-bottom:10px}
+@keyframes unlockPulse{0%{opacity:0.28;filter:grayscale(0.7)}50%{opacity:0.85;filter:grayscale(0.1)}100%{opacity:1;filter:none}}
+
+/* ─── PAGE HEADER ─── */
+.page-header{text-align:center;margin-bottom:24px}
+.allocation-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:linear-gradient(135deg,rgba(245,200,66,0.15),rgba(245,200,66,0.06));
+  border:1px solid rgba(245,200,66,0.4);
+  padding:7px 18px;border-radius:50px;
+  font-family:'DM Mono',monospace;font-size:10px;color:var(--gold);
+  letter-spacing:0.14em;text-transform:uppercase;margin-bottom:16px;
+  box-shadow:0 0 20px rgba(245,200,66,0.08);
+}
+.allocation-badge::before{content:'⬡';font-size:11px}
+.page-header h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(26px,6.5vw,44px);color:var(--white);line-height:1;letter-spacing:1px;margin-bottom:8px}
 .page-header h1 span{color:var(--gold)}
-.page-header p{font-size:14px;color:var(--muted);line-height:1.7}
-.page-header p strong{color:var(--white)}
-.trust-row{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin:16px 0 28px}
-.trust-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);font-family:'DM Mono',monospace}
+.page-header .subtitle{font-size:13.5px;color:var(--muted);line-height:1.75;max-width:500px;margin:0 auto}
+.page-header .subtitle strong{color:var(--white)}
+.trust-row{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin:16px 0 24px}
+.trust-item{display:flex;align-items:center;gap:5px;font-size:11.5px;color:var(--muted);font-family:'DM Mono',monospace}
 .trust-item .icon{color:var(--green)}
-/* FORM CARD */
-.form-card{background:var(--navy2);border:1px solid var(--border-gold);padding:36px 32px;position:relative;overflow:hidden;border-radius:6px}
-.form-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--green))}
-.form-section-title{font-family:'DM Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:10px}
+
+/* ─── FORM CARD ─── */
+.form-card{background:var(--navy2);border:1px solid var(--border-gold);padding:32px 28px;position:relative;overflow:hidden;border-radius:8px}
+.form-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--green),var(--gold));background-size:200%;animation:shimmer 4s linear infinite}
+.form-section-title{font-family:'DM Mono',monospace;font-size:9.5px;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:18px;display:flex;align-items:center;gap:10px}
 .form-section-title::after{content:'';flex:1;height:1px;background:var(--border-gold)}
 .form-group{margin-bottom:20px}
 .form-group label{display:block;font-size:13px;font-weight:700;color:var(--white);margin-bottom:8px;letter-spacing:0.3px}
@@ -78,107 +151,258 @@ select.form-input option{background:var(--navy2);color:var(--white)}
 @media(max-width:480px){.form-row{grid-template-columns:1fr}}
 .error-msg{font-size:12px;color:var(--red);margin-top:5px;display:none;font-family:'DM Mono',monospace}
 .error-msg.show{display:block}
+
+/* ════════════════════════════════════════
+   QUALIFICATION SECTION — 3 ELITE QUESTIONS
+   Psychology: Makes service feel exclusive.
+   Forces acknowledgement of earning level.
+   Creates mental contract before payment.
+════════════════════════════════════════ */
+.qual-section{
+  background:var(--navy3);
+  border:1px solid rgba(91,159,255,0.18);
+  border-radius:12px;
+  padding:22px 20px;
+  margin-bottom:24px;
+  position:relative;
+  overflow:hidden;
+}
+.qual-section::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--blue),var(--gold),var(--green));
+  background-size:200% 100%;animation:shimmer 4s linear infinite;
+}
+.qual-section-intro{
+  background:rgba(91,159,255,0.07);
+  border:1px solid rgba(91,159,255,0.18);
+  border-radius:7px;
+  padding:12px 14px;
+  margin-bottom:20px;
+  font-family:'DM Mono',monospace;
+  font-size:10.5px;color:rgba(91,159,255,0.9);
+  line-height:1.8;letter-spacing:0.03em;
+}
+.qual-section-intro strong{color:var(--white)}
+
+/* Dynamic qualifier response */
+.qualifier-response{
+  display:none;margin-top:10px;
+  background:rgba(0,200,83,0.06);
+  border:1px solid rgba(0,200,83,0.2);
+  border-left:3px solid var(--green);
+  border-radius:7px;padding:11px 14px;
+  font-size:12.5px;color:var(--text);line-height:1.75;
+  animation:fadeInUp .35s ease;
+}
+.qualifier-response.show{display:block}
+.qualifier-response strong{color:var(--gold)}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+
+/* ── COMMITMENT CHECKBOX ── */
+.commitment-wrap{
+  background:linear-gradient(135deg,rgba(245,200,66,0.08),rgba(245,200,66,0.03));
+  border:2px solid rgba(245,200,66,0.3);
+  border-radius:10px;
+  padding:18px 16px;
+  margin-bottom:24px;
+  position:relative;
+  overflow:hidden;
+}
+.commitment-wrap::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--gold),var(--orange));
+}
+.commitment-label-row{
+  display:flex;align-items:flex-start;gap:13px;cursor:pointer;
+}
+.commitment-cb{
+  width:22px;height:22px;min-width:22px;
+  accent-color:var(--gold);cursor:pointer;margin-top:3px;
+}
+.commitment-text{font-size:13px;font-weight:700;color:var(--white);line-height:1.65;user-select:none}
+.commitment-text em{color:var(--gold);font-style:normal}
+.commitment-signed{
+  display:none;
+  margin-top:12px;
+  background:rgba(0,200,83,0.08);
+  border:1px solid rgba(0,200,83,0.25);
+  border-radius:6px;
+  padding:10px 14px;
+  font-family:'DM Mono',monospace;
+  font-size:10.5px;color:var(--green);
+  display:none;align-items:center;gap:8px;
+  animation:fadeInUp .3s ease;
+}
+.commitment-signed.show{display:flex}
+.error-msg.commitment-error{margin-top:10px}
+
+/* ─── IMPORTANT BOX ─── */
 .important-box{background:rgba(245,200,66,0.06);border:1px solid rgba(245,200,66,0.2);border-left:3px solid var(--gold);padding:16px 20px;margin:24px 0;border-radius:4px}
 .important-box-title{font-size:12px;font-weight:900;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;font-family:'DM Mono',monospace}
 .important-box ul{list-style:none;display:flex;flex-direction:column;gap:6px}
 .important-box ul li{font-size:13px;color:var(--text);display:flex;align-items:flex-start;gap:8px;line-height:1.5}
 .important-box ul li::before{content:'OK';flex-shrink:0;font-size:10px;font-family:'DM Mono',monospace;font-weight:900;color:var(--green);margin-top:2px;letter-spacing:0.5px}
-/* SUBMIT BTN */
-.submit-btn{width:100%;background:var(--gold);color:#100800;font-family:'Manrope',sans-serif;font-weight:900;font-size:18px;padding:22px 20px;border:none;cursor:pointer;letter-spacing:0.3px;transition:all .2s;border-radius:4px;box-shadow:0 8px 32px rgba(245,200,66,0.3);display:flex;align-items:center;justify-content:center;gap:12px;position:relative;overflow:hidden;margin-top:8px}
-.submit-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(45deg,transparent 30%,rgba(255,255,255,0.2) 50%,transparent 70%);transform:translateX(-100%);transition:transform .5s}
+
+/* ─── SUBMIT BUTTON ─── */
+.submit-btn{
+  width:100%;
+  background:linear-gradient(135deg,var(--gold),#FFB800);
+  color:#100800;
+  font-family:'Manrope',sans-serif;font-weight:900;font-size:17px;
+  padding:22px 20px;border:none;cursor:pointer;
+  letter-spacing:0.3px;transition:all .2s;border-radius:6px;
+  box-shadow:0 8px 32px rgba(245,200,66,0.35),0 0 0 1px rgba(245,200,66,0.2);
+  display:flex;align-items:center;justify-content:center;
+  gap:10px;position:relative;overflow:hidden;margin-top:8px;
+}
+.submit-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(45deg,transparent 30%,rgba(255,255,255,0.22) 50%,transparent 70%);transform:translateX(-100%);transition:transform .5s}
 .submit-btn:hover::before{transform:translateX(100%)}
-.submit-btn:hover{background:#FFE062;transform:translateY(-2px)}
+.submit-btn:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(245,200,66,0.5)}
 .submit-btn:disabled{background:#2a2408;color:#5a4a10;cursor:not-allowed;transform:none;box-shadow:none}
-.submit-note{text-align:center;font-size:12px;color:var(--muted);margin-top:12px;font-family:'DM Mono',monospace;letter-spacing:0.3px;line-height:1.8}
-.next-steps{margin-top:32px;background:var(--green-dim);border:1px solid rgba(0,200,83,0.2);padding:20px 24px;border-radius:4px}
-.next-steps-title{font-family:'DM Mono',monospace;font-size:11px;color:var(--green);letter-spacing:2px;text-transform:uppercase;margin-bottom:14px}
-.next-step-item{display:flex;align-items:flex-start;gap:12px;margin-bottom:10px;font-size:14px;color:var(--text);line-height:1.5}
+.submit-btn .btn-arrow{font-size:18px;transition:transform .2s}
+.submit-btn:hover .btn-arrow{transform:translateX(4px)}
+.submit-note{text-align:center;font-size:11.5px;color:var(--muted);margin-top:10px;font-family:'DM Mono',monospace;letter-spacing:0.3px;line-height:1.8}
+
+/* ─── NEXT STEPS ─── */
+.next-steps{margin-top:28px;background:var(--green-dim);border:1px solid rgba(0,200,83,0.2);padding:18px 22px;border-radius:6px}
+.next-steps-title{font-family:'DM Mono',monospace;font-size:10px;color:var(--green);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px}
+.next-step-item{display:flex;align-items:flex-start;gap:11px;margin-bottom:9px;font-size:13.5px;color:var(--text);line-height:1.5}
 .next-step-item:last-child{margin-bottom:0}
-.step-num{width:24px;height:24px;background:var(--green);color:var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0}
-.security-row{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-top:24px;padding-top:20px;border-top:1px solid var(--border)}
-.security-badge{font-size:12px;color:var(--muted);font-family:'DM Mono',monospace;letter-spacing:0.5px}
-/* PROCESSING OVERLAY */
-.processing-overlay{display:none;position:fixed;inset:0;z-index:9999;background:rgba(7,14,28,0.96);backdrop-filter:blur(10px);align-items:center;justify-content:center;flex-direction:column;gap:22px}
+.step-num{width:23px;height:23px;background:var(--green);color:var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;flex-shrink:0}
+.security-row{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin-top:22px;padding-top:18px;border-top:1px solid var(--border)}
+.security-badge{font-size:11.5px;color:var(--muted);font-family:'DM Mono',monospace;letter-spacing:0.5px}
+
+/* ─── PROCESSING OVERLAY ─── */
+.processing-overlay{display:none;position:fixed;inset:0;z-index:9999;background:rgba(7,14,28,0.97);backdrop-filter:blur(10px);align-items:center;justify-content:center;flex-direction:column;gap:22px}
 .processing-overlay.show{display:flex}
-.processing-spinner{width:52px;height:52px;border:3px solid rgba(245,200,66,0.2);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite}
+.processing-spinner{width:52px;height:52px;border:3px solid rgba(245,200,66,0.15);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 .processing-text{font-family:'DM Mono',monospace;font-size:13px;color:var(--gold);letter-spacing:0.5px;text-align:center;line-height:2}
-@media(max-width:480px){.form-card{padding:24px 16px}.container{padding:28px 16px 60px}.qual-gate{padding:16px 14px}}
+
+@media(max-width:480px){.form-card{padding:22px 14px}.container{padding:24px 14px 60px}.qual-gate{padding:16px 14px}}
 </style>
 </head>
 <body>
 
+<!-- Processing Overlay -->
 <div class="processing-overlay" id="processingOverlay">
   <div class="processing-spinner"></div>
-  <div class="processing-text">Saving your details securely...<br>Taking you to payment selection now.</div>
+  <div class="processing-text">Verifying your application...<br>Securing your deployment slot now.</div>
 </div>
 
-<div class="topbar">GGS Global — Professional PayPal Setup | 500+ Nigerians Served Since 2019</div>
+<div class="topbar">GGS Global — Professional PayPal Setup | Only 5 Slots Per Week</div>
 
+<!-- ─── UPGRADED MULTI-STEP PROGRESS BAR ─── -->
 <div class="progress-bar">
   <div class="progress-inner">
-    <div class="progress-label">
-      <span class="progress-step active">① Your Details</span>
-      <span class="progress-step inactive">② Choose Payment</span>
-      <span class="progress-step inactive">③ Confirmed</span>
+    <div class="progress-steps">
+      <div class="progress-step-item">
+        <div class="psi-dot active">1</div>
+        <div class="psi-label active">Application</div>
+      </div>
+      <div class="progress-step-item">
+        <div class="psi-dot inactive">2</div>
+        <div class="psi-label inactive">Secure Slot</div>
+      </div>
+      <div class="progress-step-item">
+        <div class="psi-dot inactive">3</div>
+        <div class="psi-label inactive">Deployment</div>
+      </div>
     </div>
-    <div class="progress-track"><div class="progress-fill"></div></div>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
   </div>
 </div>
 
 <div class="container">
 
+  <!-- SLOTS URGENCY BAR -->
+  <div class="slots-urgency">
+    <div class="su-dots" id="slotDots"></div>
+    <div class="su-text">Only <b id="slotCount">4</b> of 5 weekly deployment slots remaining</div>
+  </div>
+
   <!-- QUALIFICATION GATE -->
   <div class="qual-gate">
     <div class="qual-price-warning">
-      <strong>⚠️ This service is a ₦180,000 investment — it is not for everyone.</strong>
-      If you are serious about receiving international payments properly, you are in the right place. If you are still browsing or not yet ready — come back when the timing is right.
+      <strong>⚠️ This is a Priority Deployment Form — Not a General Enquiry Page.</strong>
+      This form is for Nigerian professionals ready to invest ₦100,000–₦180,000 to secure their international payment infrastructure today. If you are still researching — return to the information page first.
     </div>
     <div class="qual-social-strip">
-      ⭐ Trusted Since 2019 &nbsp;·&nbsp; ✅ 500+ Accounts Delivered &nbsp;·&nbsp; ⚡ 72-Hour Delivery &nbsp;·&nbsp; 🔒 Split Payment From ₦100K
+      ⭐ Trusted Since 2019 &nbsp;·&nbsp; ✅ 500+ Accounts Deployed &nbsp;·&nbsp; ⚡ 72-Hour Delivery &nbsp;·&nbsp; 🔒 5 Slots Weekly
     </div>
     <label class="gate-checkbox-wrap" for="gateConfirm" id="gateCheckboxWrap">
       <input type="checkbox" id="gateConfirm" onchange="toggleGate(this)">
       <span class="gate-checkbox-label">
-        <span class="green">✅</span>&nbsp; I have seen the ₦180,000 investment, I understand the split option starts at ₦100,000, and I am ready to proceed today.
+        <span class="green">✅</span>&nbsp; I confirm I am ready to initiate the ₦100,000 or ₦180,000 investment to secure my global payment infrastructure today.
       </span>
     </label>
-    <div class="gate-not-ready-msg" id="gateNotReadyMsg">↑ Please confirm you are ready before filling your details</div>
+    <div class="gate-not-ready-msg" id="gateNotReadyMsg">↑ Please confirm your readiness before accessing the application form</div>
   </div>
 
+  <!-- PAGE HEADER — REBRANDED -->
   <div class="page-header">
-    <div class="step-badge">Step 1 of 3 — Your Details</div>
-    <h1>TELL US ABOUT<br><span>YOUR SETUP</span></h1>
-    <p>Fill in your details accurately below.<br><strong>After submitting, you will choose your payment method on the next page.</strong></p>
+    <div class="allocation-badge">Priority Deployment & Verification Form</div>
+    <h1>SECURE YOUR<br><span>72-HOUR DEPLOYMENT SLOT</span></h1>
+    <p class="subtitle">Complete this form to reserve one of our <strong>5 weekly slots</strong> for the 72-hour PayPal professional setup. Your information is used to configure your account correctly from day one.</p>
   </div>
 
   <div class="trust-row">
-    <div class="trust-item"><span class="icon">✓</span> Secure &amp; Private</div>
-    <div class="trust-item"><span class="icon">✓</span> 500+ Clients Served</div>
-    <div class="trust-item"><span class="icon">✓</span> Real Person, Real Setup</div>
+    <div class="trust-item"><span class="icon">✓</span> Verified Since 2019</div>
+    <div class="trust-item"><span class="icon">✓</span> 500+ Deployments</div>
+    <div class="trust-item"><span class="icon">✓</span> Personally Handled</div>
   </div>
 
+  <!-- PROCESS TIMELINE -->
+  <div class="process-timeline">
+    <div class="pt-label">Your 3-Step Deployment Process</div>
+    <div class="pt-steps">
+      <div class="pt-step">
+        <div class="pt-num current">1</div>
+        <div class="pt-content">
+          <div class="pt-title current">Submit Onboarding Application <span class="pt-here">● You Are Here</span></div>
+          <div class="pt-desc">Complete this form with your verified details. Richard receives your application immediately.</div>
+        </div>
+      </div>
+      <div class="pt-step">
+        <div class="pt-num next">2</div>
+        <div class="pt-content">
+          <div class="pt-title next">Secure Your Slot With Payment</div>
+          <div class="pt-desc">Choose full payment ₦180,000 or split deposit ₦100,000. Your 72-hour clock starts the moment payment is confirmed.</div>
+        </div>
+      </div>
+      <div class="pt-step">
+        <div class="pt-num next">3</div>
+        <div class="pt-content">
+          <div class="pt-title next">72-Hour Technical Deployment & Handover</div>
+          <div class="pt-desc">Richard personally builds, verifies and delivers your account. You receive login details, bank withdrawal setup, and 30-day personal support.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FORM CARD -->
   <div class="form-card">
     <div class="form-body locked" id="formBody">
 
-      <div class="form-section-title">Personal Information</div>
+      <!-- SECTION 1: PERSONAL INFO -->
+      <div class="form-section-title">Applicant Information</div>
 
       <div class="form-group">
-        <label>Full Name <span class="required">*</span> <span class="hint">(exactly as on your Government ID)</span></label>
+        <label>Full Legal Name <span class="required">*</span> <span class="hint">(must match Government ID)</span></label>
         <input type="text" id="fullName" class="form-input" placeholder="e.g. Emeka John Okafor" autocomplete="name">
-        <div class="error-msg" id="fullName-error">Please enter your full name</div>
+        <div class="error-msg" id="fullName-error">Please enter your full legal name</div>
       </div>
 
       <div class="form-group">
-        <label>Business Name <span class="hint">(leave blank if none)</span></label>
+        <label>Business / Brand Name <span class="hint">(leave blank if none)</span></label>
         <input type="text" id="businessName" class="form-input" placeholder="e.g. Emeka Digital Services">
       </div>
 
       <div class="form-row">
         <div class="form-group">
-          <label>Phone Number <span class="required">*</span></label>
+          <label>WhatsApp Number <span class="required">*</span></label>
           <input type="tel" id="phone" class="form-input" placeholder="e.g. 08012345678" autocomplete="tel">
-          <div class="error-msg" id="phone-error">Please enter a valid 11-digit phone number</div>
+          <div class="error-msg" id="phone-error">Please enter a valid 11-digit number</div>
         </div>
         <div class="form-group">
           <label>Date of Birth <span class="required">*</span> <span class="hint">(DD/MM/YYYY)</span></label>
@@ -188,19 +412,9 @@ select.form-input option{background:var(--navy2);color:var(--white)}
       </div>
 
       <div class="form-group">
-        <label>Business Type <span class="required">*</span></label>
-        <select id="businessType" class="form-input">
-          <option value="" disabled selected>Select your business type</option>
-          <option value="Freelancing (Fiverr/Upwork)">Freelancing (Fiverr / Upwork)</option>
-          <option value="Dropshipping">Dropshipping</option>
-          <option value="Digital Products &amp; Services">Digital Products &amp; Services</option>
-          <option value="Content Creation">Content Creation</option>
-          <option value="E-commerce / Online Store">E-commerce / Online Store</option>
-          <option value="Remote Work / Employment">Remote Work / Employment</option>
-          <option value="Consulting Services">Consulting Services</option>
-          <option value="Other">Other</option>
-        </select>
-        <div class="error-msg" id="businessType-error">Please select your business type</div>
+        <label>Email Address <span class="required">*</span> <span class="hint">(for deployment confirmation)</span></label>
+        <input type="email" id="emailAddress" class="form-input" placeholder="e.g. emeka@gmail.com" autocomplete="email">
+        <div class="error-msg" id="emailAddress-error">Please enter a valid email address</div>
       </div>
 
       <div class="form-group">
@@ -215,152 +429,394 @@ select.form-input option{background:var(--navy2);color:var(--white)}
         <div class="error-msg" id="idType-error">Please select your ID type</div>
       </div>
 
+      <!-- ════════════════════════════════════════
+           SECTION 2: THREE ELITE QUALIFICATION QUESTIONS
+           These make the service feel exclusive,
+           force income acknowledgement, and create
+           a mental contract before payment.
+      ════════════════════════════════════════ -->
+      <div class="form-section-title" style="margin-top:32px">Deployment Qualification</div>
+
+      <div class="qual-section">
+        <div class="qual-section-intro">
+          <strong>This section qualifies your account configuration.</strong> Your answers allow Richard to set up your account specifically for your transaction volume and platform — not a generic setup.
+        </div>
+
+        <!-- QUESTION 1: Income Qualifier -->
+        <div class="form-group">
+          <label>What is your average monthly international transaction volume? <span class="required">*</span></label>
+          <select id="transactionVolume" class="form-input" onchange="onVolumeSelect(this)">
+            <option value="" disabled selected>Select your volume range</option>
+            <option value="$500 – $1,500 (Growth Stage)">$500 – $1,500 · Growth Stage</option>
+            <option value="$1,500 – $5,000 (Established Professional)">$1,500 – $5,000 · Established Professional</option>
+            <option value="Above $5,000 (Agency / High-Volume)">Above $5,000 · Agency / High-Volume</option>
+          </select>
+          <div class="qualifier-response" id="volumeResponse"></div>
+          <div class="error-msg" id="transactionVolume-error">Please select your transaction volume</div>
+        </div>
+
+        <!-- QUESTION 2: Platform Filter -->
+        <div class="form-group">
+          <label>Which platform is your primary source of USD inflow? <span class="required">*</span></label>
+          <select id="primaryPlatform" class="form-input" onchange="onPlatformSelect(this)">
+            <option value="" disabled selected>Select your primary platform</option>
+            <option value="Freelance Marketplaces (Upwork / Fiverr / Toptal)">Freelance Marketplaces — Upwork / Fiverr / Toptal</option>
+            <option value="Direct International Clients (Invoicing / Social Media)">Direct International Clients — Invoicing / Social Media</option>
+            <option value="E-commerce / Digital Products (Gumroad / Stripe / Amazon)">E-commerce / Digital Products — Gumroad / Stripe / Amazon</option>
+            <option value="Remote Employment (Salary / Contractor Pay)">Remote Employment — Salary / Contractor Pay</option>
+          </select>
+          <div class="qualifier-response" id="platformResponse"></div>
+          <div class="error-msg" id="primaryPlatform-error">Please select your primary platform</div>
+        </div>
+
+        <!-- QUESTION 3: Readiness Commitment -->
+        <div class="form-group">
+          <label>To maintain our 72-hour deployment speed, we only accept 5 active setups weekly. Are you ready to initiate your investment today? <span class="required">*</span></label>
+          <select id="readinessLevel" class="form-input" onchange="onReadinessSelect(this)">
+            <option value="" disabled selected>Select your readiness level</option>
+            <option value="Yes — Ready to start ₦100k/₦180k setup immediately">✅ Yes — I am ready to start the ₦100k / ₦180k setup immediately</option>
+            <option value="I have funds but have a quick technical question for Richard">💬 I have the funds but have one quick technical question for Richard</option>
+          </select>
+          <div class="qualifier-response" id="readinessResponse"></div>
+          <div class="error-msg" id="readinessLevel-error">Please confirm your readiness to proceed</div>
+        </div>
+
+      </div>
+
+      <!-- ── COMMITMENT CHECKBOX — Digital Signature ── -->
+      <div class="commitment-wrap">
+        <label class="commitment-label-row" for="commitmentCheck">
+          <input type="checkbox" id="commitmentCheck" class="commitment-cb" onchange="onCommitmentChange(this)">
+          <span class="commitment-text">
+            I confirm I am ready to initiate the <em>₦100,000 / ₦180,000</em> investment to secure my global payment infrastructure. I understand my 72-hour deployment begins the moment my payment is confirmed.
+          </span>
+        </label>
+        <div class="commitment-signed" id="commitmentSigned">
+          ✅ Digital commitment recorded — your slot priority is confirmed
+        </div>
+        <div class="error-msg commitment-error" id="commitmentCheck-error">Please confirm your investment commitment to proceed</div>
+      </div>
+
+      <!-- IMPORTANT BOX -->
       <div class="important-box">
-        <div class="important-box-title">Read Before Submitting</div>
+        <div class="important-box-title">Before You Submit</div>
         <ul>
-          <li>Double-check all spelling — this information goes directly into your PayPal account</li>
-          <li>All details must match your Government ID exactly</li>
-          <li>After submitting, you choose your payment method on the next page</li>
-          <li>Richard receives your details instantly the moment you submit</li>
+          <li>Ensure all names match your Government ID exactly — this goes directly into your PayPal account</li>
+          <li>After submitting, you will choose your payment method on the secure payment page</li>
+          <li>Richard receives your application the moment you submit — deployment begins after payment</li>
+          <li>Your slot is only confirmed after payment — submit and pay promptly to secure your position</li>
         </ul>
       </div>
 
+      <!-- SUBMIT BUTTON — Power Language -->
       <button class="submit-btn" onclick="submitForm()" id="submitBtn" disabled>
-        <span>→</span>
-        <span id="btnLabel">Save My Details &amp; Choose Payment Method</span>
+        <span id="btnLabel">Proceed to Secure My 72-Hour Slot</span>
+        <span class="btn-arrow" id="btnArrow">→</span>
       </button>
 
-      <p class="submit-note">Your details are saved securely. You will choose how to pay on the next page.</p>
+      <p class="submit-note">Your application is saved instantly. You choose your payment method on the next page.</p>
 
       <div class="next-steps">
-        <div class="next-steps-title">What Happens Next</div>
-        <div class="next-step-item"><div class="step-num">1</div><span>Your details are sent to Richard immediately</span></div>
-        <div class="next-step-item"><div class="step-num">2</div><span>You choose your payment method — full payment, split, or bank transfer</span></div>
-        <div class="next-step-item"><div class="step-num">3</div><span>Payment confirmed — Richard begins your setup the same day</span></div>
-        <div class="next-step-item"><div class="step-num">4</div><span>Fully verified PayPal delivered within 72 hours with personal WhatsApp support</span></div>
+        <div class="next-steps-title">What Happens After You Submit</div>
+        <div class="next-step-item"><div class="step-num">1</div><span>Your application is sent to Richard immediately — he is notified within seconds</span></div>
+        <div class="next-step-item"><div class="step-num">2</div><span>You choose your payment — full ₦180,000 or split deposit ₦100,000 — your 72-hour clock starts</span></div>
+        <div class="next-step-item"><div class="step-num">3</div><span>Richard personally builds and verifies your account — WhatsApp updates throughout</span></div>
+        <div class="next-step-item"><div class="step-num">4</div><span>Account delivered within 72 hours — complete with bank withdrawal setup and 30-day personal support</span></div>
       </div>
 
       <div class="security-row">
-        <div class="security-badge">🔒 Secure &amp; Private</div>
-        <div class="security-badge">👤 Real Human Support</div>
-        <div class="security-badge">✅ 500+ Setups Done</div>
+        <div class="security-badge">🔒 Fully Secure</div>
+        <div class="security-badge">👤 Personally Handled</div>
+        <div class="security-badge">⚡ 72-Hour Deployment</div>
       </div>
 
-    </div>
+    </div><!-- /form-body -->
   </div>
-</div>
+
+</div><!-- /container -->
 
 <script>
-function safePixel(ev,p){try{if(typeof fbq!=='undefined'){p?fbq('track',ev,p):fbq('track',ev)}}catch(e){}}
+// ── PIXEL HELPER ──────────────────────────────────────────────
+function safePixel(ev,p){
+  try{if(typeof fbq!=='undefined'){p?fbq('track',ev,p):fbq('track',ev)}}catch(e){}
+}
 
+// ── SLOTS WIDGET ──────────────────────────────────────────────
+(function(){
+  var SK='ggs_slots_v2',SEK='ggs_sess_v2';
+  var isNew=!sessionStorage.getItem(SEK);
+  sessionStorage.setItem(SEK,'1');
+  var stored=localStorage.getItem(SK),slots;
+  if(!stored){slots=Math.floor(Math.random()*2)+3;localStorage.setItem(SK,slots);}
+  else{slots=parseInt(stored,10);if(isNew&&slots>1){slots--;localStorage.setItem(SK,slots);}}
+  var dotsEl=document.getElementById('slotDots');
+  var countEl=document.getElementById('slotCount');
+  if(countEl)countEl.textContent=slots;
+  if(dotsEl){
+    dotsEl.innerHTML='';
+    for(var i=0;i<5;i++){
+      var d=document.createElement('div');
+      d.className='su-dot'+(i>=slots?' off':'');
+      if(i<slots)d.style.animationDelay=(i*0.3)+'s';
+      dotsEl.appendChild(d);
+    }
+  }
+})();
+
+// ── PROGRESS BAR UPDATE ───────────────────────────────────────
+function updateProgress(pct){
+  var f=document.getElementById('progressFill');
+  if(f)f.style.width=pct+'%';
+}
+
+// ── GATE TOGGLE ──────────────────────────────────────────────
 function toggleGate(cb){
-  const fb=document.getElementById('formBody');
-  const sb=document.getElementById('submitBtn');
-  const nm=document.getElementById('gateNotReadyMsg');
-  const wr=document.getElementById('gateCheckboxWrap');
+  var fb=document.getElementById('formBody');
+  var sb=document.getElementById('submitBtn');
+  var nm=document.getElementById('gateNotReadyMsg');
+  var wr=document.getElementById('gateCheckboxWrap');
   if(cb.checked){
     fb.classList.remove('locked');fb.classList.add('unlocking');
-    setTimeout(()=>fb.classList.remove('unlocking'),400);
+    setTimeout(function(){fb.classList.remove('unlocking')},400);
     sb.disabled=false;nm.classList.remove('show');wr.classList.add('confirmed');
-  }else{fb.classList.add('locked');sb.disabled=true;wr.classList.remove('confirmed')}
+    updateProgress(33);
+  }else{
+    fb.classList.add('locked');sb.disabled=true;wr.classList.remove('confirmed');
+    updateProgress(5);
+  }
 }
 
 document.getElementById('formBody').addEventListener('click',function(e){
   if(this.classList.contains('locked')){
-    const nm=document.getElementById('gateNotReadyMsg');
-    const wr=document.getElementById('gateCheckboxWrap');
+    var nm=document.getElementById('gateNotReadyMsg');
+    var wr=document.getElementById('gateCheckboxWrap');
     nm.classList.add('show');
     wr.style.borderColor='rgba(245,200,66,0.8)';
     wr.style.background='rgba(245,200,66,0.06)';
-    setTimeout(()=>{wr.style.borderColor='';wr.style.background=''},1400);
+    setTimeout(function(){wr.style.borderColor='';wr.style.background=''},1400);
   }
 },true);
 
+// ── DOB FORMAT ────────────────────────────────────────────────
 document.getElementById('clientDob').addEventListener('input',function(e){
-  let v=e.target.value.replace(/\D/g,'');
+  var v=e.target.value.replace(/\D/g,'');
   if(v.length>=2)v=v.substring(0,2)+'/'+v.substring(2);
   if(v.length>=5)v=v.substring(0,5)+'/'+v.substring(5,9);
   e.target.value=v;
 });
 
+// ── QUALIFICATION DYNAMIC RESPONSES ──────────────────────────
+var volumeResponses={
+  '$500 – $1,500 (Growth Stage)':'At this volume every payment needs to arrive cleanly and directly. A professional configuration ensures <strong>zero third-party cuts</strong> from day one as your volume grows.',
+  '$1,500 – $5,000 (Established Professional)':'At $1,500–$5,000 monthly a broken PayPal is costing you <strong>up to ₦36,000,000 per year</strong> in misdirected or lost income. This is exactly the volume Richard\'s setup is optimised for.',
+  'Above $5,000 (Agency / High-Volume)':'High-volume accounts require <strong>expert-level stability configuration</strong>. Richard has clients at this volume running clean since 2020. Your account will be built to handle consistent high-value transactions without flags.'
+};
+
+var platformResponses={
+  'Freelance Marketplaces (Upwork / Fiverr / Toptal)':'Freelance marketplace payments have specific PayPal verification requirements. Richard configures your account to handle <strong>GNS and FNF payments</strong> from these platforms without triggering limitations.',
+  'Direct International Clients (Invoicing / Social Media)':'Direct client invoicing requires a fully verified account that can send professional payment requests. <strong>Your account will support invoicing globally</strong> from day one.',
+  'E-commerce / Digital Products (Gumroad / Stripe / Amazon)':'E-commerce and digital product payments require <strong>higher transaction thresholds</strong> and specific verification. Richard\'s configuration accounts for this from the initial setup.',
+  'Remote Employment (Salary / Contractor Pay)':'Salary and contractor payments require <strong>stable recurring transaction capability</strong>. Your account will be configured to receive consistent international transfers without flags.'
+};
+
+var readinessResponses={
+  'Yes — Ready to start ₦100k/₦180k setup immediately':'<strong>Excellent.</strong> Your slot will be secured the moment payment is confirmed. Complete this form and proceed to payment — Richard will confirm your deployment within 2 hours.',
+  'I have funds but have a quick technical question for Richard':'Noted. Complete this form, proceed to the payment page, and use the <strong>"Talk to Richard"</strong> button there to ask your question. Richard answers personally within minutes.'
+};
+
+function onVolumeSelect(sel){
+  var r=document.getElementById('volumeResponse');
+  r.innerHTML=volumeResponses[sel.value]||'';
+  r.classList.toggle('show',!!volumeResponses[sel.value]);
+  document.getElementById('transactionVolume-error').classList.remove('show');
+  checkProgress();
+}
+
+function onPlatformSelect(sel){
+  var r=document.getElementById('platformResponse');
+  r.innerHTML=platformResponses[sel.value]||'';
+  r.classList.toggle('show',!!platformResponses[sel.value]);
+  document.getElementById('primaryPlatform-error').classList.remove('show');
+  checkProgress();
+}
+
+function onReadinessSelect(sel){
+  var r=document.getElementById('readinessResponse');
+  r.innerHTML=readinessResponses[sel.value]||'';
+  r.classList.toggle('show',!!readinessResponses[sel.value]);
+  document.getElementById('readinessLevel-error').classList.remove('show');
+  checkProgress();
+}
+
+function onCommitmentChange(cb){
+  var signed=document.getElementById('commitmentSigned');
+  signed.classList.toggle('show',cb.checked);
+  document.getElementById('commitmentCheck-error').classList.remove('show');
+  checkProgress();
+}
+
+// Live progress update as form is filled
+function checkProgress(){
+  var fields=[
+    document.getElementById('fullName').value.trim()!=='',
+    document.getElementById('phone').value.replace(/\D/g,'').length===11,
+    document.getElementById('emailAddress').value.includes('@'),
+    document.getElementById('idType').value!=='',
+    document.getElementById('transactionVolume').value!=='',
+    document.getElementById('primaryPlatform').value!=='',
+    document.getElementById('readinessLevel').value!=='',
+    document.getElementById('commitmentCheck').checked
+  ];
+  var filled=fields.filter(Boolean).length;
+  var pct=Math.round(33+(filled/fields.length)*50);
+  updateProgress(pct);
+}
+
+// Attach live progress to all inputs
+['fullName','phone','emailAddress','clientDob','idType'].forEach(function(id){
+  var el=document.getElementById(id);
+  if(el)el.addEventListener('input',checkProgress);
+  if(el)el.addEventListener('change',checkProgress);
+});
+
+// ── COLLECT DATA ──────────────────────────────────────────────
 function collectData(){
   return{
-    fullName:document.getElementById('fullName').value.trim(),
-    businessName:document.getElementById('businessName').value.trim(),
-    phone:document.getElementById('phone').value.trim(),
-    clientDob:document.getElementById('clientDob').value.trim(),
-    businessType:document.getElementById('businessType').value,
-    idType:document.getElementById('idType').value,
-    timestamp:new Date().toLocaleString('en-NG',{timeZone:'Africa/Lagos'})
+    fullName        :document.getElementById('fullName').value.trim(),
+    businessName    :document.getElementById('businessName').value.trim(),
+    phone           :document.getElementById('phone').value.trim(),
+    email           :document.getElementById('emailAddress').value.trim(),
+    clientDob       :document.getElementById('clientDob').value.trim(),
+    idType          :document.getElementById('idType').value,
+    transactionVolume:document.getElementById('transactionVolume').value,
+    primaryPlatform :document.getElementById('primaryPlatform').value,
+    readinessLevel  :document.getElementById('readinessLevel').value,
+    timestamp       :new Date().toLocaleString('en-NG',{timeZone:'Africa/Lagos'})
   };
 }
 
+// ── VALIDATE ──────────────────────────────────────────────────
 function validateForm(d){
-  let valid=true;
+  var valid=true;
   function check(fid,eid,cond){
-    if(!cond){document.getElementById(fid).classList.add('error');document.getElementById(eid).classList.add('show');valid=false}
-    else{document.getElementById(fid).classList.remove('error');document.getElementById(eid).classList.remove('show')}
+    if(!cond){document.getElementById(fid).classList.add('error');document.getElementById(eid).classList.add('show');valid=false;}
+    else{document.getElementById(fid).classList.remove('error');document.getElementById(eid).classList.remove('show');}
   }
   check('fullName','fullName-error',d.fullName!=='');
   check('phone','phone-error',d.phone.replace(/\D/g,'').length===11);
   check('clientDob','clientDob-error',/^\d{2}\/\d{2}\/\d{4}$/.test(d.clientDob));
-  check('businessType','businessType-error',d.businessType!=='');
+  check('emailAddress','emailAddress-error',/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email));
   check('idType','idType-error',d.idType!=='');
+  check('transactionVolume','transactionVolume-error',d.transactionVolume!=='');
+  check('primaryPlatform','primaryPlatform-error',d.primaryPlatform!=='');
+  check('readinessLevel','readinessLevel-error',d.readinessLevel!=='');
+  // Commitment checkbox
+  if(!document.getElementById('commitmentCheck').checked){
+    document.getElementById('commitmentCheck-error').classList.add('show');valid=false;
+  }else{document.getElementById('commitmentCheck-error').classList.remove('show');}
   return valid;
 }
 
+// ── WEB3FORMS ─────────────────────────────────────────────────
 async function sendToWeb3Forms(d){
-  const body=
-`NEW LEAD — GGS Global PayPal Setup
-Status: Details Submitted — Now On Payment Page
+  var body=
+'PRIORITY DEPLOYMENT APPLICATION — GGS Global\n'+
+'Status: Application Submitted — Client Now On Payment Page\n\n'+
+'━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n'+
+'APPLICANT DETAILS\n'+
+'━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n'+
+'Full Name: '+d.fullName+'\n'+
+'Business Name: '+(d.businessName||'N/A')+'\n'+
+'WhatsApp: '+d.phone+'\n'+
+'Email: '+d.email+'\n'+
+'Date of Birth: '+d.clientDob+'\n'+
+'Government ID: '+d.idType+'\n\n'+
+'━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n'+
+'QUALIFICATION DATA\n'+
+'━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n'+
+'Transaction Volume: '+d.transactionVolume+'\n'+
+'Primary Platform: '+d.primaryPlatform+'\n'+
+'Readiness Level: '+d.readinessLevel+'\n'+
+'Investment Commitment: ✅ Digitally Confirmed\n\n'+
+'Submitted At: '+d.timestamp+'\n\n'+
+'⚠️ ACTION REQUIRED:\n'+
+'Ghost Hunter sequence active — if no payment in 2 hours, WhatsApp immediately.';
 
-Full Name: ${d.fullName}
-Business Name: ${d.businessName||'N/A'}
-Phone: ${d.phone}
-Date of Birth: ${d.clientDob}
-Business Type: ${d.businessType}
-Government ID Type: ${d.idType}
-Submitted At: ${d.timestamp}
-
-⚠️ ACTION: If no payment confirmation follows within 2 hours — contact this client on WhatsApp immediately.`;
   try{
     await fetch('https://api.web3forms.com/submit',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({access_key:'47cd5294-193b-4311-8e13-6bfa2e5b0660',subject:'🔔 NEW LEAD — GGS Global PayPal Setup — Details Submitted',message:body})
+      body:JSON.stringify({
+        access_key:'47cd5294-193b-4311-8e13-6bfa2e5b0660',
+        subject:'🚀 NEW APPLICATION — '+d.fullName+' — '+d.transactionVolume,
+        message:body
+      })
     });
   }catch(e){console.warn('Web3Forms:',e)}
 }
 
+// ── BREVO ─────────────────────────────────────────────────────
+async function addToBrevo(d){
+  try{
+    await fetch('https://api.brevo.com/v3/contacts',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','api-key':'YOUR_BREVO_API_KEY'},
+      body:JSON.stringify({
+        email:d.email,
+        attributes:{
+          FIRSTNAME:d.fullName.split(' ')[0]||d.fullName,
+          LASTNAME:d.fullName.split(' ').slice(1).join(' ')||'',
+          SMS:d.phone,
+          WHATSAPP:d.phone,
+          PAYMENT_RANGE:d.transactionVolume,
+          PLATFORM:d.primaryPlatform
+        },
+        listIds:[YOUR_LIST_ID],
+        updateEnabled:true,
+        tags:['ghost_hunter','allocation_form','no_payment_yet',d.readinessLevel.includes('Yes')?'ready_to_pay':'has_question']
+      })
+    });
+  }catch(e){console.warn('Brevo:',e)}
+}
+
+// ── MAIN SUBMIT ───────────────────────────────────────────────
 async function submitForm(){
   if(!document.getElementById('gateConfirm').checked){
     document.getElementById('gateNotReadyMsg').classList.add('show');
     window.scrollTo({top:0,behavior:'smooth'});return;
   }
-  const d=collectData();
+  var d=collectData();
   if(!validateForm(d)){
     document.querySelector('.form-input.error')?.scrollIntoView({behavior:'smooth',block:'center'});return;
   }
+
+  // Lock button
   document.getElementById('submitBtn').disabled=true;
-  document.getElementById('btnLabel').textContent='Saving your details...';
+  document.getElementById('btnLabel').textContent='Securing your deployment slot...';
+  document.getElementById('btnArrow').textContent='⏳';
   document.getElementById('processingOverlay').classList.add('show');
+  updateProgress(90);
 
-  // Fire Lead pixel — no sensitive data
-  safePixel('Lead',{content_name:'PayPal Setup — Details Submitted',currency:'NGN',content_category:'Digital Service'});
+  // Fire pixel
+  safePixel('Lead',{content_name:'PayPal Setup — Allocation Form Submitted',currency:'NGN',content_category:'Digital Service'});
 
-  // Email Richard immediately
-  sendToWeb3Forms(d).catch(e=>console.warn(e));
+  // Email Richard + Brevo (non-blocking)
+  sendToWeb3Forms(d).catch(function(e){console.warn(e)});
+  addToBrevo(d).catch(function(e){console.warn(e)});
 
-  // Store for payment page — clientDob intentionally excluded (pixel safe)
+  // Store for payment page
   try{
-    sessionStorage.setItem('ggs_name',d.fullName);
-    sessionStorage.setItem('ggs_phone',d.phone);
-    sessionStorage.setItem('ggs_business',d.businessType);
-    sessionStorage.setItem('ggs_id',d.idType);
-    sessionStorage.setItem('ggs_bname',d.businessName||'');
+    sessionStorage.setItem('ggs_name',    d.fullName);
+    sessionStorage.setItem('ggs_phone',   d.phone);
+    sessionStorage.setItem('ggs_email',   d.email);
+    sessionStorage.setItem('ggs_id',      d.idType);
+    sessionStorage.setItem('ggs_bname',   d.businessName||'');
+    sessionStorage.setItem('ggs_volume',  d.transactionVolume);
+    sessionStorage.setItem('ggs_platform',d.primaryPlatform);
+    sessionStorage.setItem('ggs_ready',   d.readinessLevel);
   }catch(e){}
 
-  setTimeout(()=>{window.location.href='payment.html'},900);
+  setTimeout(function(){window.location.href='payment.html'},1000);
 }
 </script>
 </body>

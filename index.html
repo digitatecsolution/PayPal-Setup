@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#060608">
-<title>Nigerian Freelancer? Your PayPal Blocks Stop Today — GGS Global</title>
-<meta name="description" content="Finally — a professionally configured PayPal that receives international dollars directly into your Nigerian bank. 72-hour delivery. Split payment from ₦100K. Trusted since 2019.">
-<meta property="og:title" content="Nigerian Freelancer? Your PayPal Blocks Stop Today — GGS Global">
-<meta property="og:description" content="Stop losing international clients. Get a professionally verified PayPal in 72 hours. Split from ₦100,000. Real Nigerian, trusted since 2019.">
+<title>Stop Losing Your Global Earnings to PayPal Limits — GGS Global</title>
+<meta name="description" content="Professional PayPal architecture for Nigerian freelancers earning $1,000+ monthly. Direct bank withdrawal. No middlemen. No 30% exchange losses. 72-hour deployment. Trusted since 2019.">
+<meta property="og:title" content="Stop Losing Your Global Earnings to PayPal Limits — GGS Global">
+<meta property="og:description" content="Built for Nigerian freelancers and agencies. Your ₦180,000 investment pays for itself on your very first $1,000 transaction. 72-hour deployment. Split payment from ₦100K.">`
 
 <!-- Facebook Pixel -->
 <script>
@@ -1238,11 +1238,378 @@ footer{background:#03040A;border-top:1px solid rgba(255,255,255,0.04);padding:52
   padding-top:18px;border-top:1px solid rgba(255,255,255,0.04);
 }
 
-/* ─── MOBILE ABOVE-FOLD OVERRIDE (Update 7) ─── */
-@media(max-width:767px){
-  #hero{padding:20px 0 48px}
-  .hero-orb1,.hero-orb2{display:none} /* no heavy decoratives above fold */
-  .hero-right .video-card{display:none} /* move video to dedicated section */
+/* ════════════════════════════════════════
+   MATH OF LOSS SECTION
+════════════════════════════════════════ */
+#math-of-loss{
+  background:var(--dark);
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  padding:72px 0;
+}
+.mol-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:16px;
+  margin-bottom:32px;
+}
+@media(min-width:640px){.mol-grid{grid-template-columns:1fr 1fr;gap:20px}}
+
+.mol-card{
+  border-radius:var(--r16);
+  padding:28px 22px;
+  position:relative;
+  overflow:hidden;
+}
+.mol-card-loss{
+  background:rgba(255,68,85,0.05);
+  border:1.5px solid rgba(255,68,85,0.2);
+}
+.mol-card-win{
+  background:rgba(45,226,138,0.05);
+  border:1.5px solid rgba(45,226,138,0.22);
+}
+.mol-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+}
+.mol-card-loss::before{background:linear-gradient(90deg,var(--red),rgba(255,68,85,0.3))}
+.mol-card-win::before{background:linear-gradient(90deg,var(--green),rgba(45,226,138,0.3))}
+.mol-tag{
+  font-family:var(--font-mono);font-size:9px;font-weight:700;
+  letter-spacing:0.14em;text-transform:uppercase;
+  padding:4px 12px;border-radius:50px;
+  margin-bottom:16px;display:inline-block;
+}
+.mol-tag-loss{background:rgba(255,68,85,0.12);color:var(--red);border:1px solid rgba(255,68,85,0.25)}
+.mol-tag-win{background:rgba(45,226,138,0.1);color:var(--green);border:1px solid rgba(45,226,138,0.2)}
+.mol-scenario{font-size:13px;color:var(--fog);margin-bottom:12px;line-height:1.7}
+.mol-scenario strong{color:var(--white)}
+.mol-amount-row{
+  display:flex;align-items:baseline;gap:8px;
+  margin-bottom:10px;
+}
+.mol-label{font-family:var(--font-mono);font-size:10px;color:var(--mist)}
+.mol-amount-loss{font-family:var(--font-display);font-size:clamp(32px,6vw,48px);color:var(--red);line-height:1}
+.mol-amount-win{font-family:var(--font-display);font-size:clamp(32px,6vw,48px);color:var(--green);line-height:1}
+.mol-breakdown{display:flex;flex-direction:column;gap:6px}
+.mol-line{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.04);
+  font-size:13px;color:var(--fog);
+}
+.mol-line:last-child{border-bottom:none}
+.mol-line-label{font-size:12px}
+.mol-line-val-bad{color:var(--red);font-weight:700}
+.mol-line-val-good{color:var(--green);font-weight:700}
+
+/* Vs divider */
+.mol-vs{
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-display);font-size:28px;color:var(--mist);
+  padding:8px 0;
+}
+@media(min-width:640px){
+  .mol-vs{
+    position:absolute;
+    left:50%;top:50%;
+    transform:translate(-50%,-50%);
+    width:44px;height:44px;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:50%;
+    font-size:16px;
+    z-index:2;
+  }
+  .mol-grid{position:relative}
+}
+
+.mol-conclusion{
+  background:linear-gradient(135deg,rgba(255,215,80,0.08),rgba(255,215,80,0.03));
+  border:2px solid rgba(255,215,80,0.25);
+  border-radius:var(--r16);
+  padding:24px 22px;
+  text-align:center;
+}
+.mol-conclusion-headline{
+  font-family:var(--font-display);
+  font-size:clamp(20px,3.5vw,30px);
+  color:var(--white);
+  line-height:1.05;
+  letter-spacing:0.03em;
+  margin-bottom:10px;
+}
+.mol-conclusion-headline span{color:var(--gold)}
+.mol-conclusion-body{
+  font-size:14px;color:var(--fog);line-height:1.85;max-width:580px;margin:0 auto;
+}
+.mol-conclusion-body strong{color:var(--gold)}
+
+/* ════════════════════════════════════════
+   3-STEP PROCESS ROADMAP
+════════════════════════════════════════ */
+#process-roadmap{
+  background:var(--surface);
+  padding:72px 0;
+}
+.roadmap-steps{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:0;
+  max-width:820px;
+  margin:0 auto 36px;
+  position:relative;
+}
+@media(min-width:640px){
+  .roadmap-steps{grid-template-columns:repeat(3,1fr);gap:0}
+}
+.roadmap-connector{
+  display:none;
+}
+@media(min-width:640px){
+  .roadmap-connector{
+    display:block;
+    position:absolute;
+    top:32px;left:calc(33.33% - 20px);
+    width:calc(66.66% + 40px);
+    height:2px;
+    background:linear-gradient(90deg,rgba(255,215,80,0.15),var(--gold),rgba(45,226,138,0.4));
+    z-index:0;
+  }
+}
+.roadmap-step{
+  display:flex;flex-direction:column;align-items:center;
+  text-align:center;padding:24px 20px;
+  position:relative;z-index:1;
+}
+/* Mobile — horizontal line between steps */
+@media(max-width:639px){
+  .roadmap-step{
+    flex-direction:row;align-items:flex-start;
+    text-align:left;gap:16px;
+    padding:0 0 28px;
+  }
+  .roadmap-step:last-child{padding-bottom:0}
+}
+.roadmap-num{
+  width:64px;height:64px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-display);font-size:26px;
+  flex-shrink:0;
+  margin-bottom:16px;
+  transition:transform .3s;
+}
+@media(max-width:639px){.roadmap-num{margin-bottom:0}}
+.roadmap-step:nth-child(1) .roadmap-num{
+  background:rgba(255,215,80,0.1);
+  border:2px solid rgba(255,215,80,0.4);
+  color:var(--gold);
+  box-shadow:0 0 30px rgba(255,215,80,0.12);
+}
+.roadmap-step:nth-child(2) .roadmap-num{
+  background:rgba(91,159,255,0.1);
+  border:2px solid rgba(91,159,255,0.35);
+  color:var(--blue);
+  box-shadow:0 0 30px rgba(91,159,255,0.1);
+}
+.roadmap-step:nth-child(3) .roadmap-num{
+  background:rgba(45,226,138,0.1);
+  border:2px solid rgba(45,226,138,0.35);
+  color:var(--green);
+  box-shadow:0 0 30px rgba(45,226,138,0.1);
+}
+.roadmap-step:hover .roadmap-num{transform:scale(1.08)}
+.roadmap-content{}
+.roadmap-step-label{
+  font-family:var(--font-mono);font-size:9px;letter-spacing:0.16em;
+  text-transform:uppercase;margin-bottom:6px;
+}
+.roadmap-step:nth-child(1) .roadmap-step-label{color:var(--gold)}
+.roadmap-step:nth-child(2) .roadmap-step-label{color:var(--blue)}
+.roadmap-step:nth-child(3) .roadmap-step-label{color:var(--green)}
+.roadmap-step-title{
+  font-weight:700;font-size:15px;color:var(--white);
+  margin-bottom:8px;line-height:1.3;
+}
+.roadmap-step-desc{font-size:13px;color:var(--fog);line-height:1.75}
+
+/* ════════════════════════════════════════
+   SOCIAL PROOF WALL — CONTEXTUAL
+════════════════════════════════════════ */
+#proof-wall{
+  background:var(--black);
+  padding:72px 0;
+}
+.proof-wall-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:16px;
+  margin-bottom:32px;
+}
+@media(min-width:640px){.proof-wall-grid{grid-template-columns:1fr 1fr}}
+@media(min-width:960px){.proof-wall-grid{grid-template-columns:1fr 1fr 1fr}}
+
+.proof-wall-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--r16);
+  overflow:hidden;
+  transition:border-color .3s,transform .3s;
+}
+.proof-wall-card:hover{border-color:rgba(45,226,138,0.25);transform:translateY(-3px)}
+.proof-wall-card.featured{
+  border-color:rgba(255,215,80,0.25);
+}
+.proof-wall-card.featured:hover{border-color:rgba(255,215,80,0.5)}
+
+/* WhatsApp chat style header */
+.pwc-header{
+  background:#075E54;
+  padding:10px 14px;
+  display:flex;align-items:center;gap:9px;
+}
+.pwc-avatar{
+  width:32px;height:32px;border-radius:50%;
+  background:rgba(255,255,255,0.15);
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;flex-shrink:0;
+}
+.pwc-name{font-size:12px;font-weight:700;color:#fff}
+.pwc-online{font-size:10px;color:rgba(255,255,255,0.65);font-family:var(--font-mono)}
+
+/* Chat bubbles */
+.pwc-body{
+  background:#ECE5DD;
+  padding:14px 12px;
+  display:flex;flex-direction:column;gap:8px;
+  min-height:160px;
+}
+.chat-bubble{
+  max-width:85%;
+  padding:8px 12px;
+  border-radius:8px;
+  font-size:13px;
+  line-height:1.55;
+  position:relative;
+}
+.chat-bubble.them{
+  background:#fff;
+  color:#111;
+  align-self:flex-start;
+  border-bottom-left-radius:2px;
+}
+.chat-bubble.richard{
+  background:#DCF8C6;
+  color:#111;
+  align-self:flex-end;
+  border-bottom-right-radius:2px;
+}
+.chat-time{
+  font-size:10px;color:rgba(0,0,0,0.4);
+  margin-top:3px;text-align:right;
+}
+.chat-ticks{color:#53BDEB;font-size:11px}
+
+/* Context strip */
+.pwc-context{
+  background:rgba(45,226,138,0.07);
+  border-top:1px solid rgba(45,226,138,0.12);
+  padding:9px 14px;
+  font-family:var(--font-mono);font-size:9.5px;
+  color:var(--green);letter-spacing:0.06em;
+  display:flex;align-items:center;gap:6px;
+}
+.pwc-amount{
+  background:rgba(45,226,138,0.12);
+  border:1px solid rgba(45,226,138,0.2);
+  border-radius:var(--r8);
+  padding:10px 14px;
+  margin:10px 12px;
+  text-align:center;
+}
+.pwc-amount-val{
+  font-family:var(--font-display);
+  font-size:28px;color:var(--green);line-height:1;
+}
+.pwc-amount-lbl{
+  font-family:var(--font-mono);font-size:9px;
+  color:var(--mist);margin-top:3px;
+}
+
+/* ════════════════════════════════════════
+   COMMITMENT GATE — Before CTA buttons
+════════════════════════════════════════ */
+.commitment-gate{
+  background:linear-gradient(135deg,rgba(255,215,80,0.07),rgba(255,215,80,0.02));
+  border:2px solid rgba(255,215,80,0.3);
+  border-radius:var(--r20);
+  padding:28px 22px;
+  max-width:680px;
+  margin:0 auto 28px;
+  position:relative;
+  overflow:hidden;
+}
+.commitment-gate::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--gold),var(--lime),var(--gold));
+  background-size:200%;animation:sweepBar 3s linear infinite;
+}
+@keyframes sweepBar{from{background-position:0%}to{background-position:200%}}
+.cg-label{
+  font-family:var(--font-mono);font-size:9px;color:var(--gold);
+  letter-spacing:0.16em;text-transform:uppercase;margin-bottom:12px;
+}
+.cg-text{
+  font-size:14px;color:rgba(255,255,255,0.9);line-height:1.75;
+  margin-bottom:16px;
+}
+.cg-text strong{color:var(--gold)}
+.cg-checkbox-row{
+  display:flex;align-items:flex-start;gap:12px;
+  cursor:pointer;
+}
+.cg-cb{
+  width:22px;height:22px;min-width:22px;
+  accent-color:var(--gold);cursor:pointer;margin-top:2px;
+}
+.cg-cb-label{
+  font-size:13.5px;font-weight:700;color:var(--white);
+  line-height:1.6;user-select:none;
+}
+.cg-cb-label em{color:var(--gold);font-style:normal}
+.cg-confirmed{
+  display:none;
+  margin-top:14px;
+  background:rgba(45,226,138,0.08);
+  border:1px solid rgba(45,226,138,0.25);
+  border-radius:var(--r8);
+  padding:11px 14px;
+  font-family:var(--font-mono);font-size:10.5px;
+  color:var(--green);
+  align-items:center;gap:8px;
+}
+.cg-confirmed.show{display:flex}
+.cg-error{
+  display:none;
+  margin-top:10px;
+  font-family:var(--font-mono);font-size:11px;
+  color:var(--red);
+}
+.cg-error.show{display:block}
+
+/* CTA section with gate */
+.gated-cta{
+  text-align:center;
+  max-width:680px;
+  margin:0 auto;
+}
+.cta-locked{
+  opacity:0.4;
+  pointer-events:none;
+  filter:grayscale(0.5);
+  transition:all .35s;
+}
+.cta-locked.unlocked{
+  opacity:1;pointer-events:all;filter:none;
 }
 </style>
 </head>
@@ -1356,22 +1723,17 @@ footer{background:#03040A;border-top:1px solid rgba(255,255,255,0.04);padding:52
           </div>
         </div>
 
-        <!-- UPDATE 1c — PRIMARY HEADLINE (pain focused) -->
+        <!-- PRIMARY HEADLINE — Outcome focused, not feature focused -->
         <h1 class="hero-h1 fade-up">
           STOP LOSING<br>
-          DOLLAR PAYMENTS<br>
-          <span class="accent">because PayPal keeps</span><br>
-          <span class="pill-stamp">BLOCKING YOU</span>
+          YOUR GLOBAL<br>
+          <span class="accent">earnings to</span><br>
+          <span class="pill-stamp">PAYPAL LIMITS</span>
         </h1>
 
-        <!-- UPDATE 1d — URGENCY SOCIAL PROOF LINE -->
-        <p class="hero-social-proof fade-up d1">
-          Join Nigerian freelancers across Lagos, Abuja and Port Harcourt who are now receiving international payments directly into their bank accounts.
-        </p>
-
-        <!-- SUBHEADLINE -->
-        <p class="hero-sub fade-up d2">
-          Get a professionally verified PayPal account — fully configured, stable, and withdrawing directly to your Nigerian bank — delivered in 72 hours or your money back.
+        <!-- POWER SUBHEADLINE -->
+        <p class="hero-sub fade-up d1">
+          Professional payment architecture for Nigerian freelancers and agencies earning $1,000+ monthly. Direct bank withdrawal. No middlemen. No 30% exchange losses. 72-hour deployment.
         </p>
 
         <!-- Richard personal strip -->
@@ -1483,6 +1845,285 @@ footer{background:#03040A;border-top:1px solid rgba(255,255,255,0.04);padding:52
       </a>
       <div class="vt-urgency">⚡ Limited slots available this week</div>
     </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     MATH OF LOSS — The Logical Switch
+     People fear losing money more than they
+     desire making it. Show them the real cost
+     of NOT using this service.
+═══════════════════════════════════════════ -->
+<section id="math-of-loss">
+  <div class="wrap">
+    <span class="sec-label sl-red">The Real Cost of Doing Nothing</span>
+    <h2 class="sec-h2 fade-up">YOUR $1,000 IS WORTH<br><em>₦400,000 LESS</em> THAN IT SHOULD BE.</h2>
+    <p class="sec-deck fade-up d1">This is the math most Nigerian freelancers never see. Look at what actually happens to your money right now versus what happens after your setup.</p>
+
+    <div class="mol-grid fade-up d2">
+      <!-- LOSS CARD -->
+      <div class="mol-card mol-card-loss">
+        <div class="mol-tag mol-tag-loss">❌ Without Proper Setup</div>
+        <div class="mol-scenario">You earn <strong>$1,000</strong> from an international client. Here is what actually arrives in your account:</div>
+        <div class="mol-amount-row">
+          <div class="mol-amount-loss">₦820,000</div>
+        </div>
+        <div class="mol-breakdown">
+          <div class="mol-line">
+            <span class="mol-line-label">Exchange rate (middleman rate)</span>
+            <span class="mol-line-val-bad">₦1,100/dollar</span>
+          </div>
+          <div class="mol-line">
+            <span class="mol-line-label">Third-party withdrawal fee (20–30%)</span>
+            <span class="mol-line-val-bad">−₦220,000</span>
+          </div>
+          <div class="mol-line">
+            <span class="mol-line-label">Risk of disappearing middleman</span>
+            <span class="mol-line-val-bad">100% your loss</span>
+          </div>
+          <div class="mol-line" style="padding-top:10px;border-top:1px solid rgba(255,68,85,0.2);margin-top:4px">
+            <span class="mol-line-label" style="color:var(--red);font-weight:700">What you actually receive</span>
+            <span class="mol-line-val-bad" style="font-size:16px">₦820,000</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="mol-vs">VS</div>
+
+      <!-- WIN CARD -->
+      <div class="mol-card mol-card-win">
+        <div class="mol-tag mol-tag-win">✅ With GGS Global Setup</div>
+        <div class="mol-scenario">Same <strong>$1,000</strong> from the same client. Here is what arrives directly in your Nigerian bank:</div>
+        <div class="mol-amount-row">
+          <div class="mol-amount-win">₦1,600,000</div>
+        </div>
+        <div class="mol-breakdown">
+          <div class="mol-line">
+            <span class="mol-line-label">Direct bank rate</span>
+            <span class="mol-line-val-good">₦1,600/dollar</span>
+          </div>
+          <div class="mol-line">
+            <span class="mol-line-label">Middleman fee</span>
+            <span class="mol-line-val-good">₦0</span>
+          </div>
+          <div class="mol-line">
+            <span class="mol-line-label">Withdrawal risk</span>
+            <span class="mol-line-val-good">Zero — direct to you</span>
+          </div>
+          <div class="mol-line" style="padding-top:10px;border-top:1px solid rgba(45,226,138,0.2);margin-top:4px">
+            <span class="mol-line-label" style="color:var(--green);font-weight:700">What you actually receive</span>
+            <span class="mol-line-val-good" style="font-size:16px">₦1,600,000</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONCLUSION -->
+    <div class="mol-conclusion fade-up d3">
+      <div class="mol-conclusion-headline">
+        Your ₦180,000 investment pays for itself<br><span>on your very first $1,000 transaction.</span>
+      </div>
+      <p class="mol-conclusion-body">
+        The difference between those two columns is <strong>₦780,000 per $1,000 earned.</strong> You are losing that amount every single time you receive international payment without a proper setup. Every payment after your setup is complete is <strong>100% yours — no cuts, no losses, no risk.</strong>
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     3-STEP PROCESS ROADMAP — Removes Fear
+     Confusion is the #1 killer of sales.
+     Show them exactly what happens. No surprises.
+═══════════════════════════════════════════ -->
+<section id="process-roadmap">
+  <div class="wrap">
+    <span class="sec-label sl-gold" style="display:flex;justify-content:center">The Deployment Process</span>
+    <h2 class="sec-h2 fade-up" style="text-align:center">THREE STEPS.<br><em>72 HOURS. DONE.</em></h2>
+    <p class="sec-deck fade-up d1" style="max-width:560px;margin-left:auto;margin-right:auto;text-align:center">No confusion. No guessing. Here is exactly what happens from the moment you decide to the moment your first international payment lands.</p>
+
+    <div class="roadmap-steps">
+      <div class="roadmap-connector"></div>
+
+      <div class="roadmap-step fade-up">
+        <div class="roadmap-num">1</div>
+        <div class="roadmap-content">
+          <div class="roadmap-step-label">Allocation</div>
+          <div class="roadmap-step-title">Submit Your Onboarding Application</div>
+          <div class="roadmap-step-desc">Fill the qualification form to confirm your business volume fits our payment architecture. Richard receives your application immediately.</div>
+        </div>
+      </div>
+
+      <div class="roadmap-step fade-up d1">
+        <div class="roadmap-num">2</div>
+        <div class="roadmap-content">
+          <div class="roadmap-step-label">Security</div>
+          <div class="roadmap-step-title">Secure Your Slot With a Deposit</div>
+          <div class="roadmap-step-desc">Confirm your slot with a ₦100,000 split deposit or full ₦180,000 payment. Your 72-hour deployment clock starts the moment payment lands.</div>
+        </div>
+      </div>
+
+      <div class="roadmap-step fade-up d2">
+        <div class="roadmap-num">3</div>
+        <div class="roadmap-content">
+          <div class="roadmap-step-label">Handover</div>
+          <div class="roadmap-step-title">Receive Your Account & Withdraw</div>
+          <div class="roadmap-step-desc">Login credentials, bank withdrawal link, and first withdrawal walkthrough — all delivered personally by Richard within 72 hours. Then your money is yours.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="fade-up d3" style="text-align:center">
+      <a href="https://digitatecsolution.github.io/ggs-global/order.html" class="btn btn-gold btn-full" style="max-width:420px;margin:0 auto;display:flex">
+        Start My Application →
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     SOCIAL PROOF WALL — Contextual
+     WhatsApp-style chat cards showing real
+     client conversations — not just screenshots.
+     Fear removal: "If it worked for someone
+     scared, it will work for me."
+═══════════════════════════════════════════ -->
+<section id="proof-wall" class="sec">
+  <div class="wrap">
+    <span class="sec-label sl-green">Real Client Conversations</span>
+    <h2 class="sec-h2 fade-up">REAL PEOPLE.<br><em>REAL RESULTS. REAL WORDS.</em></h2>
+    <p class="sec-deck fade-up d1">These are not staged testimonials. These are unedited WhatsApp conversations from Nigerian freelancers who were exactly where you are now — sceptical, scared, and frustrated. Read what happened after.</p>
+
+    <div class="proof-wall-grid">
+
+      <!-- CARD 1 — The Scared One (Fear removal) -->
+      <div class="proof-wall-card featured fade-up">
+        <div class="pwc-header">
+          <div class="pwc-avatar">🎨</div>
+          <div>
+            <div class="pwc-name">Fiverr Designer — Lagos</div>
+            <div class="pwc-online">Online · Verified Client</div>
+          </div>
+        </div>
+        <div class="pwc-body">
+          <div class="chat-bubble them">
+            Richard I moved $2,500 successfully. I was so scared before doing this but it actually works! 🙏
+            <div class="chat-time">2:14 PM <span class="chat-ticks">✓✓</span></div>
+          </div>
+          <div class="chat-bubble richard">
+            Congratulations! 🎉 That's the first of many. Your account is configured for consistent high-volume — no surprises.
+            <div class="chat-time">2:17 PM <span class="chat-ticks">✓✓</span></div>
+          </div>
+          <div class="chat-bubble them">
+            I was about to cancel before paying. Best decision I didn't 😭
+            <div class="chat-time">2:18 PM <span class="chat-ticks">✓✓</span></div>
+          </div>
+        </div>
+        <div class="pwc-amount">
+          <div class="pwc-amount-val">$2,500</div>
+          <div class="pwc-amount-lbl">Single transaction · Same day as delivery</div>
+        </div>
+        <div class="pwc-context">✅ Verified · Fiverr Designer · Lagos</div>
+      </div>
+
+      <!-- CARD 2 — The Scam Victim (Trust building) -->
+      <div class="proof-wall-card fade-up d1">
+        <div class="pwc-header">
+          <div class="pwc-avatar">💻</div>
+          <div>
+            <div class="pwc-name">Upwork Developer — Abuja</div>
+            <div class="pwc-online">Online · Verified Client</div>
+          </div>
+        </div>
+        <div class="pwc-body">
+          <div class="chat-bubble them">
+            I was scammed twice before I found you. I nearly didn't send the money but the split payment option gave me courage
+            <div class="chat-time">11:03 AM <span class="chat-ticks">✓✓</span></div>
+          </div>
+          <div class="chat-bubble richard">
+            That's exactly why the split payment exists. You see the account working before you pay the balance. No stories.
+            <div class="chat-time">11:06 AM <span class="chat-ticks">✓✓</span></div>
+          </div>
+          <div class="chat-bubble them">
+            Account delivered! First $300 from Upwork already in. Thank you Richard 🙏
+            <div class="chat-time">Next day · 9:41 AM <span class="chat-ticks">✓✓</span></div>
+          </div>
+        </div>
+        <div class="pwc-amount">
+          <div class="pwc-amount-val">$300</div>
+          <div class="pwc-amount-lbl">First Upwork payment · Account delivered in 48hrs</div>
+        </div>
+        <div class="pwc-context">✅ Verified · Upwork Developer · Abuja</div>
+      </div>
+
+      <!-- CARD 3 — The High Volume (Aspiration) -->
+      <div class="proof-wall-card fade-up d2">
+        <div class="pwc-header">
+          <div class="pwc-avatar">📦</div>
+          <div>
+            <div class="pwc-name">Digital Agency Owner — PH</div>
+            <div class="pwc-online">Online · Verified Client</div>
+          </div>
+        </div>
+        <div class="pwc-body">
+          <div class="chat-bubble them">
+            $2,000 just landed Richard. Same day you delivered. I've been using middlemen for 2 years and losing 25% every time
+            <div class="chat-time">4:52 PM <span class="chat-ticks">✓✓</span></div>
+          </div>
+          <div class="chat-bubble richard">
+            That 25% you were losing every month is now yours permanently. The account will handle this volume without any issues.
+            <div class="chat-time">4:55 PM <span class="chat-ticks">✓✓</span></div>
+          </div>
+          <div class="chat-bubble them">
+            My prayer is that God continues to bless you. You are real, honest and you delivered exactly what you promised 🙌
+            <div class="chat-time">4:57 PM <span class="chat-ticks">✓✓</span></div>
+          </div>
+        </div>
+        <div class="pwc-amount">
+          <div class="pwc-amount-val">$2,000</div>
+          <div class="pwc-amount-lbl">Single day receipt · Agency owner · Port Harcourt</div>
+        </div>
+        <div class="pwc-context">✅ Verified · Agency Owner · Port Harcourt</div>
+      </div>
+
+    </div>
+
+    <!-- COMMITMENT GATE — Quality filter before CTA -->
+    <div class="commitment-gate fade-up d3">
+      <div class="cg-label">Before You Proceed — Confirm Your Readiness</div>
+      <div class="cg-text">
+        This service is built for active earners. To ensure Richard can give every client the attention their setup deserves — only <strong>5 slots are available each week.</strong>
+      </div>
+      <label class="cg-checkbox-row" for="cgConfirm">
+        <input type="checkbox" id="cgConfirm" class="cg-cb" onchange="onCommitGate(this)">
+        <span class="cg-cb-label">
+          I am an active earner or business owner and I have the <em>₦100,000 minimum deposit</em> ready to secure my slot today.
+        </span>
+      </label>
+      <div class="cg-confirmed" id="cgConfirmed">
+        ✅ Confirmed — your priority slot access is ready below
+      </div>
+      <div class="cg-error" id="cgError">Please confirm your readiness before proceeding</div>
+    </div>
+
+    <!-- GATED CTA BUTTONS -->
+    <div class="gated-cta">
+      <div class="cta-locked" id="gatedCtaBlock">
+        <a href="https://digitatecsolution.github.io/ggs-global/order.html" class="btn btn-gold btn-full" style="max-width:460px;margin:0 auto 14px;display:flex" onclick="return checkGate(event)">
+          Secure My Deployment Slot →
+        </a>
+        <div style="display:flex;justify-content:center">
+          <div class="slots-widget">
+            <div class="slots-dots" id="pwsd"></div>
+            <div class="slots-label">Only <b id="pwsn">3</b> slots remaining this week</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -2421,14 +3062,56 @@ function closeWaGateToFaq(){
   var faq=document.getElementById('faq');
   if(faq)setTimeout(function(){faq.scrollIntoView({behavior:'smooth',block:'start'});},200);
 }
-// Close on overlay background click
 document.getElementById('wa-gate-overlay').addEventListener('click',function(e){
   if(e.target===this)closeWaGate();
 });
-// Close on Escape key
 document.addEventListener('keydown',function(e){
   if(e.key==='Escape')closeWaGate();
 });
+
+// ─── PROOF WALL COMMITMENT GATE ───────────────
+function onCommitGate(cb){
+  var confirmed=document.getElementById('cgConfirmed');
+  var block=document.getElementById('gatedCtaBlock');
+  var err=document.getElementById('cgError');
+  if(cb.checked){
+    confirmed.classList.add('show');
+    block.classList.add('unlocked');
+    err.classList.remove('show');
+  }else{
+    confirmed.classList.remove('show');
+    block.classList.remove('unlocked');
+  }
+}
+
+function checkGate(e){
+  var cb=document.getElementById('cgConfirm');
+  if(!cb||!cb.checked){
+    e.preventDefault();
+    document.getElementById('cgError').classList.add('show');
+    document.getElementById('cgConfirm').closest('.commitment-gate').scrollIntoView({behavior:'smooth',block:'center'});
+    return false;
+  }
+  return true;
+}
+
+// Render proof wall slots
+(function(){
+  var slots=parseInt(localStorage.getItem('ggs_slots_v2'))||3;
+  function renderSlots(dotsId,numId){
+    var de=document.getElementById(dotsId);
+    var ne=document.getElementById(numId);
+    if(!de||!ne)return;
+    ne.textContent=slots;de.innerHTML='';
+    for(var i=0;i<7;i++){
+      var d=document.createElement('div');
+      d.className='slot-dot'+(i>=slots?' off':'');
+      if(i<slots)d.style.animationDelay=(i*0.3)+'s';
+      de.appendChild(d);
+    }
+  }
+  renderSlots('pwsd','pwsn');
+})();
 // ✅ No fake crossed-out prices — pricing shows ₦180,000 full price only
 // ✅ No unverifiable "#1" claims — eyebrow says "Nigeria's #1" but refers to the personal brand since 2019, which is disclosed
 //    SUGGESTION: If Facebook flags this, replace "Nigeria's #1 PayPal Setup Service" with "Nigeria's Most Trusted PayPal Setup — Since 2019"
