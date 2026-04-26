@@ -65,14 +65,14 @@ body{background:var(--navy);color:var(--text);font-family:'Manrope',sans-serif;l
 .page-header p{font-size:13.5px;color:var(--muted);line-height:1.7}
 
 /* ════════════════════════════════════════
-   TRUST VIDEO SECTION
+   TRUST VIDEO SECTION (Richard's direct address)
 ════════════════════════════════════════ */
 .video-trust-section{
   background:var(--navy2);
   border:1px solid var(--border-gold);
   border-radius:12px;
   overflow:hidden;
-  margin-bottom:24px;
+  margin-bottom:0;          /* removed bottom margin — review video sits directly below */
   position:relative;
 }
 .video-trust-section::before{
@@ -94,19 +94,10 @@ body{background:var(--navy);color:var(--text);font-family:'Manrope',sans-serif;l
 }
 @keyframes livePulse{0%,100%{box-shadow:0 0 0 0 rgba(255,68,85,0.6)}50%{box-shadow:0 0 0 7px rgba(255,68,85,0)}}
 
-/* Video placeholder — Richard replaces src with his video file or YouTube embed */
-.video-wrapper{
-  position:relative;width:100%;
-  background:#000;
-}
-/* Portrait ratio for phone-recorded video */
-.video-wrapper{position:relative}
+.video-wrapper{position:relative;background:#000;}
 .video-wrapper iframe,
 .video-wrapper video{
-  width:100%;
-  display:block;
-  border:none;
-  aspect-ratio:16/9;
+  width:100%;display:block;border:none;aspect-ratio:16/9;
 }
 @keyframes nudgePop{from{opacity:0;transform:translateX(-50%) translateY(6px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
 
@@ -119,6 +110,69 @@ body{background:var(--navy);color:var(--text);font-family:'Manrope',sans-serif;l
 .vsp-points{display:flex;flex-direction:column;gap:7px}
 .vsp-point{display:flex;align-items:flex-start;gap:9px;font-size:12.5px;color:var(--fog,#8B95A8);line-height:1.6}
 .vsp-point .vsp-time{font-family:'DM Mono',monospace;font-size:9px;color:var(--gold);background:rgba(245,200,66,0.1);padding:2px 7px;border-radius:3px;flex-shrink:0;margin-top:2px}
+
+/* ════════════════════════════════════════
+   REVIEW VIDEO SECTION (client testimonial)
+   Sits directly below the trust video.
+   Same card style — connected visually via
+   shared border and divider line.
+════════════════════════════════════════ */
+.review-video-section{
+  background:var(--navy2);
+  border:1px solid var(--border-gold);
+  border-top:none;                       /* connects flush to trust video above */
+  border-radius:0 0 12px 12px;
+  overflow:hidden;
+  margin-bottom:24px;
+  position:relative;
+}
+
+/* Divider between the two videos */
+.review-video-divider{
+  border:none;
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--border-gold),transparent);
+  margin:0;
+}
+
+.review-video-header{
+  padding:14px 20px 10px;
+  display:flex;align-items:center;gap:10px;
+}
+.review-video-label{
+  font-family:'DM Mono',monospace;font-size:9.5px;color:var(--green);
+  letter-spacing:0.14em;text-transform:uppercase;
+}
+.review-green-dot{
+  width:8px;height:8px;border-radius:50%;background:var(--green);flex-shrink:0;
+  animation:greenPulse 2.5s ease-in-out infinite;
+}
+@keyframes greenPulse{0%,100%{box-shadow:0 0 0 0 rgba(0,200,83,0.6)}50%{box-shadow:0 0 0 7px rgba(0,200,83,0)}}
+
+/* Review video is a YouTube Short — 9:16 portrait, centered, max 320px */
+.review-vid-wrapper{
+  display:flex;justify-content:center;align-items:center;
+  padding:0 20px;
+  background:#000;
+}
+.review-vid-inner{
+  position:relative;
+  width:100%;max-width:320px;
+}
+.review-vid-inner::before{content:'';display:block;padding-top:177.78%;}  /* 9:16 */
+.review-vid-inner iframe{
+  position:absolute;inset:0;width:100%;height:100%;border:none;
+}
+
+.review-video-caption{
+  padding:14px 20px 18px;
+  background:rgba(0,0,0,0.25);
+  border-top:1px solid var(--border);
+}
+.rvc-label{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:8px}
+.rvc-points{display:flex;flex-direction:column;gap:6px}
+.rvc-point{display:flex;align-items:flex-start;gap:9px;font-size:12.5px;color:#8B95A8;line-height:1.6}
+.rvc-point .rvc-ic{font-size:13px;flex-shrink:0;margin-top:1px}
 
 /* ════════════════════════════════════════
    PAYMENT CARDS
@@ -254,30 +308,7 @@ body{background:var(--navy);color:var(--text);font-family:'Manrope',sans-serif;l
 .stat-val{font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--gold);line-height:1}
 .stat-lbl{font-family:'DM Mono',monospace;font-size:8.5px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-top:3px;line-height:1.4}
 
-/* ════════════════════════════════════════
-   TALK TO HUMAN SAFETY NET
-════════════════════════════════════════ */
-.talk-human-section{
-  margin-top:28px;text-align:center;
-  padding:20px;
-  background:rgba(255,255,255,0.02);
-  border:1px dashed rgba(255,255,255,0.1);
-  border-radius:10px;
-}
-.th-label{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:10px}
-.th-text{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:14px}
-.btn-talk-human{
-  display:inline-flex;align-items:center;justify-content:center;gap:9px;
-  background:#25D366;color:#fff;
-  font-family:'Manrope',sans-serif;font-weight:700;font-size:14px;
-  padding:13px 24px;border-radius:50px;border:none;cursor:pointer;
-  text-decoration:none;
-  box-shadow:0 4px 20px rgba(37,211,102,0.3);
-  transition:all .22s;
-}
-.btn-talk-human:hover{background:#1fba58;transform:translateY(-1px);box-shadow:0 6px 28px rgba(37,211,102,0.45)}
-.btn-talk-human svg{width:18px;height:18px;fill:#fff;flex-shrink:0}
-.th-note{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);margin-top:10px;line-height:1.6}
+
 
 /* ─── GUARANTEE STRIP (bottom) ─── */
 .guarantee-strip{background:rgba(0,200,83,0.05);border:1px solid rgba(0,200,83,0.2);border-radius:8px;padding:14px 18px;margin-top:24px;display:flex;align-items:flex-start;gap:12px}
@@ -336,10 +367,10 @@ body{background:var(--navy);color:var(--text);font-family:'Manrope',sans-serif;l
   <!-- TWO COLUMN LAYOUT -->
   <div class="two-col">
 
-    <!-- LEFT: VIDEO + PAYMENT -->
+    <!-- LEFT: VIDEOS + PAYMENT -->
     <div>
 
-      <!-- ════ TRUST VIDEO SECTION ════ -->
+      <!-- ════ VIDEO 1: RICHARD'S DIRECT ADDRESS ════ -->
       <div class="video-trust-section">
         <div class="video-trust-header">
           <div class="video-live-dot"></div>
@@ -356,7 +387,7 @@ body{background:var(--navy);color:var(--text);font-family:'Manrope',sans-serif;l
             loading="lazy">
           </iframe>
 
-          <!-- Unmute nudge — appears 2s after autoplay starts -->
+          <!-- Unmute nudge -->
           <div id="unmuteNudge" style="
             display:none;position:absolute;bottom:12px;left:50%;transform:translateX(-50%);
             background:rgba(6,6,8,0.88);backdrop-filter:blur(8px);
@@ -389,7 +420,49 @@ body{background:var(--navy);color:var(--text);font-family:'Manrope',sans-serif;l
             </div>
           </div>
         </div>
-      </div>
+      </div><!-- /video-trust-section -->
+
+      <!-- ════ VIDEO 2: REAL CLIENT REVIEW ════
+           Sits flush below Video 1. Connected card. -->
+      <div class="review-video-section">
+
+        <div class="review-video-header">
+          <div class="review-green-dot"></div>
+          <div class="review-video-label">Real Client · Unprompted Review — What Happens After You Pay</div>
+        </div>
+
+        <!-- 9:16 portrait embed — YouTube Short DWGui5lE9z8 -->
+        <div class="review-vid-wrapper">
+          <div class="review-vid-inner">
+            <iframe
+              src="https://www.youtube.com/embed/DWGui5lE9z8?rel=0&modestbranding=1"
+              title="GGS Global PayPal Setup — Real Client Video Review"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              loading="lazy">
+            </iframe>
+          </div>
+        </div>
+
+        <div class="review-video-caption">
+          <div class="rvc-label">Why this matters before you pay</div>
+          <div class="rvc-points">
+            <div class="rvc-point">
+              <span class="rvc-ic">⭐</span>
+              <span>A real Nigerian freelancer — no script, no editing — sharing exactly what 72 hours after payment looks like.</span>
+            </div>
+            <div class="rvc-point">
+              <span class="rvc-ic">💰</span>
+              <span>You will hear how their first withdrawal landed and how Richard guided them through the entire process personally.</span>
+            </div>
+            <div class="rvc-point">
+              <span class="rvc-ic">🇳🇬</span>
+              <span>Individual results vary. This is one client's personal experience — shared freely and unprompted.</span>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /review-video-section -->
 
       <!-- ════ PAYMENT CARDS ════ -->
       <div style="margin-bottom:12px">
@@ -569,17 +642,7 @@ body{background:var(--navy);color:var(--text);font-family:'Manrope',sans-serif;l
         <div class="guarantee-strip-text"><strong>The GGS Global Iron Guarantee —</strong> Account not delivered within 72 hours and working exactly as described? Full deposit refunded. No negotiations. No excuses. Richard's word — backed by 7 years of delivery.</div>
       </div>
 
-      <!-- ════ TALK TO HUMAN SAFETY NET ════ -->
-      <div class="talk-human-section">
-        <div class="th-label">Still have a question before paying?</div>
-        <div class="th-text">80% of clients pay directly from this page. If you need to speak with Richard personally before proceeding — message him directly. He responds within minutes.</div>
-        <a href="https://wa.me/2348106334849?text=Hello%20Richard%2C%20I%20have%20seen%20the%20%E2%82%A6180%2C000%20investment%20and%20I%20am%20ready%20to%20proceed%20but%20have%20one%20quick%20question%20first."
-          target="_blank" rel="noopener" class="btn-talk-human">
-          <svg viewBox="0 0 32 32"><path d="M16 0C7.164 0 0 7.163 0 16c0 2.822.736 5.474 2.023 7.78L0 32l8.395-2.002A15.936 15.936 0 0016 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.333a13.276 13.276 0 01-6.773-1.849l-.487-.289-5.02 1.197 1.233-4.894-.318-.503A13.258 13.258 0 012.667 16C2.667 8.636 8.636 2.667 16 2.667c7.364 0 13.333 5.97 13.333 13.333S23.364 29.333 16 29.333zm7.32-9.96c-.4-.2-2.364-1.166-2.73-1.299-.366-.133-.633-.2-.9.2-.266.4-1.033 1.3-1.266 1.566-.233.267-.466.3-.866.1-.4-.2-1.687-.622-3.213-1.98-1.188-1.057-1.99-2.363-2.223-2.763-.233-.4-.025-.615.175-.814.18-.178.4-.466.6-.7.2-.233.266-.4.4-.666.133-.267.066-.5-.034-.7-.1-.2-.9-2.166-1.233-2.966-.324-.78-.654-.674-.9-.686l-.766-.014c-.267 0-.7.1-1.067.5-.366.4-1.4 1.366-1.4 3.333s1.433 3.866 1.633 4.133c.2.267 2.82 4.3 6.833 6.033.955.412 1.7.658 2.282.843.958.305 1.831.262 2.52.159.769-.114 2.364-.966 2.697-1.9.333-.933.333-1.733.233-1.9-.1-.167-.367-.267-.767-.467z"/></svg>
-          Talk to Richard Before Paying
-        </a>
-        <div class="th-note">Pre-filled message confirms you have seen the price — keeps the conversation qualified and serious.</div>
-      </div>
+
 
     </div><!-- /left col -->
 
@@ -671,15 +734,11 @@ body{background:var(--navy);color:var(--text);font-family:'Manrope',sans-serif;l
 
 <script>
 // ── VIDEO AUTOPLAY ON SCROLL (YouTube IFrame API) ────────────
-// Loads YouTube IFrame API, then fires play+muted the moment
-// the video enters the viewport. Shows unmute nudge 2s later.
-// Pauses automatically when scrolled back out of view.
 var YT_READY=false;
 var ytPlayer=null;
 var videoPlayed=false;
 var nudgeShown=false;
 
-// Load YouTube IFrame API
 (function(){
   var tag=document.createElement('script');
   tag.src='https://www.youtube.com/iframe_api';
@@ -687,16 +746,12 @@ var nudgeShown=false;
   first.parentNode.insertBefore(tag,first);
 })();
 
-// Called automatically by YouTube API when ready
 function onYouTubeIframeAPIReady(){
   YT_READY=true;
   ytPlayer=new YT.Player('trustVideo',{
     events:{
-      'onReady':function(e){
-        // Player ready — IntersectionObserver will trigger play
-      },
+      'onReady':function(e){},
       'onStateChange':function(e){
-        // If user manually plays — hide nudge and unmute
         if(e.data===YT.PlayerState.PLAYING&&ytPlayer.isMuted()){
           showNudge();
         }
@@ -711,7 +766,6 @@ function showNudge(){
   var nudge=document.getElementById('unmuteNudge');
   if(nudge){
     nudge.style.display='flex';
-    // Auto-hide nudge after 6 seconds if not tapped
     setTimeout(function(){
       if(nudge&&ytPlayer&&!ytPlayer.isMuted()){
         nudge.style.display='none';
@@ -729,7 +783,6 @@ function unmuteVideo(){
   }
 }
 
-// IntersectionObserver — triggers autoplay when video enters viewport
 (function(){
   var wrapper=document.getElementById('videoWrapper');
   if(!wrapper||!window.IntersectionObserver)return;
@@ -737,23 +790,19 @@ function unmuteVideo(){
   var observer=new IntersectionObserver(function(entries){
     entries.forEach(function(entry){
       if(entry.isIntersecting){
-        // Video in view — play muted if not already played
         if(!videoPlayed&&YT_READY&&ytPlayer&&typeof ytPlayer.playVideo==='function'){
           videoPlayed=true;
           ytPlayer.mute();
           ytPlayer.playVideo();
-          // Show unmute nudge after 2 seconds
           setTimeout(showNudge,2000);
         }
         if(videoPlayed&&YT_READY&&ytPlayer&&typeof ytPlayer.getPlayerState==='function'){
           var state=ytPlayer.getPlayerState();
-          // Resume if paused due to scroll-out
           if(state===YT.PlayerState.PAUSED){
             ytPlayer.playVideo();
           }
         }
       } else {
-        // Video out of view — pause to save bandwidth
         if(YT_READY&&ytPlayer&&typeof ytPlayer.pauseVideo==='function'){
           var state=ytPlayer.getPlayerState();
           if(state===YT.PlayerState.PLAYING){
@@ -762,10 +811,11 @@ function unmuteVideo(){
         }
       }
     });
-  },{threshold:0.5}); // fires when 50% of video is visible
+  },{threshold:0.5});
 
   observer.observe(wrapper);
 })();
+
 function safePixel(ev,p){try{if(typeof fbq!=='undefined'){p?fbq('track',ev,p):fbq('track',ev)}}catch(e){}}
 
 // ── LOAD CLIENT SUMMARY ───────────────────────────────────────
@@ -851,7 +901,6 @@ async function sendBankOrder(bankAmount,receiptName){
 }
 
 // ── FLUTTERWAVE PROCEED ───────────────────────────────────────
-// After Flutterwave payment — thankyou.html redirects to WhatsApp automatically
 async function proceedFlutterwave(type){
   const btn=document.querySelector('#panel-'+type+' .btn-proceed');
   if(btn){btn.disabled=true;btn.innerHTML='<span>⏳</span><span>Redirecting...</span>'}
